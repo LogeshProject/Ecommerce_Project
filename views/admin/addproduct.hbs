@@ -1,0 +1,461 @@
+    <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="/admin/home" class="brand-wrap">
+                <img src="/assetsAdmin/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+                <li class="menu-item ">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Products</span>
+                    </a>
+                   
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+                   
+                </li>
+                {{!-- <li class="menu-item has-submenu">
+                    <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
+                        <span class="text">Sellers</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="page-sellers-cards.html">Sellers cards</a>
+                        <a href="page-sellers-list.html">Sellers list</a>
+                        <a href="page-seller-detail.html">Seller profile</a>
+                    </div>
+                </li> --}}
+                {{!-- <li class="menu-item has-submenu">
+                    <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Add product</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="page-form-product-1.html">Add product 1</a>
+                        <a href="page-form-product-2.html">Add product 2</a>
+                        <a href="page-form-product-3.html">Add product 3</a>
+                        <a href="page-form-product-4.html">Add product 4</a>
+                    </div>
+                </li> --}}
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                        <span class="text">Category</span>
+                    </a>
+                    
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                        <span class="text">Users</span>
+                    </a>
+                    
+                </li>
+                {{!-- <li class="menu-item">
+                    <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+                        <span class="text">Reviews</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+                        <span class="text">Brands</span> </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+                        <span class="text">Statistics</span>
+                    </a>
+                </li> --}}
+            </ul>
+            <hr>
+            <ul class="menu-aside">
+                <li class="menu-item ">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link btn btn-primary" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+            <br>
+            <br>
+        </nav>
+    </aside>
+<main class="main-wrap">
+    <section class="content-main">
+        <div class="row">
+            <div class="col-9">
+                <div class="content-header">
+                    <h2 class="content-title">Add New Product</h2>
+                    {{!-- <div>
+                        <button class="btn btn-light rounded font-sm mr-5 text-body hover-up">Save to draft</button>
+                        <button class="btn btn-md rounded font-sm hover-up">Publich</button>
+                    </div> --}}
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Basic</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" id = "product_form" class="form-add-product" action="/admin/add_new_product"
+                            enctype="multipart/form-data" onsubmit="return Validation()">
+                            <div class="mb-4">
+                                <label for="product_name" class="form-label">Product Name</label>
+                                <input type="text" placeholder="Type here" name="name" 
+                                    class="form-control" id="productName" onchange="validate_productName()">
+                                <h6 class="alertAddProduct mt-1" style="color: red" id="productNameAlert"></h6>
+
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Full description</label>
+                                <textarea placeholder="Type here" name="description" id="longdescription"  onchange="validate_description()"
+                                    class="form-control" rows="5"></textarea>
+                                <h6 class="alertAddProduct mt-1" style="color: red" id="longAlert"></h6>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Price</label>
+                                        <div class="row gx-2">
+                                            <input placeholder="$" type="number" id="price" name="price"
+                                                class="form-control">
+                                        </div>
+                                        <h6 class="alertAddProduct mt-1" style="color: red" id="priceAlert"></h6>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Stock</label>
+                                        <input name="stock" class="form-control" placeholder="Quantity" type="number"
+                                            id="Qty" required>
+                                    </div>
+                                    <h6 class="alertAddProduct mt-1" style="color: red" id="qtyAlert"></h6>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="form-label">Category:</label>
+                                    <select name="category" id="productCategory" class="form-select">
+                                        {{#each catogories}}
+                                        <option value="{{this._id}}">{{this.category}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+
+
+                                {{!-- <div class="col-lg-3">
+                                    <div class="form-element m-2">
+                                        <input type="file" id="file-1" name="image" accept="image/*">
+                                        <label for="file-1" id="file-1-preview">
+                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
+                                            <div>
+                                                <span>+</span>
+                                            </div>
+                                        </label>
+                                    </div> <!-- card end// -->
+
+                                </div> --}}
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 " style="width:250px ;height:400px">
+                                    <div class="card-body" style="width:250px ;height:400px">
+                                        <input type="file" id="file-1" name="image" accept="image/*" hidden >
+                                        <label for="file-1" id="file-1-preview">
+                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
+                                            <div>
+                                                <span>+</span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-md-4 d-flex" style="width:250px ;height:400px">
+                                    <div class="card-body" style="width:250px ;height:400px">
+                                        <input type="file" id="file-2" name="image" accept="image/*" hidden>
+                                        <label for="file-2" id="file-2-preview">
+                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
+                                            <div>
+                                                <span>+</span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-md-4 d-flex" style="width:250px ;height:400px">
+                                    <div class="card-body" style="width:250px ;height:400px">
+                                        <input type="file" id="file-3" name="image" accept="image/*" hidden>
+                                        <label for="file-3" id="file-3-preview">
+                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
+                                            <div>
+                                                <span>+</span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-md-4 d-flex" style="width:250px ;height:400px">
+                                    <div class="card-body" style="width:250px ;height:400px">
+                                        <input type="file" id="file-4" name="image" accept="image/*" hidden>
+                                        <label for="file-4" id="file-4-preview">
+                                            <img src="/assetsAdmin/imgs/theme/upload.svg" style="" alt="">
+                                            <div>
+                                                <span>+</span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="col-md-4 d-flex " style="width:250px ;height:400px">
+                                    <div class="card-body" style="width:250px ;height:400px">
+                                        <input type="file" id="file-5" name="image" accept="image/*" hidden>
+                                        <label for="file-5" id="file-5-preview">
+                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
+                                            <div>
+                                                <span>+</span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                            <h6 id="imgAlert" class=" mt-2" style="color: red;"></h6>
+
+
+                            <div class="d-flex g-2">
+                                <div class="m-2">
+                                    <button type="submit" class="btn btn-primary">Add Product</button>
+
+                                </div>
+                                <div class="m-2">
+                                    <a href="/admin/product" type="button" class="btn btn-primary">Back</a>
+
+                                </div>
+
+
+                            </div>
+                            {{!-- <div class="mb-4">
+                                <label class="form-label">Tax rate</label>
+                                <input type="text" placeholder="%" class="form-control" id="product_name">
+                            </div>
+                            <label class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" value="">
+                                <span class="form-check-label"> Make a template </span>
+                            </label> --}}
+                        </form>
+                    </div>
+                </div> <!-- card end// -->
+
+
+
+            </div>
+    </section> <!-- content-main end// -->
+    <footer class="main-footer font-xs">
+        <div class="row pb-30 pt-15">
+            <div class="col-sm-6">
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> ©, Evara - HTML Ecommerce Template .
+            </div>
+            <div class="col-sm-6">
+                <div class="text-sm-end">
+                    All rights reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
+
+<script>
+    function Validation() {
+
+        var fileInput = document.getElementById('file-1');
+        var previewImage = document.getElementById('file-1-preview').querySelector('img');
+
+        let productName = document.getElementById("productName").value;
+
+        let longdescription = document.getElementById("longdescription").value;
+        let Qty = document.getElementById("Qty").value;
+        let price = document.getElementById("price").value;
+
+
+
+        let productNameRegex = /^\s*.*\S.*\s*$/;
+        let number = /^[1-9]\d*$/;
+        let descriptionRegex = /^(?!\s*$)[\s\S]{1,100}$/
+
+
+
+
+        let productNameAlert = document.getElementById("productNameAlert");
+        let qtyAlert = document.getElementById("qtyAlert");
+        let priceAlert = document.getElementById("priceAlert");
+
+
+        let longAlert = document.getElementById("longAlert");
+        let imgAlert = document.getElementById('imgAlert')
+
+        if (!productName.match(productNameRegex)) {
+            productNameAlert.innerHTML = "Name Not Valid";
+            return false;
+        } else if (!Qty.match(number)) {
+            qtyAlert.innerHTML = "Please Check Qty Again";
+            return false;
+        } else if (!price.match(number)) {
+            priceAlert.innerHTML = "Please Check Price Again";
+            return false;
+        }
+
+        else if (!longdescription.match(descriptionRegex)) {
+            longAlert.innerHTML = "Please Check about Again";
+            return false;
+        } else if (fileInput.files.length === 0) {
+            imgAlert.innerHTML = "Please chose image"
+            return false;
+        }
+
+        else {
+            return true;
+        }
+
+    }
+
+    function previewBeforeUpload(id) {
+        document.querySelector("#" + id).addEventListener("change", function (e) {
+            if (e.target.files.length == 0) {
+                return;
+            }
+            let file = e.target.files[0];
+            let url = URL.createObjectURL(file);
+            document.querySelector("#" + id + "-preview div").innerText = file.name;
+            document.querySelector("#" + id + "-preview img").src = url;
+        });
+    }
+
+    previewBeforeUpload("file-1");
+    previewBeforeUpload("file-2");
+    previewBeforeUpload("file-3");
+    previewBeforeUpload("file-4");
+    previewBeforeUpload("file-5");
+
+
+
+    function validate_productName() {
+        var productNameInput = document.getElementById("productName");
+        var product = productNameInput.value.trim();
+        var pattern = /^[a-zA-Z0-9\s]{3,}$/;
+
+        if (!pattern.test(product)) {
+            alert("Invalid product name. Please try again.");
+            productNameInput.value = ''; // Clear the input field
+            productNameInput.focus();    // Set focus back to the input field
+            return false;
+        } else {
+            return true;
+        }
+
+
+    }
+
+
+    function validate_description() {
+
+        var longdescriptionInput = document.getElementById("longdescription");
+        var longdescription = longdescriptionInput.value.trim();
+
+
+        if (longdescription === "") {
+            alert("Invalid description . Please try again.");
+            longdescriptionInput.value = ''; // Clear the input field
+            longdescriptionInput.focus();    // Set focus back to the input field
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+
+</script>
+{{!-- 
+<script>
+    var productForm = document.getElementById('product_form');
+    var productNameInput = document.getElementById('product_name');
+    var validationMessage = document.getElementById('name-validation-message');
+    var priceName = document.getElementById('price');
+    var priceMsg = document.getElementById('priceAlert')
+    
+    
+    function validateProductName() {
+        var productName = productNameInput.value.trim();
+        var pattern = /^[a-zA-Z\s]{3,20}$/;
+        
+       
+        if(!pattern.test(productName)){
+            validationMessage.textContent = 'Product title is invalid';
+            return false;
+        }
+        else {
+            validationMessage.textContent = '';
+            return true;
+        }
+        
+         if (productName === '' ) {
+            validationMessage.textContent = 'Product title is required';
+            return false;
+        }
+    }
+
+   function validatePrice(){
+        var price = priceName
+        if( price <= 0){
+            priceMsg.textContent = "invalid"
+            return false;
+        }
+        else{
+            priceMsg.textContent = "";
+            return true;
+        }
+   }
+
+    function handleSubmit(event) {
+        if (!validateProductName()) {
+            event.preventDefault(); 
+        }
+        if(!validatePrice()){
+            event.preventDefault();
+        }
+    }
+
+    productNameInput.addEventListener('blur', validateProductName);
+
+   
+    productForm.addEventListener('submit','input', validateProductName);
+
+     productForm.addEventListener('submit', handleSubmit);
+
+</script> --}}

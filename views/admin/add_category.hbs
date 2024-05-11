@@ -1,0 +1,227 @@
+        <aside class="navbar-aside" id="offcanvas_aside">
+        <div class="aside-top">
+            <a href="/admin/home" class="brand-wrap">
+                <img src="/assetsAdmin/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
+            </a>
+            <div>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+            </div>
+        </div>
+        <nav>
+            <ul class="menu-aside">
+                <li class="menu-item ">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Products</span>
+                    </a>
+                   
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+                   
+                </li>
+                {{!-- <li class="menu-item has-submenu">
+                    <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
+                        <span class="text">Sellers</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="page-sellers-cards.html">Sellers cards</a>
+                        <a href="page-sellers-list.html">Sellers list</a>
+                        <a href="page-seller-detail.html">Seller profile</a>
+                    </div>
+                </li> --}}
+                {{!-- <li class="menu-item has-submenu">
+                    <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>
+                        <span class="text">Add product</span>
+                    </a>
+                    <div class="submenu">
+                        <a href="page-form-product-1.html">Add product 1</a>
+                        <a href="page-form-product-2.html">Add product 2</a>
+                        <a href="page-form-product-3.html">Add product 3</a>
+                        <a href="page-form-product-4.html">Add product 4</a>
+                    </div>
+                </li> --}}
+                <li class="menu-item active">
+                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                        <span class="text">Category</span>
+                    </a>
+                    
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                        <span class="text">Users</span>
+                    </a>
+                    
+                </li>
+                {{!-- <li class="menu-item">
+                    <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+                        <span class="text">Reviews</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+                        <span class="text">Brands</span> </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+                        <span class="text">Statistics</span>
+                    </a>
+                </li> --}}
+            </ul>
+            <hr>
+            <ul class="menu-aside">
+                <li class="menu-item ">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                        <span class="text">Settings</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link btn btn-primary" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+            <br>
+            <br>
+        </nav>
+    </aside>
+    <main class="main-wrap">
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Add Categories </h2>
+                </div>
+                <div>
+                    <input type="text" placeholder="Search Categories" class="form-control bg-white">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    {{#if catSaveMsg}}
+            <div class="alert alert-success mt-3 alert-dismissible fade  {{#if catSaveMsg}}show{{/if}}" role="alert">
+              {{catSaveMsg}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {{/if}}
+            {{#if catExistMsg}}
+            <div class="alert alert-danger mt-3 alert-dismissible fade {{#if catExistMsg}}show{{/if}}" role="alert">
+              {{catExistMsg}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {{/if}}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form action="/admin/add_category" method="post" id = "product_form'" class="" enctype="multipart/form-data">
+                                <div class="mb-4">
+                                    <label for="categoryName" class="form-label">Category Name:</label>
+                                    <input type="text" placeholder="Type here" class="form-control" name="name" id="product_name" onchange="validate_Category()" required />
+                                </div>
+                                <div id="name-validation-message" class="text-danger"></div>
+                                
+                                
+                                <div class="mb-4">
+                                    <label for="categoryImage" class="form-label">Category Image:</label>
+                                    <input type="file" placeholder="Type here" class="form-control-file" name="image"  accept="image/*" id="product_name" />
+                                    
+                                    
+                                </div>
+                                <div  class="d-flex g-2">
+                                    <div class="m-2">
+                                         <button type="submit" class="btn btn-primary">Create category</button>
+
+                                    </div>
+                                    <div class="m-2">
+                                        <a href="/admin/Category" type="button" class="btn btn-primary">Back</a>
+
+                                    </div>
+                                   
+                                    
+                                </div>
+                            </form>
+                        </div>
+                     
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Evara - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    {{!-- <script>
+    var productForm = document.getElementById('product_form');
+    var productNameInput = document.getElementById('product_name');
+    var validationMessage = document.getElementById('name-validation-message');
+
+    function validateProductName() {
+        var productName = productNameInput.value.trim();
+        var pattern = /^[a-zA-Z\s]{3,20}$/;
+        
+       
+        if(!pattern.test(productName)){
+            validationMessage.textContent = 'Category name  is invalid';
+            return false;
+        }
+        else {
+            validationMessage.textContent = '';
+            return true;
+        }
+        
+         if (productName === '' ) {
+            validationMessage.textContent = 'Product is required';
+            return false;
+        }
+    }
+
+    function handleSubmit(event) {
+        if (!validateProductName()) {
+            event.preventDefault(); 
+        }
+    }
+
+    productNameInput.addEventListener('blur', validateProductName);
+
+   
+    productForm.addEventListener('submit','input', validateProductName);
+
+     productForm.addEventListener('submit', handleSubmit);
+
+</script> --}}
+
+
+<script>
+    function validate_Category() {
+        var categoryNameInput = document.getElementById("product_name");
+        var category = categoryNameInput.value.trim();
+        var pattern = /^[a-zA-Z0-9\s']{3,}$/;
+
+        if (!pattern.test(category)) {
+            alert("Invalid category name. Please try again.");
+            categoryNameInput.value = ''; // Clear the input field
+            categoryNameInput.focus();    // Set focus back to the input field
+            return false;
+        } else {
+            return true;
+        }
+
+
+    }
+</script>
