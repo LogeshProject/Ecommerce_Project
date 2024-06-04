@@ -9,13 +9,15 @@ const checkout        = require('../controller/user/checkout')
 const orders          = require('../controller/user/orders')
 const category        = require('../controller/user/category')
 const wishlist        = require('../controller/user/wishlist');
-const resetProfile    = require('../controller/user/resetProfile')
+const resetProfile    = require('../controller/user/resetProfile');
+const passport = require('passport');
+
+require('../middleware/googleAuth')
+
 
 const { isLogin, isLogout, blockCheck : isBlocked , logedin } = auth
 
-
-router.get('/changePassword' , logedin, resetProfile.submitMailProfile)
-router.post('/changePassword', logedin ,     resetProfile.submitMailPostProfile)
+router.get('/changePassword' , logedin, resetProfile.submitMailPostProfile)
 router.get('/profileOtp', logedin, resetProfile.forgotOtppageProfile)
 router.post('/profileOtp', logedin ,   resetProfile.forgotOtpSubmitProfile)
 router.get('/profileResetPassword', logedin, resetProfile.resetPasswordPageProfile)
@@ -26,13 +28,15 @@ router.get('/', userController.loadHome)
 router.post('/', userController.doLogin) 
 
 router.get('/product', userController.getProduct)
+router.post('/product', userController.getProductsPage);
 router.get('/productview', userController.ProductView)
 router.post('/products_filter', userController.productSearch)
-router.post('/sort_product_az', userController.sortProduct_az)
+router.post('/sort_product_name', userController.sortProductByName)
 router.post('/sort_product_price', userController.sortProductByPrice)
 
 
 router.get('/category_fil', category.catFilter)
+router.post('/category_fil', category.catFilter)
 router.get('/category', category.categoryFilter)
 
 router.get('/login', isLogout, userController.userLogin)
@@ -41,10 +45,16 @@ router.get('/logout',  userController.doLogout)
 router.get('/signup', isLogout, userController.usersignup)
 router.post('/signup', userController.doSignup)
 
+
+router.get('/auth/google', passport.authenticate('google',{scope:['email','profile']}))
+router.get('/auth/google/callback', passport.authenticate('google',{failureRedirect:'/login'}), userController.googleCallback)
+
+
 router.get('/get_otp', isLogout, userController.getOtp)
 router.post('/submit_otp', userController.submitOtp)
 
 router.get('/resend_otp', isLogout, userController.resendOtp)
+router.get("/search", userController.searchProducts)
 
 router.get('/profile', logedin, isBlocked, profile.loadProfile)
 router.get('/adresses', logedin, isBlocked, profile.manageAdress)
@@ -66,6 +76,12 @@ router.post('/otp', forgetPassword.submitOtpPost)
 router.get('/reset_password', isLogout, forgetPassword.resetPassword)
 router.post('/reset_password', forgetPassword.resetPasswordPost)
 
+
+router.get('/wallet',logedin , profile.loadWallet)
+
+router.post('/addmoneytowallet', logedin, isBlocked,profile.addMoneyToWallet)
+router.post('/verify_Payment', logedin, isBlocked,profile.verifyPayment)
+
 router.get('/cart', logedin, isBlocked, cart.loadCart)  
 router.get('/add_to_cart', logedin, isBlocked, cart.addToCart) 
 router.get('/remove', isLogin, isBlocked, cart.removeCart)
@@ -79,7 +95,7 @@ router.get('/my_orders', logedin, isBlocked, orders.myOrders)
 router.get('/order_details', logedin, isBlocked, orders.orderDetails)
 router.get('/order_sucess', logedin, isBlocked, orders.orderSuccess)
 router.post('/cancel_order', logedin, isBlocked, orders.cancelOrder)
-router.get('/return_order', logedin, isBlocked, orders.returnOrder)
+router.post('/return_order', logedin, isBlocked, orders.returnOrder)
 
 router.get('/filter_orders', logedin, isBlocked, orders.filterOrders)
 
@@ -91,13 +107,6 @@ router.get('/remove_from_wishlist', logedin, isBlocked, wishlist.removeFromWishL
 
 
 router.post('/validate_coupon', logedin, isBlocked, checkout.validateCoupon)
-
-
-
-
-
-
-
 
 
 

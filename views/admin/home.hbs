@@ -1,255 +1,369 @@
 <head>
     <script src="https://cdn.jsdelivr.net/npm/handlebars/dist/handlebars.min.js"></script>
-</head>
 
-<style>
-    body {
-            {
-                {
-                !-- background-color: #f2f6fc;
-                --
-            }
+    <style>
+        /* CSS for positioning the badge */
+        .img-wrap {
+            position: relative;
         }
 
-        color:#69707a;
-    }
+        .badge-premium {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background-color: #ffc107;
+            /* Yellow color for premium badge */
+            color: #212529;
+            /* Text color for premium badge */
+        }
 
-    .img-account-profile {
-        height: 10rem;
-    }
+        .badge-top {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background-color: #ffc107;
+            /* Yellow color for premium badge */
+            color: #212529;
+            /* Text color for premium badge */
+        }
+    </style>
 
-    .rounded-circle {
-        border-radius: 50% !important;
-    }
-
-    .card {
-        box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
-    }
-
-    .card .card-header {
-        font-weight: 500;
-    }
-
-    .card-header:first-child {
-        border-radius: 0.35rem 0.35rem 0 0;
-    }
-
-    .card-header {
-        padding: 1rem 1.35rem;
-        margin-bottom: 0;
-        background-color: rgba(33, 40, 50, 0.03);
-        border-bottom: 1px solid rgba(33, 40, 50, 0.125);
-    }
-
-    .form-control,
-    .dataTable-input {
-        display: block;
-        width: 100%;
-        padding: 0.875rem 1.125rem;
-        font-size: 0.875rem;
-        font-weight: 400;
-        line-height: 1;
-        color: #69707a;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #c5ccd6;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        border-radius: 0.35rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-
-    .nav-borders .nav-link.active {
-        color: #0061f2;
-        border-bottom-color: #0061f2;
-    }
-
-    .nav-borders .nav-link {
-        color: #69707a;
-        border-bottom-width: 0.125rem;
-        border-bottom-style: solid;
-        border-bottom-color: transparent;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        padding-left: 0;
-        padding-right: 0;
-        margin-left: 1rem;
-        margin-right: 1rem;
-    }
-</style>
-
-{{>adminHeader}}
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Menu</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-
-                    <li class="nav-item">
-                        <a href="/admin/home" class="nav-link align-middle px-0 "
-                            style="background-color: #fff; padding: 2px;">Home </a>
-                    </li>
-
-                    <li>
-                        <a href="/admin/manage_users" class="nav-link px-0 align-middle"> Users </a>
-                    </li>
-
-                    <li>
-                        <a href="/admin/category" class="nav-link px-0 align-middle btn btn-outline-primary">Category
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/orders" class="nav-link px-0 align-middle">Orders</a>
-                    </li>
-                    <li>
-                        <a href="/admin/product" class="nav-link px-0 align-middle"> Products </a>
-                    </li>
-                    <li>
-                        <a href="/admin/coupons" class="nav-link px-0 align-middle"> Coupons </a>
-                    </li>
-                    <li>
-                        <a href="/admin/banners" class="nav-link px-0 align-middle"> Banner </a>
-                    </li>
-                </ul>
-                <hr>
-            </div>
-        </div>
-        <div class="col py-3" style="text-align: center;">
-
-            <div class="mt-5" style="color: #000;">
-                <h1>Admin Dashboard</h1>
-                <hr>
-            </div>
-
-            {{!-- <nav class="navbar navbar-light bg-light mb-4 p-10">
-                <div class="form-inline" style="margin-right: 2%;">
-
-                    <a href="/admin/sales_report" class="btn btn-outline-secondary" type="button">Sales Report</a>
-
-                </div>
-            </nav> --}}
-
-            <div class="container-xl px-4" style="margin-top: 10px; margin-bottom: 150px;">
-
-                <div class="row">
-
-                    <div class="col-xl-3 mb-5 mt-5">
-                        <!-- Account details card-->
-                        <div class="card mb-4">
-                            <div class="card-header">This Month Revenue</div>
-                            <div class="card-body ml-3 p-5">
-                                <h2>${{thisMonthSales}}</h2>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 mt-5">
-                        <!-- Account details card-->
-                        <div class="card mb-4">
-                            <div class="card-header">This Month sales</div>
-                            <div class="card-body ml-3 p-5">
-                                <h2>{{thisMonthOrder}}</h2>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 mt-5">
-                        <!-- Account details card-->
-                        <div class="card mb-4">
-                            <div class="card-header">Total Revenue</div>
-                            <div class="card-body ml-3 p-5">
-                                <h2>${{totalRevnue}}</h2>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 mt-5">
-                        <!-- Account details card-->
-                        <div class="card mb-4">
-                            <div class="card-header">Total sales</div>
-                            <div class="card-body ml-3 p-5">
-                                <h2>{{totalSales}}</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xl-6">
-                        <!-- Account details card-->
-                        <div class="card mb-4">
-                            <div class="card-header">Monthly Sales </div>
-                            <div class="card-body ml-3 p-5">
-                                <canvas id="myChart"></canvas>
-
-                            </div>
-                        </div>
-                    </div>
+</head>
 
 
-                    <div class="col-xl-6">
-                        <!-- Account details card-->
-                        <div class="card mb-4">
-                            <div class="card-header">Monthly Revenue</div>
-                            <div class="card-body ml-3 p-5">
-                                <canvas id="myChart1"></canvas>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-xl px-4" style="margin-top: 100px; margin-bottom: 80px;">
-
-                <nav class="navbar navbar-light bg-light mb-4 p-10">
-
-                    <div class="form-inline d-flex m-3">
-                        <div class="form-group" style="margin-right: 2%;">
-                            <label for="start-date">Start Date:</label>
-                            <input type="date" class="form-control" id="start-date" min="" max="">
-                        </div>
-                        <div class="form-group" style="margin-right: 2%;">
-                            <label for="end-date">End Date:</label>
-                            <input type="date" class="form-control" id="end-date" min="" max="">
-                        </div>
-                        <div class="form-group mt-4 mr-2">
-                            <button onclick="getSalesData()" type="button" class="btn btn-primary">Submit</button>
-                        </div>
-                        <input id="revenue" type="hidden" value="{{revnueByMonth}}">
-
-                    </div>
-
-                    <div style="margin-right: 50%;">
-                        <h4> Get Sales Report </h4>
-                    </div>
-
-
-                    {{!-- <div class="form-inline" style="margin-right: 2%;">
-                        <button class="btn btn-outline-secondary" type="button">This Year </button>
-                        <button onclick="getThisMOnthOrders()" class="btn btn-outline-secondary" type="button">This
-                            Month</button>
-                        <a href="/admin/current_month_orders" class="btn btn-outline-secondary" type="button">This
-                            Week</a>
-
-                    </div> --}}
-                </nav>
-
-                <div class="row" id="table">
-
-                </div>
-
-            </div>
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+            
+            <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+            </button>
         </div>
     </div>
-</div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item  active ">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+
+            </li>
+
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                    <span class="text">Category</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Users</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span> </a>
+            </li>
+
+            {{!-- <li class="menu-item ">
+                <a class="menu-link" href="/admin/banner"> <i
+                        class="icon material-icons md-photo_size_select_actual"></i>
+                    <span class="text">Banners</span> </a>
+            </li> --}}
+
+
+
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
+                    <button class="nav-link
+                     rounded-pill darkmode m-3 " href="#">
+                        <i class="material-icons md-nights_stay"></i>Dark mode
+                    </button>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                    <span class="text"> Logout </span>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </nav>
+</aside>
+<main class="main-wrap">
+
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Dashboard </h2>
+                <p>Whole data about your business here</p>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card card-body mb-4">
+                    <article class="icontext">
+                        <span class="icon icon-sm rounded-circle bg-primary-light"><i
+                                class="text-primary material-icons md-monetization_on"></i></span>
+                        <div class="text">
+                            <h6 class="mb-1 card-title">Total Revenue</h6>
+                            <span>₹{{totalRevnue}}</span>
+                            <span class="text-sm">
+                                Shipping fees are not included
+                            </span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card card-body mb-4">
+                    <article class="icontext">
+                        <span class="icon icon-sm rounded-circle bg-success-light"><i
+                                class="text-success material-icons md-local_shipping"></i></span>
+                        <div class="text">
+                            <h6 class="mb-1 card-title">Total Orders</h6> <span>{{thisMonthOrder}}</span>
+                            <span class="text-sm">
+                                Excluding orders in transit
+                            </span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card card-body mb-4">
+                    <article class="icontext">
+                        <span class="icon icon-sm rounded-circle bg-warning-light"><i
+                                class="text-warning material-icons md-qr_code"></i></span>
+                        <div class="text">
+                            <h6 class="mb-1 card-title">This Month sales</h6> <span>{{thisMonthOrder}}</span>
+                            <span class="text-sm">
+                                In 19 Categories
+                            </span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card card-body mb-4">
+                    <article class="icontext">
+                        <span class="icon icon-sm rounded-circle bg-info-light"><i
+                                class="text-info material-icons md-shopping_basket"></i></span>
+                        <div class="text">
+                            <h6 class="mb-1 card-title">Monthly Earning</h6> <span>₹{{thisMonthSales}}</span>
+                            <span class="text-sm">
+                                Based in your local time.
+                            </span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8 col-lg-12">
+                <div class="card mb-4">
+                    <article class="card-body">
+                        <h5 class="card-title">Sale statistics</h5>
+                        <canvas id="myChart1" height="120px"></canvas>
+                    </article>
+                </div>
+
+            </div>
+            <div class="col-xl-4 col-lg-12">
+                <div class="card mb-4">
+                    <article class="card-body">
+                        <h5 class="card-title">Revenue Base on Area</h5>
+                        <canvas id="myChar" height="265px"></canvas>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+
+        {{!-- Date Details --}}
+
+        
+
+        <div class="form-inline d-flex m-3">
+            <div class="form-group" style="margin-right: 5%;">
+                <label for="date-range">Select Range : </label>
+                <select class="form-control" id="date-range" onchange="toggleDateInputs()">
+                    <option value="select">Select</option>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="custom">Custom</option>
+                </select>
+            </div>
+            
+            <div class="form-group" id="start-date-group" style="margin-right: 2%; display: none;">
+                <label for="start-date">Start Date:</label>
+                <input type="date" class="form-control" value="2024-07-12" id="start-date" min="" max="">
+            </div>
+            <div class="form-group" id="end-date-group" style="margin-right: 2%; display: none;">
+                <label for="end-date">End Date:</label>
+                <input type="date" class="form-control" value="2024-07-18" id="end-date" min="" max="">
+            </div>
+            <div class="form-group mt-4 mr-2">
+                <button onclick="getSalesData()" type="button" class="btn btn-primary"><i
+                        class="text-muted material-icons md-post_add"></i>Create report</button>
+            </div>
+            <input id="revenue" type="hidden" value="{{revenueByMonth}}">
+        </div>
+
+        <script>
+            function toggleDateInputs() {
+                var dateRange = document.getElementById("date-range").value;
+                var startDateGroup = document.getElementById("start-date-group");
+                var endDateGroup = document.getElementById("end-date-group");
+                var startDateInput = document.getElementById("start-date");
+                var endDateInput = document.getElementById("end-date");
+
+                var today = new Date().toISOString().split('T')[0];
+
+                switch (dateRange) {
+                    case "daily":
+                        startDateInput.value = endDateInput.value = today;
+                        break;
+                    case "weekly":
+                        var lastWeek = new Date();
+                        lastWeek.setDate(lastWeek.getDate() - 6);
+                        startDateInput.value = lastWeek.toISOString().split('T')[0];
+                        endDateInput.value = today;
+                        break;
+                    case "monthly":
+                        var lastMonth = new Date();
+                        lastMonth.setDate(lastMonth.getDate() - 30);
+                        startDateInput.value = lastMonth.toISOString().split('T')[0];
+                        endDateInput.value = today;
+                        break;
+                    case "custom":
+                        startDateInput.value = endDateInput.value = "";
+                        break;
+                    default:
+                        startDateInput.value = endDateInput.value = "";
+                        break;
+                }
+
+                startDateGroup.style.display = endDateGroup.style.display = (dateRange === "custom") ? "block" : "none";
+            }
+        </script>
+
+
+        {{!-- Date Details --}}
+
+        <div class="row" id="table">
+
+        </div>
+
+
+
+
+    </section>
+
+
+    <section>
+        <div class="card-body">
+            <h5 class="card-title">Top 3 Selling Products</h5>
+            <div class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
+                {{#each topSelling}}
+                <div class="col">
+                    <div class="card card-product-grid">
+                        <a href="#" class="img-wrap position-relative">
+                            <img src="/images/products/{{this.productImage.[0]}}" alt="{{this.productName}}">
+
+                            <span class="badge badge-primary badge-premium"><i class="fa-solid fa-crown"></i></span>
+
+                        </a>
+                        <div class="info-wrap">
+                            <a href="#" class="title text-truncate">{{this.productName}}</a>
+                            <div class="price mb-2"> ₹ {{this.salePrice}}</div>
+                            <h6 class="quantity mb-2">Total Quantity Sold: {{this.totalQuantitySold}}</h6>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+
+            </div>
+        </div>
+
+    </section>
+
+    <section>
+        <div class="card-body">
+            <h5 class="card-title">Top 3 Selling Categories</h5>
+            <div class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
+                {{#each topSellingCat}}
+                <div class="col">
+                    <div class="card card-category-grid">
+                        <a href="#" class="img-wrap">
+
+                            <img src="/images/products/{{this.categoryImageUrl}}" alt="{{this.categoryName}}">
+                            <span class="badge badge-primary badge-top"><i
+                                    class="fa-solid fa-star-half-stroke"></i></span>
+                        </a>
+                        <div class="info-wrap">
+                            <a href="#" class="title text-truncate">{{this.categoryName}}</a>
+                            <h6 class="quantity mb-2">Total Quantity Sold: {{this.totalQuantitySold}}</h6>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </section>
+
+    <!-- content-main end// -->
+    <footer class="main-footer font-xs">
+        <div class="row pb-30 pt-15">
+            <div class="col-sm-6">
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> ©, Coco Loco - Ecommerce website.
+            </div>
+            <div class="col-sm-6">
+                <div class="text-sm-end">
+                    All rights reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="/javascripts/chart.js"></script>
+
 <script>
 
 
@@ -270,20 +384,20 @@
         revenueByMonth = data.revnueByMonth
 
         //graph functions
-        salesGraph(months,ordersByMonth)
-        revenue(months,revenueByMonth)
+        salesGraph(months, ordersByMonth)
+        revenue(months, revenueByMonth)
 
     }
 
     getChartData()
 
 
-    function salesGraph(months,ordersByMonth) {
+    function salesGraph(months, ordersByMonth) {
         const ctx = document.getElementById('myChart1');
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels:months ,
+                labels: months,
                 datasets: [{
                     label: '# of Sales',
                     data: ordersByMonth,
@@ -301,27 +415,27 @@
     }
 
 
-function revenue(months,revenueByMonth){
-    const ctx1 = document.getElementById('myChart');
-    new Chart(ctx1, {
-        type: 'line',
-        data: {
-            labels: months,
-            datasets: [{
-                label: '# Revenue',
-                data: revenueByMonth,
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+    function revenue(months, revenueByMonth) {
+        const ctx1 = document.getElementById('myChar');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: '# Revenue',
+                    data: revenueByMonth,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
-}
+        });
+    }
 
 
 

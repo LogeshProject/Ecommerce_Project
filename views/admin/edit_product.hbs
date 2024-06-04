@@ -1,16 +1,17 @@
-    <aside class="navbar-aside" id="offcanvas_aside">
+         <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
             <a href="/admin/home" class="brand-wrap">
-                <img src="/assetsAdmin/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
-            </a>
+            
+            <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
+        </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
             </div>
         </div>
         <nav>
             <ul class="menu-aside">
-                <li class="menu-item ">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-home"></i>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
@@ -26,27 +27,7 @@
                     </a>
                    
                 </li>
-                {{!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
-                        <span class="text">Sellers</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-sellers-cards.html">Sellers cards</a>
-                        <a href="page-sellers-list.html">Sellers list</a>
-                        <a href="page-seller-detail.html">Seller profile</a>
-                    </div>
-                </li> --}}
-                {{!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>
-                        <span class="text">Add product</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-form-product-1.html">Add product 1</a>
-                        <a href="page-form-product-2.html">Add product 2</a>
-                        <a href="page-form-product-3.html">Add product 3</a>
-                        <a href="page-form-product-4.html">Add product 4</a>
-                    </div>
-                </li> --}}
+               
                 <li class="menu-item ">
                     <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
                         <span class="text">Category</span>
@@ -59,20 +40,18 @@
                     </a>
                     
                 </li>
-                {{!-- <li class="menu-item">
-                    <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
-                    </a>
+                 <li class="menu-item ">
+                    <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span> </a>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
-                        <span class="text">Brands</span> </a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
-                        <span class="text">Statistics</span>
-                    </a>
+
+                {{!-- <li class="menu-item ">
+                    <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-photo_size_select_actual"></i>
+                        <span class="text">Banners</span> </a>
                 </li> --}}
+
+
+               
             </ul>
             <hr>
             <ul class="menu-aside">
@@ -81,9 +60,11 @@
                         <span class="text">Settings</span>
                     </a>
                     <div class="submenu">
-                        <a href="page-settings-1.html">Setting sample 1</a>
-                        <a href="page-settings-2.html">Setting sample 2</a>
-                    </div>
+                    <button class="nav-link
+                     rounded-pill darkmode m-3 " href="#">
+                        <i class="material-icons md-nights_stay"></i>Dark mode
+                    </button>
+                </div>
                 </li>
                 <li class="menu-item">
                     <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
@@ -95,60 +76,6 @@
             <br>
         </nav>
     </aside>
-       {{!-- <header class="main-header navbar">
-            <div class="col-search">
-                <form class="searchform">
-                    <div class="input-group">
-                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
-                        <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
-                    </div>
-                    <datalist id="search_terms">
-                        <option value="Products">
-                        <option value="New orders">
-                        <option value="Apple iphone">
-                        <option value="Ahmed Hassan">
-                    </datalist>
-                </form>
-            </div>
-            <div class="col-nav">
-                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon" href="#">
-                            <i class="material-icons md-notifications animation-shake"></i>
-                            <span class="badge rounded-pill">3</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png" alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png" alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png" alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png" alt="Français">中国人</a>
-                        </div>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="assets/imgs/people/avatar2.jpg" alt="User"></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit Profile</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account Settings</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-account_balance_wallet"></i>Wallet</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#"><i class="material-icons md-exit_to_app"></i>Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </header> --}}
 <main class="main-wrap">
 
     <section class="content-main">
@@ -156,10 +83,7 @@
             <div class="col-9">
                 <div class="content-header">
                     <h2 class="content-title">Edit Product</h2>
-                    {{!-- <div>
-                        <button class="btn btn-light rounded font-sm mr-5 text-body hover-up">Save to draft</button>
-                        <button class="btn btn-md rounded font-sm hover-up">Publich</button>
-                    </div> --}}
+                   
                 </div>
             </div>
             <div class="col-lg-12">
@@ -183,12 +107,21 @@
                                     value="{{proData.description}}" required></input>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-2">
                                     <div class="mb-4">
-                                        <label class="form-label">Price</label>
+                                        <label class="form-label">Regular Price</label>
                                         <div class="row gx-2">
-                                            <input placeholder="$" type="text" value="{{proData.price}}" id="price"
+                                            <input placeholder="₹" type="text" value="{{proData.price}}" id="price"
                                                 name="price" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="mb-4">
+                                        <label class="form-label">Discount Price</label>
+                                        <div class="row gx-2">
+                                            <input placeholder="₹" type="text" value="{{proData.DiscountPrice}}" id="price"
+                                                name="discountprice" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -209,19 +142,7 @@
                                 </div>
 
 
-                                {{!-- <div class="col-lg-3">
-                                    <div class="form-element m-2">
-                                        <input type="file" id="file-1" name="image" accept="image/*">
-                                        <label for="file-1" id="file-1-preview">
-                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
-                                            <div>
-                                                <span>+</span>
-                                            </div>
-                                        </label>
-                                    </div> <!-- card end// -->
-
-                                </div> --}}
-
+                                
                             </div>
                             <div class="form-group">
         <label for="productImage">Product Image:</label>
@@ -229,8 +150,8 @@
           <input name="product-id" type="hidden" value="{{proData._id}}">
           {{#each proData.imageUrl}}
           <div class="image-container" onclick="deleteProImg()">
-            <div  class="badge rounded-pill alert-danger "><p  class="close-button" data-image-index="{{@index}}"
-              style="text-decoration: none;">×</p></div>
+            <div  class="badge rounded-pill alert-danger "><span  class="close-button" data-image-index="{{@index}}"
+              style="text-decoration: none;">×</span></div>
             <img src="/images/products/{{this}}" alt="images" style="width: 80px; height: auto;" class="m-2 pro-image"
               data-image-index="{{@index}}">
           </div>
@@ -241,12 +162,16 @@
       </div>
 
                             <div class="d-flex g-2">
-                                <div class="m-2">
-                                    <button type="submit" class="btn btn-primary">Edit Product</button>
+                                {{!-- <div class="m-2">
+                                    <button type="submit" class="btn btn-primary" onclick="return Do you Edit the product ?">Edit Product</button>
 
-                                </div>
+                                </div> --}}
                                 <div class="m-2">
-                                    <a href="/admin/product" type="button" class="btn btn-primary">Back</a>
+    <button type="submit" class="btn btn-primary" onclick="return confirm('Do you want to edit the product?')">Edit Product</button>
+</div>
+
+                                <div class="m-2">
+                                    <a href="/admin/product" type="button" id="backbutton" class="btn btn-primary">Back</a>
 
                                 </div>
 
@@ -273,7 +198,7 @@
             <div class="col-sm-6">
                 <script>
                     document.write(new Date().getFullYear())
-                </script> ©, Evara - HTML Ecommerce Template .
+                </script> ©, Coco Loco - Ecommerce website .
             </div>
             <div class="col-sm-6">
                 <div class="text-sm-end">
@@ -315,13 +240,20 @@
     const deleteButtons = document.querySelectorAll('.close-button')
     const productId = document.getElementsByName('product-id')[0].value
 
+    
+
     deleteButtons.forEach((button )=> {
       button.addEventListener('click', async (event) => {
         const imageIndex = event.target.dataset.imageIndex;
         deleteImage(productId, imageIndex);
+         const removeIcon = document.createElement("span");
+                removeIcon.classList.add("remove-icon");
+                removeIcon.innerHTML = "&times;"; 
       });
     });
 
+
+    
 
 
 
@@ -435,3 +367,36 @@
 
    
 </script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    //back
+    $(document).ready(function () {
+        $('#backbutton').click(function (e) {
+            e.preventDefault();
+
+
+            Swal.fire({
+                title: "Leave the page?",
+                text: "The Data will not be saved",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#088178",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/admin/product";
+
+                }
+            });
+
+
+        });
+    }
+    )
+    </script>

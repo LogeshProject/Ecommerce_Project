@@ -3,6 +3,9 @@ const Sale = require('../../model/order')
 const Order = require('../../model/order');
 const PDFDocument = require('pdfkit')
 const hbs = require('hbs')
+const Handlebars = require('handlebars')
+
+const {calculateTopSellingProducts , calculateTopSellingCategories } = require('./adminController')
 
 let months        = []
 let odersByMonth  = []
@@ -11,101 +14,104 @@ let totalRevnue = 0
 let totalSales  = 0
 
 
-hbs.registerHelper("json", function (context) {
-    return JSON.stringify(context)
-  })
-
-
-// const loadDashboard = async(req, res) => {
-       
-//     Sale.find({}, (err, sales) => {
-//       if (err) {
-//         console.error(err);
-//         return;
-//       }
-    
-//       console.log(sales,'salessssssssssssssssss');
-      
-//       const salesByMonth = {};
-      
-//       sales.forEach((sale) => {
-//         const monthYear = moment(sale.date).format('MMMM YYYY');
-//         if (!salesByMonth[monthYear]) {
-//           salesByMonth[monthYear] = {
-//             totalOrders: 0,
-//             totalRevenue: 0
-//           };
-//         }
-//         salesByMonth[monthYear].totalOrders += 1;
-//         salesByMonth[monthYear].totalRevenue += sale.total;
-//       });
-      
-//       const chartData = [];
-      
-//       Object.keys(salesByMonth).forEach((monthYear) => {
-//         const { totalOrders, totalRevenue } = salesByMonth[monthYear];
-//         chartData.push({
-//           month: monthYear.split(' ')[0],
-//           totalOrders: totalOrders || 0,
-//           totalRevenue: totalRevenue || 0
-//         });
-//       });
-      
-//       console.log(chartData);
-      
-//        months        = []
-//        odersByMonth  = []
-//        revnueByMonth = []
-//        totalRevnue = 0
-//        totalSales  = 0
-
-
-
-//       chartData.forEach((data) => {
-//         months.push(data.month)
-//         odersByMonth.push(data.totalOrders)
-//         revnueByMonth.push(data.totalRevenue)
-//         totalRevnue += Number(data.totalRevenue)
-//         totalSales  += Number(data.totalOrders)
-//       })
-
-//       const thisMonthOrder = odersByMonth[odersByMonth.length-1]
-//       const thisMonthSales = revnueByMonth[revnueByMonth.length-1]
-
-//       console.log(thisMonthOrder, thisMonthSales);
-
-
-//     //   const data = {
-//     //     months: months,
-//     //     ordersByMonth: odersByMonth,
-//     //     revenueByMonth: revnueByMonth,
-       
-//     //   };
-      
-//     //   const jsonData = JSON.stringify(data);
-      
-
-//       console.log(months);
-//       console.log(odersByMonth);
-//       console.log(revnueByMonth);
-//       console.log(totalRevnue);
-//       console.log(totalSales);
-
-//       res.render('admin/home', { revnueByMonth, months, odersByMonth, totalRevnue, totalSales, thisMonthOrder, thisMonthSales},{  layout:'adminlayout'})
-
-//     })
-    
-// }
 
 
 const loadDashboard = async(req, res) => {
+       
   try {
-    res.render('admin/home',{  layout:'adminlayout'})
+    Sale.find({}, async(err, sales) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    
+      // console.log(sales,'salessssssssssssssssss');
+      
+      const salesByMonth = {};
+      
+      sales.forEach((sale) => {
+        const monthYear = moment(sale.date).format('MMMM YYYY');
+        if (!salesByMonth[monthYear]) {
+          salesByMonth[monthYear] = {
+            totalOrders: 0,
+            totalRevenue: 0
+          };
+        }
+        salesByMonth[monthYear].totalOrders += 1;
+        salesByMonth[monthYear].totalRevenue += sale.total;
+      });
+      
+      const chartData = [];
+      
+      Object.keys(salesByMonth).forEach((monthYear) => {
+        const { totalOrders, totalRevenue } = salesByMonth[monthYear];
+        chartData.push({
+          month: monthYear.split(' ')[0],
+          totalOrders: totalOrders || 0,
+          totalRevenue: totalRevenue || 0
+        });
+      });
+      
+      // console.log(chartData);
+      
+       months        = []
+       odersByMonth  = []
+       revnueByMonth = []
+       totalRevnue = 0
+       totalSales  = 0
+
+
+
+      chartData.forEach((data) => {
+        months.push(data.month)
+        odersByMonth.push(data.totalOrders)
+        revnueByMonth.push(data.totalRevenue)
+        totalRevnue += Number(data.totalRevenue)
+        totalSales  += Number(data.totalOrders)
+      })
+
+      const thisMonthOrder = odersByMonth[odersByMonth.length-1]
+      const thisMonthSales = revnueByMonth[revnueByMonth.length-1]
+
+      // console.log(thisMonthOrder, thisMonthSales);
+
+
+    //   const data = {
+    //     months: months,
+    //     ordersByMonth: odersByMonth,
+    //     revenueByMonth: revnueByMonth,
+       
+    //   };
+      
+    //   const jsonData = JSON.stringify(data);
+      
+
+      // console.log(months);
+      // console.log(odersByMonth);
+      // console.log(revnueByMonth);
+      // console.log(totalRevnue);
+      // console.log(totalSales);
+      const topSelling = await calculateTopSellingProducts();
+      const topSellingCat = await calculateTopSellingCategories();
+
+      console.log(topSelling,"................")
+
+
+     
+      res.render('admin/home', {topSelling , topSellingCat , revnueByMonth, months, odersByMonth, totalRevnue, totalSales, thisMonthOrder, thisMonthSales , layout:'adminlayout'})
+
+    })
+
+    
 
   } catch (error) {
-    
+    console.log(error)
   }
+    
 }
+
+
+
 
 
 

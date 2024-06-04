@@ -1,21 +1,21 @@
-const Admin       = require("../../model/adminModel");
+const Admin = require("../../model/adminModel");
 const adminHelper = require("../../helpers/admin_helper");
-const User        = require("../../model/userModel");
-const Category    = require("../../model/categoryModel");
-const Product     = require("../../model/productModel");
-const Coupon      = require("../../model/coupon");
-const Orders      = require("../../model/order");
-const Address     = require("../../model/address");
-const Banner      = require('../../model/banner')
-const moment      = require("moment");
+const User = require("../../model/userModel");
+const Category = require("../../model/categoryModel");
+const Product = require("../../model/productModel");
+const Coupon = require("../../model/coupon");
+const Orders = require("../../model/order");
+const Address = require("../../model/address");
+const Banner = require('../../model/banner')
+const moment = require("moment");
 
-let adminData 
+let adminData
 let catSaveMsg = "Category added suceessfully..!!";
 
 ///Admin home page ///
 
 const adminLogin = (req, res) => {
-  res.render("admin/login", {  layout:'loginlayout'});
+  res.render("admin/login", { layout: 'loginlayout' });
 };
 
 /////Admin Login//////
@@ -23,7 +23,7 @@ const adminLogin = (req, res) => {
 const adminDoLogin = async (req, res) => {
   try {
     adminData = {
-      email: process.env.ADMIN_EMAIL ,
+      email: process.env.ADMIN_EMAIL,
       password: process.env.ADMIN_PASSWORD
     };
 
@@ -37,12 +37,12 @@ const adminDoLogin = async (req, res) => {
       if (adminPassword === adminData.password) {
         req.session.aLoggedIn = true;
         req.session.admin = adminData;
-        res.redirect("/admin/product");
+        res.redirect("/admin/home");
       } else {
-        res.render("admin/login", { message: "incorrect email or password" ,layout:'loginlayout'});
+        res.render("admin/login", { message: "incorrect email or password", layout: 'loginlayout' });
       }
     } else {
-      res.render("admin/login", { message: "incorrect email or password" , layout:'loginlayout'});
+      res.render("admin/login", { message: "incorrect email or password", layout: 'loginlayout' });
     }
   } catch (error) {
     console.log(error);
@@ -67,7 +67,7 @@ const adminLogout = async (req, res) => {
 
 const loadHome = (req, res) => {
   try {
-    res.render("admin/home",{layout:'adminlayout'});
+    res.render("admin/home", { layout: 'adminlayout' });
   } catch (error) {
     console.log(error);
   }
@@ -79,7 +79,7 @@ const loadHome = (req, res) => {
 const loadUsersData = async (req, res) => {
   try {
     let allUsersData = await adminHelper.getAllUsersData();
-    res.render("admin/manage_users", { allUsersData, layout:'adminlayout' });
+    res.render("admin/manage_users", { allUsersData, layout: 'adminlayout' });
   } catch (error) {
     console.log(error);
   }
@@ -108,16 +108,35 @@ const blockUser = async (req, res) => {
 
 /// To get category page ///
 
+// const getCategory = async (req, res) => {
+//   try {
+//     let allCtegoryData = await adminHelper.getAllCtegoryData();
+//     let catUpdtMsg = "Category updated successfully..!!";
+
+//     if (req.session.categoryUpdate) {
+//       res.render("admin/category", { allCtegoryData, catUpdtMsg, layout: 'adminlayout' });
+//       req.session.categoryUpdate = false;
+//     } else {
+//       res.render("admin/category", { allCtegoryData, layout: 'adminlayout' });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+
 const getCategory = async (req, res) => {
   try {
-    let allCtegoryData = await adminHelper.getAllCtegoryData();
+    let { CtegoryData, pages } = await adminHelper.getAllCtegoryData(req);
+
+    console.log(CtegoryData , pages)
     let catUpdtMsg = "Category updated successfully..!!";
 
     if (req.session.categoryUpdate) {
-      res.render("admin/category", { allCtegoryData, catUpdtMsg,layout:'adminlayout' });
+      res.render("admin/category", { CtegoryData, catUpdtMsg, pages, layout: 'adminlayout' });
       req.session.categoryUpdate = false;
     } else {
-      res.render("admin/category", { allCtegoryData, layout:'adminlayout' });
+      res.render("admin/category", { CtegoryData, pages, layout: 'adminlayout' });
     }
   } catch (error) {
     console.log(error);
@@ -131,13 +150,13 @@ const addCategory = (req, res) => {
     let catExistMsg = "Category alredy Exist..!!";
 
     if (req.session.categorySave) {
-      res.render("admin/add_category", { catSaveMsg, layout:'adminlayout' });
+      res.render("admin/add_category", { catSaveMsg, layout: 'adminlayout' });
       req.session.categorySave = false;
     } else if (req.session.catExist) {
-      res.render("admin/add_category", { catExistMsg, layout:'adminlayout' });
+      res.render("admin/add_category", { catExistMsg, layout: 'adminlayout' });
       req.session.catExist = false;
     } else {
-      res.render("admin/add_category",{layout:'adminlayout'});
+      res.render("admin/add_category", { layout: 'adminlayout' });
     }
   } catch (error) {
     console.log(error);
@@ -166,7 +185,7 @@ const addNewCategory = async (req, res) => {
       req.session.catExist = true;
       res.redirect("/admin/add_category");
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 
 /// To edit category ///
@@ -178,10 +197,10 @@ const editCategory = async (req, res) => {
     const catData = await Category.findById({ _id: catId }).lean();
 
     if (req.session.catExist) {
-      res.render("admin/edit_category", { catData, catExistMsg, layout:'adminlayout' });
+      res.render("admin/edit_category", { catData, catExistMsg, layout: 'adminlayout' });
       // req.session.catExist = false
     } else {
-      res.render("admin/edit_category", { catData, layout:'adminlayout' });
+      res.render("admin/edit_category", { catData, layout: 'adminlayout' });
     }
   } catch (error) {
     console.log(error);
@@ -230,31 +249,31 @@ const editCategory = async (req, res) => {
 
 const updateCategory = async (req, res) => {
   try {
-      const catName = req.body.name;
-      const image = req.file
-      const catId  = req.params.id
+    const catName = req.body.name;
+    const image = req.file
+    const catId = req.params.id
 
-      const cat  = await Category.findById(catId)
-      const catImg = cat.imageUrl;
-      let updImge
-      if (image) {
-        updImge  = image.filename
-      }
-      else {
-        updImge  = catImg
-      }
+    const cat = await Category.findById(catId)
+    const catImg = cat.imageUrl;
+    let updImge
+    if (image) {
+      updImge = image.filename
+    }
+    else {
+      updImge = catImg
+    }
 
-      const catExist = await Category.findOne({ name: req.body.name })
-      if (!catExist) {
-          await Category.findByIdAndUpdate(catId, {
-              category: req.body.name,
-              imageUrl: updImge 
-          },
-              { new: true })
-          res.redirect('/admin/category')
-      }
+    const catExist = await Category.findOne({ name: req.body.name })
+    if (!catExist) {
+      await Category.findByIdAndUpdate(catId, {
+        category: req.body.name,
+        imageUrl: updImge
+      },
+        { new: true })
+      res.redirect('/admin/category')
+    }
   } catch (error) {
-      console.log(error)
+    console.log(error)
   }
 }
 
@@ -272,21 +291,25 @@ const updateCategory = async (req, res) => {
 // };
 
 const deleteCategory = async (req, res) => {
-  try {
-      const catId = req.params.id
-      let user = await Category.findById(catId)
-      let newListed = user.isListed
 
-      await Category.findByIdAndUpdate(catId, {
-          isListed: !newListed
-      },
+
+  try {
+
+    // const catId = req.params.id
+    const { id } = req.body;
+    let user = await Category.findById(id)
+    let newListed = user.isListed
+
+    await Category.findByIdAndUpdate(id, {
+      isListed: !newListed
+    },
       { new: true })
-      res.redirect('/admin/category')
+    res.redirect('/admin/category')
 
 
 
   } catch (error) {
-      console.log(error)
+    console.log(error)
 
   }
 }
@@ -296,7 +319,7 @@ const deleteCategory = async (req, res) => {
 const getProduct = async (req, res) => {
   try {
     var page = 1
-    if(req.query.page){
+    if (req.query.page) {
       page = req.query.page
     }
     const limit = 3;
@@ -316,7 +339,7 @@ const getProduct = async (req, res) => {
         $skip: (page - 1) * limit
       },
       {
-          $limit: limit * 1
+        $limit: limit * 1
       }
     ]);
 
@@ -324,10 +347,10 @@ const getProduct = async (req, res) => {
     console.log(count)
 
     // console.log(products);
-    const totalPages = Math.ceil(count/limit)  // Example value
-    const pages = Array.from({length: totalPages}, (_, i) => i + 1);
+    const totalPages = Math.ceil(count / limit)  // Example value
+    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-    res.render("admin/products", { productData,pages , currentPage: page, layout:'adminlayout' });
+    res.render("admin/product", { productData, pages, currentPage: page, layout: 'adminlayout' });
   } catch (error) {
     console.log(error);
   }
@@ -343,10 +366,10 @@ const newProduct = async (req, res) => {
     const catogories = await Category.find().lean();
     console.log(catogories)
     if (req.session.productSave) {
-      res.render("admin/addproduct", { productSaveMsg, catogories,layout:'adminlayout' });
+      res.render("admin/addproduct", { productSaveMsg, catogories, layout: 'adminlayout' });
       req.session.productSave = false;
     } else {
-      res.render("admin/addproduct", { catogories, layout:'adminlayout' });
+      res.render("admin/addproduct", { catogories, layout: 'adminlayout' });
     }
   } catch (error) {
     console.log(error);
@@ -358,7 +381,7 @@ const newProduct = async (req, res) => {
 
 const getOrders = async (req, res) => {
   try {
-    const PAGE_SIZE = 10;
+    const PAGE_SIZE = 5;
     const page = parseInt(req.query.page) || 1;
     const skip = (page - 1) * PAGE_SIZE;
 
@@ -379,17 +402,43 @@ const getOrders = async (req, res) => {
     });
 
     console.log(ordersData);
-
+   const totalPages = Math.ceil(await Orders.countDocuments() / PAGE_SIZE);
+   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
     res.render("admin/orders", {
       ordersData,
-      currentPage: page,
-      totalPages: Math.ceil(await Orders.countDocuments() / PAGE_SIZE),
-      layout:'adminlayout'
+      
+      pages,
+      layout: 'adminlayout'
     });
   } catch (error) {
     console.log(error);
   }
 };
+
+// Add offers 
+
+
+// const addProductOffer = async (req, res) => {
+//   try {
+//       // console.log(req.body);
+//       const { productId, percentage } = req.body
+//       const findProduct = await Product.findOne({ _id: productId })
+//       // console.log(findProduct);
+
+//       if (findProduct.categoryOffer == 0) {
+//           findProduct.price = findProduct.price - Math.floor(findProduct.regularPrice * (percentage / 100))
+//           findProduct.productOffer = parseInt(percentage)
+//           await findProduct.save()
+//       } else {
+//           res.json({ status: false })
+//       }
+//       res.json({ status: true })
+
+//   } catch (error) {
+//       console.log(error.message);
+//   }
+// }
+
 
 
 ////// Add new Product post/////////////
@@ -403,20 +452,21 @@ const addNewProduct = async (req, res) => {
       const image = file.filename;
       images.push(image);
     });
-    const { name, price, description, category, stock } = req.body;
+    const { name, price, description,discountprice , category, stock } = req.body;
     const product = new Product({
-      name        : name,
-      price       : price,
-      description : description,
-      category    : category,
-      stock       : stock,
-      imageUrl    : images,
+      name: name,
+      price: price,
+      DiscountPrice : discountprice,
+      description: description,
+      category: category,
+      stock: stock,
+      imageUrl: images,
       isWishlisted: false
     });
 
     await product.save();
     req.session.productSave = true;
-    res.redirect("/admin/new_product");
+    res.redirect("/admin/product");
   } catch (error) {
     console.log(error);
   }
@@ -427,11 +477,11 @@ const addNewProduct = async (req, res) => {
 const editProduct = async (req, res) => {
   try {
     let proId = req.params.id;
-    
+
     const proData = await Product.findById({ _id: proId }).lean()
     const catogories = await Category.find().lean()
 
-    res.render("admin/edit_product", { proData, catogories, layout:'adminlayout' })
+    res.render("admin/edit_product", { proData, catogories, layout: 'adminlayout' })
   } catch (error) {
     console.log(error);
   }
@@ -441,10 +491,10 @@ const editProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   try {
-    const proId   = req.params.id;
+    const proId = req.params.id;
     const product = await Product.findById(proId);
     const exImage = product.imageUrl;
-    const files   = req.files;
+    const files = req.files;
     let updImages = [];
 
     if (files && files.length > 0) {
@@ -455,23 +505,24 @@ const updateProduct = async (req, res) => {
       updImages = exImage;
     }
 
-    const { name, price, description, category, stock } = req.body;
+    const { name, price,discountprice , description, category, stock } = req.body;
     await Product.findByIdAndUpdate(
       proId,
       {
-        name        : name,
-        price       : price,
-        description : description,
-        category    : category,
-        stock       : stock,
-        is_blocked  : false,
+        name: name,
+        price: price,
+        DiscountPrice : discountprice,
+        description: description,
+        category: category,
+        stock: stock,
+        is_blocked: false,
 
-        imageUrl    : updImages,
+        imageUrl: updImages,
       },
       { new: true }
     );
 
-    // req.session.productSave = true
+    
     res.redirect("/admin/product");
   } catch (error) {
     console.log(error);
@@ -498,12 +549,13 @@ const deleteProduct = async (req, res) => {
 };
 
 const blockProduct = async (req, res) => {
-  const proId = req.params.id;
-  const prodData = await Product.findById(proId);
+  const { id } = req.body
+  // const proId = req.params.id;
+  const prodData = await Product.findById(id);
   const isBlocked = prodData.is_blocked;
 
   const proData = await Product.findByIdAndUpdate(
-    proId,
+    id,
     { $set: { is_blocked: !isBlocked } },
     { new: true }
   );
@@ -514,7 +566,21 @@ const blockProduct = async (req, res) => {
 
 const loadCoupon = async (req, res) => {
   try {
-    const coupon = await Coupon.find();
+    var page = 1
+  if(req.query.page){
+    page = req.query.page
+  }
+  const limit = 5;
+  let coupon = await Coupon.find()
+  .skip((page - 1) * limit)
+  .limit(limit * 1)
+  const count = await Coupon.find({}).count();
+  const totalPages = Math.ceil(count/limit)
+  const pages = Array.from({length: totalPages}, (_, i) => i + 1); 
+  console.log(coupon)
+
+
+    // const coupon = await Coupon.find();
 
     const now = moment();
 
@@ -527,19 +593,18 @@ const loadCoupon = async (req, res) => {
       };
     });
 
-    res.render("admin/coupon", { couponData, layout:'adminlayout' });
+    res.render("admin/coupon", { couponData,pages , currentPage: page ,layout: 'adminlayout' });
   } catch (error) {
     console.log(error);
   }
 };
-
 const addCoupon = (req, res) => {
   try {
-    const couponMsg = "Coupon added successfuly..!!";
+    
     const couponExMsg = "Coupon alredy exist..!!";
 
     if (req.session.coupon) {
-      res.render("admin/add_coupon", { couponMsg, layout:'adminlayout' });
+      res.render("admin/add_coupon", {layout:'adminlayout' });
       req.session.coupon = false;
     } else if (req.session.exCoupon) {
       res.render("admin/add_coupon", { couponExMsg, layout:'adminlayout' });
@@ -555,6 +620,12 @@ const addCoupon = (req, res) => {
 const addCouponPost = async (req, res) => {
   try {
     const { code, percent, expDate } = req.body;
+    console.log(code,percent,expDate)
+
+        // Validate input data
+        if (!code || !percent || !expDate) {
+          throw new Error("Missing required fields");
+        }
 
     const cpnExist = await Coupon.findOne({ code: code });
 
@@ -567,7 +638,7 @@ const addCouponPost = async (req, res) => {
 
       await coupon.save();
       req.session.coupon = true;
-      res.redirect("/admin/add_coupon");
+      res.redirect("/admin/coupons");
     } else {
       req.session.exCoupon = true;
       res.redirect("/admin/add_coupon");
@@ -589,6 +660,55 @@ const deleteCoupon = async (req, res) => {
   }
 };
 
+const editCoupon = async (req, res) => {
+  try {
+    
+    const c_id = req.params.id;
+    const couponData = await Coupon.findById({ _id: c_id }).lean()
+
+    
+    res.render("admin/edit_coupon", {layout:'adminlayout' , couponData})
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateCoupon = async (req, res) => {
+  try {
+    const c_id = req.params.id;
+    
+    // const product = await Product.findById(proId);
+
+    const { code , percent , expDate } = req.body;
+
+     // Validate input data
+     if (!code || !percent || !expDate) {
+      throw new Error("Missing required fields");
+    }
+
+    await Coupon.findByIdAndUpdate(
+      c_id,
+      {
+        code: code,
+        discount: percent,
+        expiryDate: expDate,
+        status : true 
+      },
+      // { new: true }
+    );
+   
+    req.session.coupon = true;
+
+    res.redirect("/admin/coupons");
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
 const orderDetails = async (req, res) => {
   try {
     const userData = req.session.user;
@@ -605,7 +725,7 @@ const orderDetails = async (req, res) => {
       orderedProDet,
       userData,
       address,
-      layout:'adminlayout'
+      layout: 'adminlayout'
     });
   } catch (error) {
     console.log(error);
@@ -632,7 +752,7 @@ const changeOrderStatus = async (req, res) => {
 
 
 
-const deleteProdImage =  async (req, res) => {
+const deleteProdImage = async (req, res) => {
   try {
 
     const { id, image } = req.query
@@ -651,18 +771,18 @@ const deleteProdImage =  async (req, res) => {
 
 const loadBanner = async (req, res) => {
   try {
-    
+
     const bannerData = await Banner.find()
-    res.render('admin/banners' , {bannerData, layout:'adminlayout'})
+    res.render('admin/banners', { layout: 'adminlayout' })
   } catch (error) {
     console.log(error)
   }
 }
 
-const addBanner =  (req, res) => {
+const addBanner = (req, res) => {
   try {
-   
-    res.render('admin/add_banner', {bannerData, layout:'adminlayout'})
+
+    res.render('admin/add_banner', { layout: 'adminlayout' })
   } catch (error) {
     console.log(error);
   }
@@ -671,17 +791,17 @@ const addBanner =  (req, res) => {
 
 const addBannerPost = async (req, res) => {
   try {
-    const {title, link} = req.body
-    const image  = req.file.filename 
+    const { title, link } = req.body
+    const image = req.file.filename
 
-    const banner = new Banner ({
-      title : title,
-      image : image,
-      link  : link,
+    const banner = new Banner({
+      title: title,
+      image: image,
+      link: link,
     })
 
     await banner.save()
-  } catch (error) { 
+  } catch (error) {
     console.log(error)
   }
 }
@@ -700,6 +820,111 @@ const deleteBanner = async (req, res) => {
   }
 };
 
+
+const calculateTopSellingProducts = async () => {
+  try {
+      const orders = await Orders.aggregate([
+          {
+              $match: { status: "Delivered" }
+          },
+          {
+              $unwind: "$product"
+          },
+          {
+              $group: {
+                  _id: { productId: "$product.id", productName: "$product.name" },
+                  totalQuantitySold: { $sum: "$product.quantity" }
+              }
+          },
+          {
+              $sort: { totalQuantitySold: -1 }
+          },
+          {
+              $limit: 3
+          },
+          {
+              $lookup: {
+                  from: "products",
+                  localField: "_id.productId",
+                  foreignField: "_id",
+                  as: "product"
+              }
+          },
+          {
+              $unwind: "$product"
+          },
+          {
+              $project: {
+                  _id: "$product._id",
+                  productName: "$product.name",
+                  productImage: "$product.imageUrl", // Use the imageUrl field from the schema
+                  salePrice: "$product.price", // Assuming salesPrice is the same as price in the schema
+                  totalQuantitySold: 1
+              }
+          }
+      ]);
+
+      return orders;
+  } catch (error) {
+      console.error("Error calculating top selling products:", error);
+      throw error; // Rethrow the error for handling further up the call stack
+  }
+};
+
+
+const calculateTopSellingCategories = async () => {
+  try {
+      const orders = await Orders.aggregate([
+          {
+              $match: { status: "Delivered" }
+          },
+          {
+              $unwind: "$product"
+          },
+          {
+              $lookup: {
+                  from: "products",
+                  localField: "product.id",
+                  foreignField: "_id",
+                  as: "productDetails"
+              }
+          },
+          {
+              $unwind: "$productDetails"
+          },
+          {
+              $lookup: {
+                  from: "categories",
+                  localField: "productDetails.category",
+                  foreignField: "_id",
+                  as: "category"
+              }
+          },
+          {
+              $unwind: "$category"
+          },
+          {
+              $group: {
+                  _id: "$category._id",
+                  categoryName: { $first: "$category.category" },
+                  categoryImageUrl: { $first: "$category.imageUrl" },
+                  totalQuantitySold: { $sum: "$product.quantity" }
+              }
+          },
+          {
+              $sort: { totalQuantitySold: -1 }
+          },
+          {
+              $limit: 3
+          }
+      ]);
+
+      return orders;
+  } catch (error) {
+      console.error("Error calculating top selling categories:", error);
+      throw error; // Rethrow the error for handling further up the call stack
+  }
+};
 
 
 
@@ -734,6 +959,8 @@ module.exports = {
   addCoupon,
   addCouponPost,
   deleteCoupon,
+  editCoupon,
+  updateCoupon,
 
   changeOrderStatus,
 
@@ -741,4 +968,6 @@ module.exports = {
   addBanner,
   addBannerPost,
   deleteBanner,
+  calculateTopSellingProducts,
+  calculateTopSellingCategories
 };

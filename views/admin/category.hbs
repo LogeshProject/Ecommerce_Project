@@ -1,16 +1,17 @@
         <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
             <a href="/admin/home" class="brand-wrap">
-                <img src="/assetsAdmin/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
-            </a>
+            
+            <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
+        </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
             </div>
         </div>
         <nav>
             <ul class="menu-aside">
-                <li class="menu-item ">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-home"></i>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
@@ -26,29 +27,9 @@
                     </a>
                    
                 </li>
-                {{!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
-                        <span class="text">Sellers</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-sellers-cards.html">Sellers cards</a>
-                        <a href="page-sellers-list.html">Sellers list</a>
-                        <a href="page-seller-detail.html">Seller profile</a>
-                    </div>
-                </li> --}}
-                {{!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>
-                        <span class="text">Add product</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-form-product-1.html">Add product 1</a>
-                        <a href="page-form-product-2.html">Add product 2</a>
-                        <a href="page-form-product-3.html">Add product 3</a>
-                        <a href="page-form-product-4.html">Add product 4</a>
-                    </div>
-                </li> --}}
-                <li class="menu-item active">
-                    <a class="menu-link " href="/admin/category"> <i class="icon material-icons md-category"></i>
+               
+                <li class="menu-item  active">
+                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
                         <span class="text">Category</span>
                     </a>
                     
@@ -59,31 +40,35 @@
                     </a>
                     
                 </li>
-                {{!-- <li class="menu-item">
-                    <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
-                    </a>
+                 <li class="menu-item ">
+                    <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span> </a>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
-                        <span class="text">Brands</span> </a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
-                        <span class="text">Statistics</span>
-                    </a>
+
+                {{!-- <li class="menu-item ">
+                    <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-photo_size_select_actual"></i>
+                        <span class="text">Banners</span> </a>
                 </li> --}}
+
+
+               
             </ul>
             <hr>
             <ul class="menu-aside">
-                <li class="menu-item ">
+                <li class="menu-item has-submenu">
                     <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
                         <span class="text">Settings</span>
                     </a>
+                    <div class="submenu">
+                    <button class="nav-link
+                     rounded-pill darkmode m-3 " href="#">
+                        <i class="material-icons md-nights_stay"></i>Dark mode
+                    </button>
+                </div>
                 </li>
                 <li class="menu-item">
-                    <a class="menu-link btn btn-primary" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
-                        Logout
+                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                        <span class="text"> Logout </span>
                     </a>
                 </li>
             </ul>
@@ -91,60 +76,7 @@
             <br>
         </nav>
     </aside>
-       {{!-- <header class="main-header navbar">
-            <div class="col-search">
-                <form class="searchform">
-                    <div class="input-group">
-                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
-                        <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
-                    </div>
-                    <datalist id="search_terms">
-                        <option value="Products">
-                        <option value="New orders">
-                        <option value="Apple iphone">
-                        <option value="Ahmed Hassan">
-                    </datalist>
-                </form>
-            </div>
-            <div class="col-nav">
-                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon" href="#">
-                            <i class="material-icons md-notifications animation-shake"></i>
-                            <span class="badge rounded-pill">3</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png" alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png" alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png" alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png" alt="Français">中国人</a>
-                        </div>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="assets/imgs/people/avatar2.jpg" alt="User"></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit Profile</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account Settings</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-account_balance_wallet"></i>Wallet</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#"><i class="material-icons md-exit_to_app"></i>Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </header> --}}
+     
 <main class="main-wrap">
 
         <section class="content-main">
@@ -189,7 +121,7 @@
                 <div class="card-body">
                    
                <!---category tab-->
-           {{#each allCtegoryData}}
+           {{#each CtegoryData}}
                     <article class="itemlist">
                         <div class="row align-items-center">
                             <div class="col col-check flex-grow-0">
@@ -197,7 +129,7 @@
                                     <input class="form-check-input" type="checkbox" value="">
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-3 col-3 flex-grow-1 col-name jsutify-content-center text-align-center">
+                            <div class="col-lg-2.5 col-sm-2 col-2 flex-grow-1 col-name jsutify-content-center text-align-center">
                                 <a class="itemside" href="#">
                                     <div class="d-flex aligin-items-center justify-content-center">
                                         <img src="/images/products/{{this.imageUrl}}" class="img-sm img-thumbnail" alt="Item">
@@ -205,7 +137,7 @@
                                     
                                 </a>
                             </div>
-                            <div class="col-lg-2 col-sm-2 col-2 flex-grow-1 col-name text-align-center">
+                            <div class="col-lg-2.5 col-sm-2 col-2 flex-grow-1 col-name text-align-center">
                                 <a class="itemside" href="#">
                                     
                                     <div class="info">
@@ -215,28 +147,28 @@
                             </div>
                             {{!-- <div class="col-lg-2 col-sm-2 col-4 col-price"> <span>$76.99</span> </div> --}}
                             
-                            <div class="col-lg-1 col-sm-1 col-1 col-status">
+                            <div class="col-lg-1.5 col-sm-2 col-2 col-status">
                             {{#if this.isListed}}
                             <span class="badge rounded-pill alert-success">Listed</span>
                             {{else}}
                             <span class="badge rounded-pill alert-danger">Unlisted</span>
                             {{/if}}
                             </div>
-                            <div class="col-lg-1 col-sm-1 col-1 col-date text-end">
+                            <div class="col-lg-1 col-sm-2 col-2 col-date text-end">
                                 <a href="/admin/edit_category/{{this._id}}" onclick="return confirm ('Are you sure want to edit?')" class="btn btn-pill font-sm rounded btn-brand">
-                                    <i class="material-icons md-edit"></i> Edit
+                                    Edit
                                 </a>
                             </div>
                             {{#if this.isListed}}
-                            <div class="col-lg-1 col-sm-1 col-1 col-date text-end">
-                                <a href="/admin/delete_category/{{this._id}}" onclick="return confirm ('Are you sure want to Unlist?')" class="btn btn-pill font-sm rounded btn-brand">
-                                    <i class="material-icons md-edit"></i>UnList
+                            <div class="col-lg-1 col-sm-2 col-2 col-date text-end">
+                                <a data-product-id="{{this._id}}" id="blockprod"  class="btn btn-pill font-sm rounded btn-brand">
+                                    UnList
                                 </a>
                             </div>
                             {{else}}
                             <div class="col-lg-1 col-sm-1 col-1 col-date text-end">
-                                <a href="/admin/delete_category/{{this._id}}" onclick="return confirm ('Are you sure want to list?')" class="btn btn-pill font-sm rounded btn-brand">
-                                    <i class="material-icons md-edit"></i>List
+                                <a data-product-id="{{this._id}}" id="blockprod" class="btn btn-pill font-sm rounded btn-brand">
+                                    List
                                 </a>
                             </div>
                             {{/if}}
@@ -249,15 +181,12 @@
 
                 </div> <!-- card-body end// -->
             </div> <!-- card end// -->
-            <div class="pagination-area mt-30 mb-50">
+             <div class="pagination-area mt-15 mb-50">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-start">
-                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-                        <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#">16</a></li>
-                        <li class="page-item"><a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a></li>
+                        {{#each pages}}
+                        <li class="page-item active"><a class="page-link" href="?page={{this}}">{{this}}</a></li>
+                       {{/each}}
                     </ul>
                 </nav>
             </div>
@@ -267,7 +196,7 @@
                 <div class="col-sm-6">
                     <script>
                     document.write(new Date().getFullYear())
-                    </script> ©, Evara - HTML Ecommerce Template .
+                    </script> ©, Coco Loco - Ecommerce website.
                 </div>
                 <div class="col-sm-6">
                     <div class="text-sm-end">
@@ -277,3 +206,127 @@
             </div>
         </footer>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+////////////delete product
+        $(document).ready(function () {
+        $(document).on('click','#deleteprod',function(e){
+            e.preventDefault();
+            var id = $(this).data('product-id');
+            //var wishId = $(this).data('whishlist-id'); // Corrected variable name to wishId
+
+            // Store reference to $(this) in a variable for use inside AJAX success and error callbacks
+            var $this = $(this);
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#088178",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/admin/delete_product',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ id: id }),
+                        success: function (productData) {
+                            console.log("Product removed from Cart successfully");
+                            // If you want to remove the row from the table upon successful removal
+                            $this.closest('tr').remove(); // Use $this instead of $(this)
+                            // swal("Removed from wishlist", "The product has been removed from your wishlist.", "success");
+                            {
+                                Swal.fire({
+                                    title: 'Removed!',
+                                    text: 'Product Succesfully Removed from Cart!!!',
+                                    icon: 'success',
+                                    confirmButtonText: 'Cool'
+                                })
+                            }
+
+
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error removing product from wishlist:", error);
+                            swal("Error", "Something went wrong. Please try again later.", "error");
+                        }
+                    });
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+
+
+        });
+    });
+
+
+    /////block product
+
+            $(document).ready(function () {
+        $(document).on('click','#blockprod',function(e){
+            e.preventDefault();
+            var id = $(this).data('product-id');
+            //var wishId = $(this).data('whishlist-id'); // Corrected variable name to wishId
+
+            // Store reference to $(this) in a variable for use inside AJAX success and error callbacks
+            var $this = $(this);
+
+            Swal.fire({
+                title: "Are you sure?",
+               // text: "Do you want to block the Product?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#088178",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/admin/delete_category',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ id: id }),
+                        success: function (productData) {
+                            console.log("ProductBlocked");
+                 
+                           
+                            {
+                                Swal.fire({
+                                    title: 'Done!',
+                                    //text: 'Product Succesfully Blocked!!!',
+                                    icon: 'success',
+                                    confirmButtonText: 'Cool'
+                                }).then(()=> window.location.reload())
+                            }
+
+
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error removing product from wishlist:", error);
+                            swal("Error", "Something went wrong. Please try again later.", "error");
+                        }
+                    });
+                    Swal.fire({
+                        title: "Done!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+
+
+        });
+    });
+
+
+</script>

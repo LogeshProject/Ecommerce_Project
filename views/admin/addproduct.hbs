@@ -1,16 +1,26 @@
-    <aside class="navbar-aside" id="offcanvas_aside">
-        <div class="aside-top">
-            <a href="/admin/home" class="brand-wrap">
-                <img src="/assetsAdmin/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
-            </a>
-            <div>
-                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
-            </div>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.css">
+</head>
+
+
+
+
+
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+            
+            <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+            </button>
         </div>
-        <nav>
+    </div>
+     <nav>
             <ul class="menu-aside">
-                <li class="menu-item ">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-home"></i>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
@@ -26,27 +36,7 @@
                     </a>
                    
                 </li>
-                {{!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
-                        <span class="text">Sellers</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-sellers-cards.html">Sellers cards</a>
-                        <a href="page-sellers-list.html">Sellers list</a>
-                        <a href="page-seller-detail.html">Seller profile</a>
-                    </div>
-                </li> --}}
-                {{!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>
-                        <span class="text">Add product</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-form-product-1.html">Add product 1</a>
-                        <a href="page-form-product-2.html">Add product 2</a>
-                        <a href="page-form-product-3.html">Add product 3</a>
-                        <a href="page-form-product-4.html">Add product 4</a>
-                    </div>
-                </li> --}}
+               
                 <li class="menu-item ">
                     <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
                         <span class="text">Category</span>
@@ -59,48 +49,48 @@
                     </a>
                     
                 </li>
-                {{!-- <li class="menu-item">
-                    <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
-                    </a>
+                 <li class="menu-item ">
+                    <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span> </a>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
-                        <span class="text">Brands</span> </a>
+
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-photo_size_select_actual"></i>
+                        <span class="text">Banners</span> </a>
                 </li>
-                <li class="menu-item">
-                    <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
-                        <span class="text">Statistics</span>
-                    </a>
-                </li> --}}
+
+                
             </ul>
             <hr>
             <ul class="menu-aside">
-                <li class="menu-item ">
+                <li class="menu-item has-submenu">
                     <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
                         <span class="text">Settings</span>
                     </a>
+                   <div class="submenu">
+                    <button class="nav-link
+                     rounded-pill darkmode m-3 " href="#">
+                        <i class="material-icons md-nights_stay"></i>Dark mode
+                    </button>
+                </div>
                 </li>
                 <li class="menu-item">
-                    <a class="menu-link btn btn-primary" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
-                        Logout
+                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                        <span class="text"> Logout </span>
                     </a>
                 </li>
             </ul>
             <br>
             <br>
         </nav>
-    </aside>
+</aside>
 <main class="main-wrap">
     <section class="content-main">
         <div class="row">
             <div class="col-9">
                 <div class="content-header">
                     <h2 class="content-title">Add New Product</h2>
-                    {{!-- <div>
-                        <button class="btn btn-light rounded font-sm mr-5 text-body hover-up">Save to draft</button>
-                        <button class="btn btn-md rounded font-sm hover-up">Publich</button>
-                    </div> --}}
+
                 </div>
             </div>
             <div class="col-lg-12">
@@ -109,28 +99,42 @@
                         <h4>Basic</h4>
                     </div>
                     <div class="card-body">
-                        <form method="post" id = "product_form" class="form-add-product" action="/admin/add_new_product"
-                            enctype="multipart/form-data" onsubmit="return Validation()">
+                        <form method="post" id="product_form" class="form-add-product" action="/admin/add_new_product"
+                            enctype="multipart/form-data" onsubmit="return submitform(this)">
                             <div class="mb-4">
                                 <label for="product_name" class="form-label">Product Name</label>
-                                <input type="text" placeholder="Type here" name="name" 
-                                    class="form-control" id="productName" onchange="validate_productName()">
+                                <input type="text" placeholder="Type here" name="name" class="form-control"
+                                    id="productName" onchange="validate_productName()" id="productName"
+                                    onchange="validate_productName()">
                                 <h6 class="alertAddProduct mt-1" style="color: red" id="productNameAlert"></h6>
 
                             </div>
                             <div class="mb-4">
                                 <label class="form-label">Full description</label>
-                                <textarea placeholder="Type here" name="description" id="longdescription"  onchange="validate_description()"
-                                    class="form-control" rows="5"></textarea>
+                                <textarea placeholder="Type here" name="description" id="longdescription"
+                                    id="longdescription" onchange="validate_description()" .0 class="form-control"
+                                    rows="5"></textarea>
                                 <h6 class="alertAddProduct mt-1" style="color: red" id="longAlert"></h6>
 
                             </div>
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-2">
                                     <div class="mb-4">
-                                        <label class="form-label">Price</label>
+                                        <label class="form-label">Regular Price</label>
                                         <div class="row gx-2">
-                                            <input placeholder="$" type="number" id="price" name="price"
+                                            <input placeholder="₹" type="number" id="price" name="price"
+                                                class="form-control">
+                                        </div>
+                                        <h6 class="alertAddProduct mt-1" style="color: red" id="priceAlert"></h6>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="mb-4">
+                                        <label class="form-label">Discount Price</label>
+                                        <div class="row gx-2">
+                                            <input placeholder="₹" type="number" id="discountprice" name="discountprice"
                                                 class="form-control">
                                         </div>
                                         <h6 class="alertAddProduct mt-1" style="color: red" id="priceAlert"></h6>
@@ -142,7 +146,7 @@
                                     <div class="mb-4">
                                         <label class="form-label">Stock</label>
                                         <input name="stock" class="form-control" placeholder="Quantity" type="number"
-                                            id="Qty" required>
+                                            id="Qty">
                                     </div>
                                     <h6 class="alertAddProduct mt-1" style="color: red" id="qtyAlert"></h6>
                                 </div>
@@ -156,91 +160,100 @@
                                 </div>
 
 
-                                {{!-- <div class="col-lg-3">
-                                    <div class="form-element m-2">
-                                        <input type="file" id="file-1" name="image" accept="image/*">
-                                        <label for="file-1" id="file-1-preview">
-                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
-                                            <div>
-                                                <span>+</span>
-                                            </div>
-                                        </label>
-                                    </div> <!-- card end// -->
-
-                                </div> --}}
 
                             </div>
                             <div class="row">
-                                <div class="col-md-4 " style="width:250px ;height:400px">
-                                    <div class="card-body" style="width:250px ;height:400px">
-                                        <input type="file" id="file-1" name="image" accept="image/*" hidden >
-                                        <label for="file-1" id="file-1-preview">
-                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
-                                            <div>
-                                                <span>+</span>
-                                            </div>
-                                        </label>
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Image 1</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="file" name="image" id="input1"
+                                                accept="image/png, image/jpeg, image/jpg"
+                                                onchange="viewImage1(event),viewImage(event, 1)" />
+                                            <label for="input1" id="file-1-preview">
+                                                <img src="/assets/imgs/theme/upload.svg" alt="" id="imgView1">
+                                        </div>
+                                        <div class="image-cropper" style="display: none; width: 200px; height: 250px;">
+                                            <img src="" id="croppedImg1" alt="" />
+                                            <button type="button" id="saveButton1" class="btn btn-primary">Save</button>
+                                        </div>
                                     </div>
-
-
-
                                 </div>
-                                <div class="col-md-4 d-flex" style="width:250px ;height:400px">
-                                    <div class="card-body" style="width:250px ;height:400px">
-                                        <input type="file" id="file-2" name="image" accept="image/*" hidden>
-                                        <label for="file-2" id="file-2-preview">
-                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
-                                            <div>
-                                                <span>+</span>
-                                            </div>
-                                        </label>
+
+                                <!-- Repeat the above code for Image 2 to Image 5 with appropriate IDs -->
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Image 2</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="file" name="image" id="input2"
+                                                accept="image/png, image/jpeg, image/jpg"
+                                                onchange="viewImage1(event),viewImage(event, 2)" />
+                                            <label for="input1" id="file-2-preview">
+                                                <img src="/assets/imgs/theme/upload.svg" alt="" id="imgView2">
+                                        </div>
+                                        <div class="image-cropper" style="display: none; width: 200px; height: 250px;">
+                                            <img src="" id="croppedImg2" alt="" />
+                                            <button type="button" id="saveButton2" class="btn btn-primary">Save</button>
+                                        </div>
                                     </div>
-
-
-
                                 </div>
-                                <div class="col-md-4 d-flex" style="width:250px ;height:400px">
-                                    <div class="card-body" style="width:250px ;height:400px">
-                                        <input type="file" id="file-3" name="image" accept="image/*" hidden>
-                                        <label for="file-3" id="file-3-preview">
-                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
-                                            <div>
-                                                <span>+</span>
-                                            </div>
-                                        </label>
+
+                                <!-- Repeat the above code for Image 2 to Image 5 with appropriate IDs -->
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Image 3</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="file" name="image" id="input3"
+                                                accept="image/png, image/jpeg, image/jpg"
+                                                onchange="viewImage1(event),viewImage(event, 3)" />
+                                            <label for="input1" id="file-3-preview">
+                                                <img src="/assets/imgs/theme/upload.svg" alt="" id="imgView3">
+                                        </div>
+                                        <div class="image-cropper" style="display: none; width: 200px; height: 250px;">
+                                            <img src="" id="croppedImg3" alt="" />
+                                            <button type="button" id="saveButton3" class="btn btn-primary">Save</button>
+                                        </div>
                                     </div>
-
-
-
                                 </div>
-                                <div class="col-md-4 d-flex" style="width:250px ;height:400px">
-                                    <div class="card-body" style="width:250px ;height:400px">
-                                        <input type="file" id="file-4" name="image" accept="image/*" hidden>
-                                        <label for="file-4" id="file-4-preview">
-                                            <img src="/assetsAdmin/imgs/theme/upload.svg" style="" alt="">
-                                            <div>
-                                                <span>+</span>
-                                            </div>
-                                        </label>
+
+                                <!-- Repeat the above code for Image 2 to Image 5 with appropriate IDs -->
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Image 4</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="file" name="image" id="input4"
+                                                accept="image/png, image/jpeg, image/jpg"
+                                                onchange="viewImage1(event),viewImage(event, 4)" />
+                                            <label for="input1" id="file-4-preview">
+                                                <img src="/assets/imgs/theme/upload.svg" alt="" id="imgView4">
+                                        </div>
+                                        <div class="image-cropper" style="display: none; width: 200px; height: 250px;">
+                                            <img src="" id="croppedImg4" alt="" />
+                                            <button type="button" id="saveButton4" class="btn btn-primary">Save</button>
+                                        </div>
                                     </div>
-
-
-
                                 </div>
-                                <div class="col-md-4 d-flex " style="width:250px ;height:400px">
-                                    <div class="card-body" style="width:250px ;height:400px">
-                                        <input type="file" id="file-5" name="image" accept="image/*" hidden>
-                                        <label for="file-5" id="file-5-preview">
-                                            <img src="/assetsAdmin/imgs/theme/upload.svg" alt="">
-                                            <div>
-                                                <span>+</span>
-                                            </div>
-                                        </label>
+
+                                <!-- Repeat the above code for Image 2 to Image 5 with appropriate IDs -->
+                                <div class="col-lg-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Image 5</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="file" name="image" id="input5"
+                                                accept="image/png, image/jpeg, image/jpg"
+                                                onchange="viewImage1(event),viewImage(event, 5)" />
+                                            <label for="input1" id="file-5-preview">
+                                                <img src="/assets/imgs/theme/upload.svg" alt="" id="imgView5">
+                                        </div>
+                                        <div class="image-cropper" style="display: none; width: 200px; height: 250px;">
+                                            <img src="" id="croppedImg5" alt="" />
+                                            <button type="button" id="saveButton5" class="btn btn-primary">Save</button>
+                                        </div>
                                     </div>
-
-
-
                                 </div>
+
+                                <!-- Repeat the above code for Image 2 to Image 5 with appropriate IDs -->
+
                             </div>
                             <h6 id="imgAlert" class=" mt-2" style="color: red;"></h6>
 
@@ -251,7 +264,8 @@
 
                                 </div>
                                 <div class="m-2">
-                                    <a href="/admin/product" type="button" class="btn btn-primary">Back</a>
+                                    <a href="/admin/product" type="button" class="btn btn-primary"
+                                        id="backbutton">Back</a>
 
                                 </div>
 
@@ -278,7 +292,7 @@
             <div class="col-sm-6">
                 <script>
                     document.write(new Date().getFullYear())
-                </script> ©, Evara - HTML Ecommerce Template .
+                </script> ©,  Coco Loco - Ecommerce website .
             </div>
             <div class="col-sm-6">
                 <div class="text-sm-end">
@@ -289,11 +303,75 @@
     </footer>
 </main>
 
-<script>
-    function Validation() {
 
-        var fileInput = document.getElementById('file-1');
-        var previewImage = document.getElementById('file-1-preview').querySelector('img');
+<script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<script>
+
+    function viewImage1(event) {
+        document.getElementById('imgView1').src = URL.createObjectURL(event.target.files[0])
+    }
+
+    function viewImage(event, index) {
+        let input = event.target;
+        let reader = new FileReader();
+
+        reader.onload = function () {
+            let dataURL = reader.result;
+            let image = document.getElementById('imgView' + index);
+            image.src = dataURL;
+
+            // Initialize Cropper.js on the image
+            let cropper = new Cropper(image, {
+                aspectRatio: 1 / 1, // Initial aspect ratio
+                viewMode: 1,
+                guides: true,
+                background: false,
+                autoCropArea: 1,
+                zoomable: true
+            });
+
+
+            // Show the image cropper container
+            let cropperContainer = document.querySelector('#croppedImg' + index).parentNode;
+            cropperContainer.style.display = 'block';
+
+            // Update the cropped image when the "Save" button is clicked
+            let saveButton = document.querySelector('#saveButton' + index);
+            saveButton.addEventListener('click', async function () {
+                let croppedCanvas = cropper.getCroppedCanvas();
+                let croppedImage = document.getElementById("croppedImg" + index);
+                croppedImage.src = croppedCanvas.toDataURL('image/jpeg', 1.0);
+
+                // Generate a unique name for the cropped image file based on the current timestamp
+                let timestamp = new Date().getTime();
+                let fileName = `cropped-img-${timestamp}-${index}.png`;
+
+                await croppedCanvas.toBlob(blob => {
+                    let input = document.getElementById('input' + index)
+                    let imgFile = new File([blob], fileName, blob)
+                    const fileList = new DataTransfer();
+                    fileList.items.add(imgFile);
+                    input.files = fileList.files
+                });
+                // cropperContainer.style.display = 'none';
+            });
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
+
+
+    function Validation() {
+        var errors = []; // Array to store validation errors
+
+        var fileInput = document.getElementById('input1');
 
         let productName = document.getElementById("productName").value;
 
@@ -303,7 +381,7 @@
 
 
 
-        let productNameRegex = /^\s*.*\S.*\s*$/;
+        let productNameRegex = /^[a-zA-Z0-9\s'-]+$/;
         let number = /^[1-9]\d*$/;
         let descriptionRegex = /^(?!\s*$)[\s\S]{1,100}$/
 
@@ -319,143 +397,97 @@
         let imgAlert = document.getElementById('imgAlert')
 
         if (!productName.match(productNameRegex)) {
-            productNameAlert.innerHTML = "Name Not Valid";
-            return false;
-        } else if (!Qty.match(number)) {
-            qtyAlert.innerHTML = "Please Check Qty Again";
-            return false;
-        } else if (!price.match(number)) {
-            priceAlert.innerHTML = "Please Check Price Again";
-            return false;
+            errors.push("Name Not Valid");
         }
 
-        else if (!longdescription.match(descriptionRegex)) {
-            longAlert.innerHTML = "Please Check about Again";
-            return false;
-        } else if (fileInput.files.length === 0) {
-            imgAlert.innerHTML = "Please chose image"
-            return false;
+        if (!Qty.match(number)) {
+            errors.push("Please Check Qty Again");
         }
 
-        else {
-            return true;
+        if (!price.match(number)) {
+            errors.push("Please Check Price Again");
         }
 
-    }
+        if (!longdescription.match(descriptionRegex)) {
+            errors.push("Please Check about Again");
+        }
 
-    function previewBeforeUpload(id) {
-        document.querySelector("#" + id).addEventListener("change", function (e) {
-            if (e.target.files.length == 0) {
-                return;
-            }
-            let file = e.target.files[0];
-            let url = URL.createObjectURL(file);
-            document.querySelector("#" + id + "-preview div").innerText = file.name;
-            document.querySelector("#" + id + "-preview img").src = url;
-        });
-    }
-
-    previewBeforeUpload("file-1");
-    previewBeforeUpload("file-2");
-    previewBeforeUpload("file-3");
-    previewBeforeUpload("file-4");
-    previewBeforeUpload("file-5");
-
-
-
-    function validate_productName() {
-        var productNameInput = document.getElementById("productName");
-        var product = productNameInput.value.trim();
-        var pattern = /^[a-zA-Z0-9\s]{3,}$/;
-
-        if (!pattern.test(product)) {
-            alert("Invalid product name. Please try again.");
-            productNameInput.value = ''; // Clear the input field
-            productNameInput.focus();    // Set focus back to the input field
-            return false;
-        } else {
-            return true;
+        if (fileInput.files.length === 0) {
+            errors.push("Please choose an image");
         }
 
 
+
+
+        // Display all error messages
+        if (errors.length > 0) {
+            productNameAlert.innerHTML = errors.includes("Name Not Valid") ? "Name Not Valid" : "";
+            qtyAlert.innerHTML = errors.includes("Please Check Qty Again") ? "Please Check Qty Again" : "";
+            priceAlert.innerHTML = errors.includes("Please Check Price Again") ? "Please Check Price Again" : "";
+            longAlert.innerHTML = errors.includes("Please Check about Again") ? "Please Check about Again" : "";
+            imgAlert.innerHTML = errors.includes("Please choose an image") ? "Please choose an image" : "";
+
+            return false; // Prevent form submission
+        }
+
+        return true; // Allow form submission if no errors
     }
 
 
-    function validate_description() {
 
-        var longdescriptionInput = document.getElementById("longdescription");
-        var longdescription = longdescriptionInput.value.trim();
-
-
-        if (longdescription === "") {
-            alert("Invalid description . Please try again.");
-            longdescriptionInput.value = ''; // Clear the input field
-            longdescriptionInput.focus();    // Set focus back to the input field
-            return false;
-        } else {
-            return true;
-        }
-
-    }
-
+    ////////////back
 
 
 </script>
-{{!-- 
 <script>
-    var productForm = document.getElementById('product_form');
-    var productNameInput = document.getElementById('product_name');
-    var validationMessage = document.getElementById('name-validation-message');
-    var priceName = document.getElementById('price');
-    var priceMsg = document.getElementById('priceAlert')
-    
-    
-    function validateProductName() {
-        var productName = productNameInput.value.trim();
-        var pattern = /^[a-zA-Z\s]{3,20}$/;
-        
-       
-        if(!pattern.test(productName)){
-            validationMessage.textContent = 'Product title is invalid';
-            return false;
-        }
-        else {
-            validationMessage.textContent = '';
-            return true;
-        }
-        
-         if (productName === '' ) {
-            validationMessage.textContent = 'Product title is required';
-            return false;
+    $(document).ready(function () {
+        $('#backbutton').click(function (e) {
+            e.preventDefault();
+
+
+            Swal.fire({
+                title: "Leave the page?",
+                text: "The Data will not be saved",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#088178",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/admin/product";
+
+                }
+            });
+
+
+        });
+    });
+
+    ////add products form submit
+    function submitform(form) {
+        event.preventDefault(); // Prevent default form submission action
+        if (Validation(form)) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Do you want to save changes?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#088178",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, change it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit(); // Submit the form if user clicks "Yes"
+                }
+            }).then(() => {
+                // Show success message after form submission
+                Swal.fire({
+                    title: "Saved",
+                    text: "The Data has been saved",
+                    icon: "success"
+                });
+            });
         }
     }
-
-   function validatePrice(){
-        var price = priceName
-        if( price <= 0){
-            priceMsg.textContent = "invalid"
-            return false;
-        }
-        else{
-            priceMsg.textContent = "";
-            return true;
-        }
-   }
-
-    function handleSubmit(event) {
-        if (!validateProductName()) {
-            event.preventDefault(); 
-        }
-        if(!validatePrice()){
-            event.preventDefault();
-        }
-    }
-
-    productNameInput.addEventListener('blur', validateProductName);
-
-   
-    productForm.addEventListener('submit','input', validateProductName);
-
-     productForm.addEventListener('submit', handleSubmit);
-
-</script> --}}
+</script>

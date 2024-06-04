@@ -7,8 +7,8 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="index.html" rel="nofollow">Home</a>
-                    <span></span> Pages
-                    <span></span> Account
+                    <span></span> <a href="/profile" rel="nofollow">Profile</a>
+                    <span></span> Edit User
                 </div>
             </div>
         </div>
@@ -21,10 +21,10 @@
                     <div class="row gx-5">
                         <aside class="col-lg-3 border-end">
                             <nav class="nav nav-pills flex-lg-column mb-4">
-                                <a class="nav-link active" aria-current="page" href="#">General</a>
-                                <a class="nav-link" href="#">Orders</a>
-                                <a class="nav-link" href="#">Track Your Order</a>
-                                <a class="nav-link" href="#">My Address</a>
+                                <a class="nav-link active" aria-current="page" href="/profile">General</a>
+                                <a class="nav-link" href="/my_orders">Orders</a>
+                                <a class="nav-link" href="/wallet">Wallet</a>
+                                <a class="nav-link" href="/adresses">My Address</a>
                                 <a class="nav-link" href="#">Account details</a>
                                 <a class="nav-link" href="#">Newsletter</a>
                             </nav>
@@ -73,11 +73,11 @@
         <label for="fileInput">
             <img class="img-lg mb-3 img-avatar" src="/images/users/profile.jpg" alt="User Photo" id="userPhoto">
             <input type="file" id="fileInput" class="img-lg mb-3 img-avatar visually-hidden" accept="image/*" onchange="previewImage(this)" name="image">
-            <figcaption>
+            {{!-- <figcaption>
                 <a class="btn btn-light rounded font-md" href="#" onclick="document.getElementById('fileInput').click(); return false;">
                     <i class="icons material-icons md-backup font-md"></i> Upload
                 </a>
-            </figcaption>
+            </figcaption> --}}
         </label>
     </figure>
 </aside> <!-- col.// -->

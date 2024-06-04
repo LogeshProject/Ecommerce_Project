@@ -44,8 +44,8 @@
                                     <td class="price" data-title="Price"><span>₹{{this.price}} </span></td>
                                     <td class="text-right" data-title="Cart">
                                         {{#if this.stock}}
-                                        {{#if this.isOnCart}}
-                                        <button onclick="window.location.href='/cart?id={{userData._id}}'" class="btn btn-sm"><i class=class="fi-rs-heart"></i>Go to cart</button>
+                                         {{#if this.productExistInCart}}
+                                        <button onclick="window.location.href='/cart?id={{this.ID}}'" class="btn btn-sm"><i class=class="fi-rs-heart"></i>Go to cart</button>
                                         {{else}}
                                         <span id="cart_btn{{this._id}}">
                                         <button onclick="addToCartBtn('{{this._id}}')" id="add_to_cart_btn" class="btn btn-sm">
@@ -75,7 +75,7 @@
                                 <div class="text-center">
                                     <h1 class="mt-5">Your wishlist is empty..!</h1>
 
-                                    <a href="/product" class="btn btn-primary mt-4">Go to products</a>
+                                    <a href="/product" class="btn btn-primary mt-4"><i class="fa-solid fa-right-from-bracket px-2"></i>  Go to products</a>
                                 </div>
                                 {{/if}}
 
@@ -163,7 +163,7 @@ const removeFromWishlist = async (id) => {
         alertify.success(`${proName} Removed from wishlist`)
     }
     document.getElementById(`row${id}`).innerHTML = ''	
-       
+    location.reload()
 		
 }
 

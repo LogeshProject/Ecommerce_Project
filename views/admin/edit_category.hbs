@@ -1,8 +1,9 @@
         <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
             <a href="/admin/home" class="brand-wrap">
-                <img src="/assetsAdmin/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
-            </a>
+            
+            <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
+        </a>
             <div>
                 <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
             </div>
@@ -10,7 +11,7 @@
         <nav>
             <ul class="menu-aside">
                 <li class="menu-item ">
-                    <a class="menu-link" href="/admin"> <i class="icon material-icons md-home"></i>
+                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
@@ -140,7 +141,7 @@
 
                                     </div>
                                     <div class="m-2">
-                                        <a href="/admin/Category" type="button" class="btn btn-primary">Back</a>
+                                        <a href="/admin/Category" id="backbutton" type="button" class="btn btn-primary">Back</a>
 
                                     </div>
                                    
@@ -158,7 +159,7 @@
                 <div class="col-sm-6">
                     <script>
                     document.write(new Date().getFullYear())
-                    </script> ©, Evara - HTML Ecommerce Template .
+                    </script> ©, Coco Loco - Ecommerce website .
                 </div>
                 <div class="col-sm-6">
                     <div class="text-sm-end">
@@ -186,4 +187,39 @@
 
 
     }
+    </script>
+
+
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    //back
+    $(document).ready(function () {
+        $('#backbutton').click(function (e) {
+            e.preventDefault();
+
+
+            Swal.fire({
+                title: "Leave the page?",
+                text: "The Data will not be saved",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#088178",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/admin/Category";
+
+                }
+            });
+
+
+        });
+    }
+    )
     </script>

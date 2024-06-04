@@ -1,150 +1,152 @@
-<style>
-    body {
-            {
-                {
-                !-- background-color: #f2f6fc;
-                --
-            }
-        }
-
-        color:#69707a;
-    }
-
-    .img-account-profile {
-        height: 10rem;
-    }
-
-    .rounded-circle {
-        border-radius: 50% !important;
-    }
-
-    .card {
-        box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
-    }
-
-    .card .card-header {
-        font-weight: 500;
-    }
-
-    .card-header:first-child {
-        border-radius: 0.35rem 0.35rem 0 0;
-    }
-
-    .card-header {
-        padding: 1rem 1.35rem;
-        margin-bottom: 0;
-        background-color: rgba(33, 40, 50, 0.03);
-        border-bottom: 1px solid rgba(33, 40, 50, 0.125);
-    }
-
-    .form-control,
-    .dataTable-input {
-        display: block;
-        width: 100%;
-        padding: 0.875rem 1.125rem;
-        font-size: 0.875rem;
-        font-weight: 400;
-        line-height: 1;
-        color: #69707a;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #c5ccd6;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        border-radius: 0.35rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-
-    .nav-borders .nav-link.active {
-        color: #0061f2;
-        border-bottom-color: #0061f2;
-    }
-
-    .nav-borders .nav-link {
-        color: #69707a;
-        border-bottom-width: 0.125rem;
-        border-bottom-style: solid;
-        border-bottom-color: transparent;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        padding-left: 0;
-        padding-right: 0;
-        margin-left: 1rem;
-        margin-right: 1rem;
-    }
-</style>
-
-{{>adminHeader}}
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Menu</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-
-                    <li class="nav-item">
-                        <a href="/admin/home" class="nav-link align-middle px-0 "
-                            style="background-color: #fff; padding: 2px;">Home </a>
-                    </li>
-
-                    <li>
-                        <a href="/admin/manage_users" class="nav-link px-0 align-middle"> Users </a>
-                    </li>
-
-                    <li>
-                        <a href="/admin/category" class="nav-link px-0 align-middle btn btn-outline-primary">Category
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/orders" class="nav-link px-0 align-middle">Orders</a>
-                    </li>
-                    <li>
-                        <a href="/admin/product" class="nav-link px-0 align-middle"> Products </a>
-                    </li>
-                    <li>
-                        <a href="/admin/coupons" class="nav-link px-0 align-middle"> Coupons </a>
-                    </li>
-                    <li>
-                        <a href="/admin/banners" class="nav-link px-0 align-middle"> Banner </a>
-                    </li>
-                </ul>
-                <hr>
-            </div>
-        </div>
-        <div class="col py-3" style="text-align: center;">
-             <div style="margin-left: 1080px;">
-        <a href="/admin/add_banner" type="button" class="btn btn-primary"
-          style="margin-left: auto; margin-bottom: 15px;">Add banner</a>
-      </div>
-
-             <table class="table table-hover" style="border-top: 1px solid black;">
-        <thead>
-          <tr>
-           
-            <th scope="col">Title</th>
-            <th scope="col">Image</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each bannerData}}
-          <tr>
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+       <a href="/admin/home" class="brand-wrap">
             
-            <td>{{this.title}}</td>
-            <td><img style="width 40px; height: 40px; " src="/uploads/{{this.image}}" alt=" image"></td>
-            <td>
-              {{!-- <a href="/admin/edit_category/{{this.id}}" onclick="return confirm ('Are you sure want to edit?')"
-                type="button" class="btn btn-warning">Edit</a> --}}
-              <a href="/admin/delete_banner?id={{this.id}}" onclick="return confirm ('Are you sure want to delete?')"
-                type="button" class="btn btn-danger">Delete</a>
-            </td>
-          </tr>
-          {{/each}}
-        </tbody>
-      </table>
+            <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
         </div>
     </div>
-</div>
+    <nav>
+            <ul class="menu-aside">
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                        <span class="text">Products</span>
+                    </a>
+                   
+                </li>
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                        <span class="text">Orders</span>
+                    </a>
+                   
+                </li>
+               
+                <li class="menu-item ">
+                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                        <span class="text">Category</span>
+                    </a>
+                    
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                        <span class="text">Users</span>
+                    </a>
+                    
+                </li>
+                 <li class="menu-item ">
+                    <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span> </a>
+                </li>
+
+                {{!-- <li class="menu-item active ">
+                    <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-photo_size_select_actual"></i>
+                        <span class="text">Banners</span> </a>
+                </li> --}}
+
+              
+               
+            </ul>
+            <hr>
+            <ul class="menu-aside">
+                <li class="menu-item has-submenu">
+                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                        <span class="text">Settings</span>
+                    </a>
+                    <div class="submenu">
+                    <button class="nav-link
+                     rounded-pill darkmode m-3 " href="#">
+                        <i class="material-icons md-nights_stay"></i>Dark mode
+                    </button>
+                </div>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                        <span class="text"> Logout </span>
+                    </a>
+                </li>
+            </ul>
+            <br>
+            <br>
+        </nav>
+</aside>
+
+<main class="main-wrap">
+    <section class="content-main">
+        <div class="content-header row">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="content-title card-title">Banners</h2>
+            </div>
+        </div>
+        <div class="right mt-5">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#if data}}
+                        {{#each data}}
+                            <tr>
+                                <td>
+                                    <img src="/uploads/products/{{image}}" style="height: 2rem; width: 3rem;" class="img-xs" alt="Item">
+                                </td>
+                                <td>{{title}}</td>
+                                <td>{{description}}</td>
+                                <td>
+                                    {{#if (and (gt startDate (now)) (lt endDate (now)))}}
+                                        <p class="badge rounded-pill alert-success">Active</p>
+                                    {{else}}
+                                        <p class="badge rounded-pill alert-danger">No Active</p>
+                                    {{/if}}
+                                </td>
+                                <td>
+                                    <a href="/admin/editBanner?id={{_id}}">
+                                        <button class="btn">
+                                            <i class="icon material-icons md-edit"></i>
+                                        </button>
+                                    </a>
+                                </td>
+                                <td class="action" data-title="Remove">
+                                    <a href="/admin/deleteBanner?id={{_id}}">
+                                        <i class="icon material-icons md-delete"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="6">No Banner Found</td>
+                        </tr>
+                    {{/if}}
+                </tbody>
+            </table>
+        </div>
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <a href="/admin/add_banner">
+                        <button class="btn btn-primary mt-3 mr-200" type="submit">Add Banner</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-3">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center mb-20" style="margin-right: 200px;"></ul>
+            </nav>
+        </div>
+    </section>
+</main>

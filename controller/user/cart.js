@@ -59,7 +59,7 @@ const loadCart = async (req, res) => {
 
      let subTotal = 0
      cart.forEach((val)=>{
-     val.total = val.product.price * val.quantity
+     val.total = (val.product.price - val.product.DiscountPrice) * val.quantity
      subTotal += val.total
      })
 

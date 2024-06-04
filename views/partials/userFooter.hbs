@@ -44,13 +44,14 @@
                             <p class="wow fadeIn animated">
                                 <strong>Hours: </strong>10:00 - 18:00, Mon - Sat
                             </p>
-                            <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
-                            <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                                <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                                <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
-                                <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                                <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
-                                <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
+                            <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated" style="padding-bottom:5%;">Follow Us</h5>
+                            <div class="social-media">
+                                <a href="#"><i class="fa-brands fa-2x fa-facebook"></i></a>
+                                <a href="#"><i class="fa-brands fa-2x fa-twitter"></i></a>
+                                
+                                <a href="#"><i class="fa-brands fa-2x fa-youtube"></i></a>
+                                <a href="#"><i class="fa-brands fa-2x fa-square-instagram"></i></a>
+                                <a href="#"><i class="fa-brands fa-2x fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
@@ -68,12 +69,12 @@
                     <div class="col-lg-2  col-md-3">
                         <h5 class="widget-title wow fadeIn animated">My Account</h5>
                         <ul class="footer-list wow fadeIn animated">
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">Order</a></li>
+                            <li><a href='/login'>Sign In</a></li>
+                            <li><a href="/cart?id={{userData._id}}">View Cart</a></li>
+                            <li><a href="/wishlist">My Wishlist</a></li>
+                            <li><a href="/my_orders">Orders</a></li>
+                            <li><a href="#">Help Center</a></li>
+                           
                         </ul>
                     </div>
                     <div class="col-lg-4">
@@ -82,13 +83,22 @@
                             <div class="col-md-8 col-lg-12">
                                 <p class="wow fadeIn animated">From App Store or Google Play</p>
                                 <div class="download-app wow fadeIn animated">
+                                    <a href="#" class="hover-up"><img class="active" src="assets/imgs/theme/google-play.jpg" alt=""></a>
                                     <a href="#" class="hover-up mb-sm-4 mb-lg-0"><img class="active" src="assets/imgs/theme/app-store.jpg" alt=""></a>
-                                    <a href="#" class="hover-up"><img src="assets/imgs/theme/google-play.jpg" alt=""></a>
+                                    
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-12 mt-md-3 mt-lg-0">
                                 <p class="mb-20 wow fadeIn animated">Secured Payment Gateways</p>
-                                <img class="wow fadeIn animated" src="assets/imgs/theme/payment-method.png" alt="">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN05klQjRP6U1MHRZwGcrZBuP29LdK_wB6PesiGzl3ug&s" alt="payment" width="80px" height="40px">
+                                <img class="wow fadeIn animated" src="https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2022/03/google-pay-1648216798.jpg"  width="70px" height="40px" alt="">
+                                <img class="wow fadeIn animated" src="https://paytmblogcdn.paytm.com/wp-content/uploads/2022/09/Paytm-800x500-1.png"  width="80px" height="40px" alt="">
+                                <img src="https://www.paymentscardsandmobile.com/wp-content/uploads/2021/11/visa-mastercard-logos.jpg" width="80px" height="40px">
+                                
+                                <img class="wow fadeIn animated" src="https://pbs.twimg.com/card_img/1793281107032694784/AIrSpiuU?format=jpg&name=large"  width="80px" height="40px" alt="">
+                                
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -111,3 +121,11 @@
             </div>
         </div>
     </footer>
+
+
+    <style>
+        .social-media a{
+            margin: 10px;
+            
+        }
+    </style>

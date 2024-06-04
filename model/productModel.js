@@ -7,11 +7,16 @@ const produtSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
+   
     price: {
         type: Number,
         required: true
     },
+    DiscountPrice: {
+        type: Number,
+        required: true
+    },
+
 
     description: {
         type: String,
@@ -20,7 +25,7 @@ const produtSchema = new mongoose.Schema({
 
     category: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
+        ref: 'category',
         required: true
     },
 
@@ -33,6 +38,10 @@ const produtSchema = new mongoose.Schema({
     stock: {
         type: Number,
         required: true
+    },
+    bestSelling :{
+        type : Number,
+        default: 0
     },
 
     is_blocked: {

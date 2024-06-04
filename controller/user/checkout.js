@@ -5,12 +5,14 @@ const Coupon  = require('../../model/coupon')
 const Product = require('../../model/productModel')
 const Razorpay = require('razorpay');
 const { log } = require('handlebars')
+require('dotenv').config()
 
 
 const loadCheckout = async (req, res) => {
 
     const userData = req.session.user
     const userId   = userData._id
+    const user = await User.findOne({ _id: userId }).lean()
 
 
     const addressData = await Address.find({userId : userId}).lean()
@@ -21,10 +23,13 @@ const loadCheckout = async (req, res) => {
 
     let subTotal = 0
     cart.forEach((val)=>{
-    val.total = val.product.price * val.quantity
+    val.total = (val.product.price - val.product.DiscountPrice ) * val.quantity
     subTotal += val.total
     })
 
+    let deliveryCharge = 50 ;
+
+    let Total = deliveryCharge + subTotal ;
 
     const now = new Date();
     const availableCoupons = await Coupon.find({ 
@@ -32,7 +37,7 @@ const loadCheckout = async (req, res) => {
       usedBy: { $nin: [userId] }
     });
     
-        res.render('user/checkout/checkout', { userData, cart, addressData, subTotal, availableCoupons })    
+        res.render('user/checkout/checkout', { userData:user, cart, addressData, deliveryCharge , subTotal, Total, availableCoupons,KEY_ID: process.env.KEY_ID })    
 }
 
 
@@ -103,165 +108,175 @@ const loadCheckou = async (req, res) => {
 
 ///////////  Place order function /////////////
 
+const placeOrder = async (req, res) => {
+    try {
+        const userData = req.session.user;
+        const userId = userData._id;
+        const addressId = req.body.selectedAddress;
+        const payMethod = req.body.selectedPayment;
 
-const placeOrder = async(req, res) => {
+        const userDataa = await User.findOne({ _id: userId }).populate("cart.product");
+        const cartPro = userDataa.cart;
+
+        let subTotal = 0;
+
+        let deliveryCharge = 50;
+
+        cartPro.forEach((val) => {
+            val.total = (val.product.price - val.product.DiscountPrice) * val.quantity;
+            subTotal += val.total;
+        });
+
+        subTotal += deliveryCharge;
+
+        let productDet = cartPro.map(item => {
+            return {
+                id: item.product._id,
+                name: item.product.name,
+                price: item.product.price,
+                quantity: item.quantity,
+                image: item.product.imageUrl[0],
+                DiscountPrice: item.product.DiscountPrice,
+            };
+        });
+
+        console.log(productDet)
+
+        const result = Math.random().toString(36).substring(2, 7);
+        const id = Math.floor(100000 + Math.random() * 900000);
+        const orderId = result + id;
+
+        let saveOrder = async () => {
+            if (req.body.couponData) {
+                const order = new Order({
+                    userId: userId,
+                    product: productDet,
+                    address: addressId,
+                    orderId: orderId,
+                    total: subTotal,
+                    paymentMethod: payMethod,
+                    discountAmt: req.body.couponData.discountAmt,
+                    amountAfterDscnt: req.body.couponData.newTotal,
+                    coupon: req.body.couponName,
+                });
+
+                const ordered = await order.save();
+            } else {
+                const order = new Order({
+                    userId: userId,
+                    product: productDet,
+                    address: addressId,
+                    orderId: orderId,
+                    total: subTotal,
+                    paymentMethod: payMethod,
+                });
+
+                const ordered = await order.save();
+            }
+
+            let userDetails = await User.findById(userId);
+            let userCart = userDetails.cart;
+
+            userCart.forEach(async item => {
+                const productId = item.product;
+                const qty = item.quantity;
+
+                const product = await Product.findById(productId);
+                const stock = product.stock;
+                const updatedStock = stock - qty;
+
+                await Product.updateOne(
+                    { _id: productId },
+                    { $set: { stock: updatedStock, isOnCart: false } }
+                );
+                await Product.updateOne(
+                    {
+                        _id: productId
+                    },
+                    {
+                        $inc: {
+                            bestSelling: 1
+                        }
+                    }
+                );
+
+            });
+
+            userDetails.cart = [];
+            await userDetails.save();
+            console.log(userDetails.cart);
+        };
+
+        if (addressId) {
+            if (payMethod === 'cash-on-delivery' && subTotal < 1000) {
+                saveOrder();
+                res.json({
+                    CODsuccess: true,
+                    toal: subTotal
+                });
+                
+            } else if (payMethod === 'razorpay') {
+                const amount = req.body.amount;
+                var instance = new Razorpay({
+                    key_id: process.env.KEY_ID,
+                    key_secret: process.env.KEY_SECRET
+                });
+
+                const order = await instance.orders.create({
+                    amount: amount * 100,
+                    currency: 'INR',
+                    receipt: 'Logesh',
+                });
+
+                saveOrder();
+
+                res.json({
+                    razorPaySuccess: true,
+                    order,
+                    amount,
+                });
+
+                console.log(amount,'......................................................................')
+            } else if (payMethod === 'wallet') {
+                const newWallet = req.body.updateWallet;
+                const userData = req.session.user;
+                const amount = req.body.amount;
+                console.log(amount,"...........................LLLLLLLL")
+
+                await User.findByIdAndUpdate(userId, { $set: { wallet: newWallet } }, { new: true });
 
 
-    try {  
-       const userData  = req.session.user
-       const userId    = userData._id
-       const addressId = req.body.selectedAddress
-       const payMethod = req.body.selectedPayment
+                await User.updateOne(
+                    {
+                        _id: req.session.user._id
+                    },
+                    {
+                        $push: {
+                            history: {
+                                amount: amount,
+                                status: "Debited",
+                                date: Date.now()
+                            }
+                        }   
+                    }
+                )
 
-       const userDataa = await User.findOne({ _id: userId }).populate("cart.product")
-       const cartPro   = userDataa.cart
+                saveOrder();
 
-       let subTotal = 0
-
-       cartPro.forEach((val)=>{
-       val.total = val.product.price * val.quantity
-       subTotal += val.total
-       })
-
-
-       let productDet = cartPro.map(item => {
-        return {
-            id       : item.product._id,
-            name     : item.product.name,
-            price    : item.product.price,
-            quantity : item.quantity,
-            image    : item.product.imageUrl[0],
+                res.json({
+                    newWallet, 
+                    walletSuccess : true 
+                });
+                console.log(newWallet,'....................................................................')
+            } else {
+                res.json({ error: 'Invalid payment method.' });
+            }
         }
-       })
-
-
-       const result  = Math.random().toString(36).substring(2, 7);
-       const id      = Math.floor(100000 + Math.random() * 900000);
-       const ordeId = result + id;
-       
-       
-
-       /// order saving function
-
-
-       let saveOrder = async () => {
-
-        if(req.body.couponData){
-          const order = new Order({
-            userId  : userId,
-            product : productDet,
-            address : addressId,
-            orderId : ordeId,
-            total   : subTotal,
-            paymentMethod    : payMethod,
-            discountAmt      : req.body.couponData.discountAmt,
-            amountAfterDscnt : req.body.couponData.newTotal,
-            coupon           : req.body.couponName,
-        })
-
-        const ordered = await order.save()
-
-
-        }else{
-            const order = new Order({
-                userId  : userId,
-                product : productDet,
-                address : addressId,
-                orderId : ordeId,
-                total   : subTotal,
-                paymentMethod    : payMethod,     
-            })
-    
-            const ordered = await order.save()
-
-        }        
-
-        let userDetails = await User.findById(userId)
-        let userCart    = userDetails.cart
-
-        userCart.forEach( async item=> {
-            const productId = item.product
-            const qty       = item.quantity
-
-            const product       = await Product.findById(productId)
-            const stock         = product.stock
-            const updatedStock  = stock - qty
-
-            await Product.updateOne(
-                { _id: productId },
-                { $set: { stock: updatedStock, isOnCart: false } }
-              );
-              
-        })
-
-     
-        userDetails.cart = []
-        await userDetails.save()
-        console.log(userDetails.cart);
-      }
-
-
-       if ( addressId ){
-        if( payMethod === 'cash-on-delivery' ){
-
-          saveOrder()
-
-          res.json({ 
-            CODsucess : true,
-            toal      : subTotal
-        }) 
-     }
-
-
-
-        if(payMethod === 'razorpay'){
-              
-            const amount = req.body.amount
-
-            var instance = new Razorpay({ 
-                key_id: "rzp_test_6u4aUWyjD4kZvI", 
-                key_secret: "BHpzGbf03O8ttvTONBk2LokC"
-             })
-
-            const order = await instance.orders.create({
-                amount: amount * 100,
-                currency: 'INR',
-                receipt: 'mubashir',
-            })
-
-            saveOrder()
-
-            res.json({
-                razorPaySucess : true,
-                order,
-                amount, 
-            })
-
-            
-        }
-
-        /// payment method wallet function
-
-
-         if ( payMethod === 'wallet' ){
-            const newWallet = req.body.updateWallet
-            const userData  = req.session.user
-
-             
-           await User.findByIdAndUpdate(userId, { $set:{ wallet:newWallet }},  { new : true })
-
-
-            saveOrder()
-
-            res.json(newWallet)
-        }
-       }  
-
-       
     } catch (error) {
         console.log(error);
+        res.status(500).json({ error: 'Internal server error.' });
     }
-}
+};
 
 
 
@@ -317,3 +332,6 @@ module.exports = {
     validateCoupon,
     checkStock,
 }
+
+
+

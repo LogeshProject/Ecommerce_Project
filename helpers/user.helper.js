@@ -16,9 +16,9 @@ const verifyEmail = async(email)=>{
             secure: false,
             requireTLS: true,
             auth: {
-              user:'logesh3510@gmail.com',
-              pass:'ulqn ocnx hbzt ytnc'
-              //ulqn ocnx hbzt ytnc
+              user: process.env.USER_MAIL,
+              pass: process.env.USER_PASS
+              // ktcm gusn tayi ruhq
           }
         })
         
@@ -128,10 +128,9 @@ async function generateInvoice(order, address, user, filename) {
   
     return stream;
   }
-    
   
 
 
 
 
-module.exports = {verifyEmail, generateOtp, hashPassword, generateInvoice}
+module.exports = {verifyEmail, generateOtp, hashPassword, generateInvoice }

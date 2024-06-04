@@ -12,10 +12,11 @@ const exphbs = require('express-handlebars')
 const nocache = require('nocache')
 const multer = require('multer')
 const swal=require('sweetalert')
+const passport = require("passport")
  require('dotenv').config()
 
  mongoose.set('strictQuery', false);
- mongoose.connect("mongodb://0.0.0.0:27017/CocoLocoNew", { useNewUrlParser: true, useUnifiedTopology: true })
+ mongoose.connect(process.env.CONNECT, { useNewUrlParser: true, useUnifiedTopology: true })
  .then(() => {
    console.log('MongoDB connected');
  })
@@ -25,12 +26,12 @@ const swal=require('sweetalert')
 
 const userRouter = require('./routes/user');
 const adminRouter = require('./routes/admin');
-// const { handlebars } = require('hbs');
+
 
 const app = express();
 
 
-let hbss = exphbs.create({})
+// let hbss = exphbs.create({})
 
 
 app.set('views', path.join(__dirname, 'views'));
@@ -44,6 +45,15 @@ app.engine('hbs', handlebars.engine({
 }));
 
 
+
+app.use(session({
+  secret: 'cats',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 hbs.registerPartials(path.join(__dirname,'/views/partials'))
 
 
@@ -51,6 +61,8 @@ Handlebars.registerHelper('ifeq', function (a, b, options) {
   if (a == b) { return options.fn(this); }
   return options.inverse(this);
 });
+
+
 
 
 Handlebars.registerHelper('ifnoteq', function (a, b, options) {
@@ -81,10 +93,15 @@ Handlebars.registerHelper('multiply', function(a, b) {
   return a * b;
 });
 
+Handlebars.registerHelper('subtract', function(a, b) {
+  return a - b;
+});
 
-// hbs.registerHelper("json", function (context) {
-//   return JSON.stringify(context)
-// })
+Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
+
 
 
 app.use(session({
@@ -116,16 +133,7 @@ app.use(function(req, res, next) {
 });
 
 
-// error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
 
 
 

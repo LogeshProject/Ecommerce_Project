@@ -17,31 +17,53 @@ const { handlebars } = require('hbs')
 
 
 
-
 const myOrders = async (req, res) => {
   try {
-      const userData = req.session.user
-      const userId   = userData._id
+      const userData = req.session.user;
+      const userId = userData._id;
 
+      // Pagination parameters
+      const page = parseInt(req.query.page) || 1; // Current page number, default to 1 if not provided
+      const limit = 7; // Number of orders per page
+
+      // Count total number of orders
+      const totalOrders = await Orders.countDocuments({ userId });
+
+      // Calculate total number of pages
+      const totalPages = Math.ceil(totalOrders / limit);
+
+      // Calculate skip value based on page number and limit
+      const skip = (page - 1) * limit;
+
+      // Fetch orders for the current page
       const orders = await Orders.find({ userId })
                                   .sort({ date: -1 })
+                                  .skip(skip)
+                                  .limit(limit);
 
+
+  
+    console.log(orders)
+      // Format orders with date
       const formattedOrders = orders.map(order => {
           const formattedDate = moment(order.date).format('MMMM D, YYYY');
-          return { ...order.toObject(), date: formattedDate }
-      })
+          return { ...order.toObject(), date: formattedDate };
+      });
 
       console.log(formattedOrders);
-
+      const pages = Array.from({length: totalPages}, (_, i) => i + 1); 
+      console.log(pages,"??????????????")
       res.render('user/my_orders', {
           userData,
           myOrders: formattedOrders || [],
-      })
-
+          
+          pages,
+          totalPages
+      });
   } catch (error) {
       console.log(error);
   }
-}
+};
 
 
 
@@ -73,10 +95,13 @@ const filterOrders = async (req, res) => {
 
  const orderDetails = async(req, res) => {
     try {
-        const userData = req.session.user
+        const user = req.session.user
+        const userId   = user._id
+        const userData = await User.findById(userId).lean()
         const orderId = req.query.id
 
-        const myOrderDetails = await Orders.findById(orderId).lean()
+        const myOrderDetails = await Orders.findById(orderId)
+        .lean()
         const orderedProDet  = myOrderDetails.product
         const addressId      = myOrderDetails.address
 
@@ -111,8 +136,40 @@ const filterOrders = async (req, res) => {
         
         const { updateWallet, payMethod } = req.body
 
+        const myOrderDetails = await Orders.findOne({_id:id},
+          {
+            total:1,
+            amountAfterDscnt:1,
+            _id : 0
+          }
+        ).lean()
+
+        console.log("myOrderDetails",myOrderDetails,"myOrderDetails");
+        let refundAmount
+        if(myOrderDetails.amountAfterDscnt){
+         refundAmount=myOrderDetails.amountAfterDscnt-50
+        }else{
+          refundAmount=myOrderDetails.total-50
+
+        }
+
+
+
         if(payMethod === 'wallet' || payMethod === 'razorpay'){
           await User.findByIdAndUpdate( userId, { $set:{ wallet:updateWallet }}, { new:true })
+
+          await User.updateOne(
+            { _id: req.session.user._id },
+            {
+                $push: {
+                    history: {
+                        amount:refundAmount,
+                        status: 'Refunded',
+                        date: Date.now()
+                    }
+                }
+            }
+        );
         }
 
         await Orders.findByIdAndUpdate(id, { $set: { status: 'Cancelled' } }, { new: true });
@@ -127,16 +184,16 @@ const filterOrders = async (req, res) => {
 
  
  const returnOrder = async(req, res) => {
-    try {
-        const id = req.query.id
+  try {
+      const id = req.query.id
 
-        await Orders.findByIdAndUpdate(id, { $set: { status: 'Returned' } }, { new: true });
+      await Orders.findByIdAndUpdate(id, { $set: { status: 'Returned' } }, { new: true });
 
-        res.json('sucess')
-    } catch (error) {
-        console.log(error);
-    }
- }
+      res.json('sucess')
+  } catch (error) {
+      console.log(error);
+  }
+}
 
 
 
@@ -164,6 +221,8 @@ const getInvoice = async (req, res) => {
       description: product.name,
       tax: product.tax,
       price: product.price,
+      
+      
     }));
 
     const date = moment(order.date).format('MMMM D, YYYY');
@@ -178,6 +237,7 @@ const getInvoice = async (req, res) => {
     const filename = `invoice_${orderId}.pdf`;
 
     const data = {
+      mode: "development",
       currency: 'USD',
       taxNotation: 'vat',
       marginTop: 25,
@@ -186,10 +246,10 @@ const getInvoice = async (req, res) => {
       marginBottom: 25,
       background: 'https://public.easyinvoice.cloud/img/watermark-draft.jpg',
       sender: {
-        company: 'Coza Store',
-        address: 'Plaza Kannur',
-        zip: '670320',
-        city: 'Kannur',
+        company: 'Coco Loco',
+        address: 'Plaza Bakes ',
+        zip: '621313',
+        city: 'Thogaimalai',
         country: 'India',
       },
       client: {
