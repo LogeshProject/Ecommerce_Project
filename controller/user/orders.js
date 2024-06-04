@@ -156,7 +156,10 @@ const filterOrders = async (req, res) => {
 
 
         if(payMethod === 'wallet' || payMethod === 'razorpay'){
-          await User.findByIdAndUpdate( userId, { $set:{ wallet:updateWallet }}, { new:true })
+
+          const deliveryCharge = 50 ;
+          const updateWalletAmount = updateWallet - deliveryCharge ;
+          await User.findByIdAndUpdate( userId, { $set:{ wallet:updateWalletAmount }}, { new:true })
 
           await User.updateOne(
             { _id: req.session.user._id },
@@ -185,7 +188,46 @@ const filterOrders = async (req, res) => {
  
  const returnOrder = async(req, res) => {
   try {
-      const id = req.query.id
+
+
+    const id       = req.query.id
+    const userData = req.session.user
+    const userId   =  userData._id
+
+    const { updateWallet, payMethod } = req.body
+
+    const myOrderDetails = await Orders.findOne({_id:id},
+      {
+        total:1,
+        amountAfterDscnt:1,
+        _id : 0
+      }
+    ).lean()
+
+    let refundAmount
+    if(myOrderDetails.amountAfterDscnt){
+     refundAmount=myOrderDetails.amountAfterDscnt-50
+    }else{
+      refundAmount=myOrderDetails.total-50
+
+    }
+
+      const deliveryCharge = 50 ;
+      const updateWalletAmount = updateWallet - deliveryCharge ;
+      await User.findByIdAndUpdate( userId, { $set:{ wallet:updateWalletAmount }}, { new:true })
+
+      await User.updateOne(
+        { _id: req.session.user._id },
+        {
+            $push: {
+                history: {
+                    amount:refundAmount,
+                    status: 'Refunded',
+                    date: Date.now()
+                }
+            }
+        }
+    );
 
       await Orders.findByIdAndUpdate(id, { $set: { status: 'Returned' } }, { new: true });
 
