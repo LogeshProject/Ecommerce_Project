@@ -2,7 +2,7 @@ const Orders = require('../../model/order')
 const Product = require('../../model/productModel')
 const Address = require('../../model/address')
 const mongoose = require('mongoose');
-const Razorpay = require('razorpay');
+const razorpay = require('razorpay');
 const moment = require('moment')
 const pdfkit = require('pdfkit')
 const fs = require('fs')
@@ -13,6 +13,12 @@ const path = require('path');
 const easyinvoice = require('easyinvoice');
 const Handlebars = require('handlebars');
 const { handlebars } = require('hbs')
+
+
+let instance = new razorpay({
+  key_id: process.env.KEY_ID,
+  key_secret: process.env.KEY_SECRET
+})
 
 
 // Adjust the path according to your project structure 
@@ -132,7 +138,7 @@ const orderDetails = async (req, res) => {
 
     console.log(myOrderDetails);
 
-    res.render('user/order_Details', { myOrderDetails, orderedProDet, userData, address });
+    res.render('user/order_Details', { myOrderDetails, orderedProDet, userData, address , KEY_ID: process.env.KEY_ID });
   } catch (error) {
     console.log(error);
   }

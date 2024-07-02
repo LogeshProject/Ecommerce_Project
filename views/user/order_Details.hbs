@@ -251,6 +251,7 @@
                                                     </span>
                                                     {{/ifeq}}
 
+
                     {{#ifeq myOrderDetails.status 'Delivered'}}
                     <span id="return_btn">
                       <button onclick="status2()" type="button"  class="btn btn-md rounded font-sm mx-2">
@@ -384,6 +385,7 @@ const status2 = () => {
   }
 
 
+
 const retryPayment = async (id , status) => {
     
     try{
@@ -411,12 +413,12 @@ const retryPayment = async (id , status) => {
 
     }
 
-
         }catch{
             console.error('Error changing status:', error);
         }
 
 }
+
 
 
 
@@ -480,11 +482,15 @@ const retryPayment = async (id , status) => {
 
 
     var options = {
-      "key": "{{KEY_ID}}",
-      "amount": subTotal * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "key": "{{KEY_ID}}", // Enter the Key ID generated from the Dashboard
+      "amount": parseInt(amount), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       "currency": "INR",
-      "name": "CocoLoco",
+
+      "name" : "Coco Loco",
       "image": "/images/logo/Eagle_Logo.png",
+      /*"name": "Acme Corp", //your business name
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",*/
 
       "order_id": undefined, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       "handler": function (response) {

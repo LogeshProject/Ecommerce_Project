@@ -228,69 +228,83 @@
 
         
 
-       <div class="form-inline d-flex m-3">
-            <div class="form-group" style="margin-right: 5%;">
-                <label for="date-range">Select Range : </label>
-                <select class="form-control" id="date-range" onchange="toggleDateInputs()">
-                    <option value="select">Select</option>
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="custom">Custom</option>
-                </select>
-            </div>
+        <div class="form-inline d-flex m-3">
+    <div class="form-group" style="margin-right: 5%;">
+        <label for="date-range">Select Range:</label>
+        <select class="form-control" id="date-range" onchange="toggleDateInputs()">
+            <option value="select">Select</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="custom">Custom</option>
+        </select>
+    </div>
+    
+    <div class="form-group" id="start-date-group" style="margin-right: 2%; display: none;">
+        <label for="start-date">Start Date:</label>
+        <input type="date" class="form-control" id="start-date">
+    </div>
+    <div class="form-group" id="end-date-group" style="margin-right: 2%; display: none;">
+        <label for="end-date">End Date:</label>
+        <input type="date" class="form-control" id="end-date">
+    </div>
+    <div class="form-group mt-4 mr-2">
+        <button onclick="getSalesData()" type="button" class="btn btn-primary">
+            <i class="text-muted material-icons md-post_add"></i>Create report
+        </button>
+    </div>
+    <input id="revenue" type="hidden" value="{{revenueByMonth}}">
+</div>
 
-            <div class="form-group" id="start-date-group" style="margin-right: 2%; display: none;">
-                <label for="start-date">Start Date:</label>
-                <input type="date" class="form-control" value="2024-07-12" id="start-date" min="" max="">
-            </div>
-            <div class="form-group" id="end-date-group" style="margin-right: 2%; display: none;">
-                <label for="end-date">End Date:</label>
-                <input type="date" class="form-control" value="2024-07-18" id="end-date" min="" max="">
-            </div>
-            <div class="form-group mt-4 mr-2">
-                <button onclick="getSalesData()" type="button" class="btn btn-primary"><i
-                        class="text-muted material-icons md-post_add"></i>Create report</button>
-            </div>
-            <input id="revenue" type="hidden" value="{{revenueByMonth}}">
-        </div>
+
 
        <script>
-            function toggleDateInputs() {
-        var dateRange = document.getElementById("date-range").value;
-        var startDateGroup = document.getElementById("start-date-group");
-        var endDateGroup = document.getElementById("end-date-group");
-        var startDateInput = document.getElementById("start-date");
-        var endDateInput = document.getElementById("end-date");
 
-        var today = new Date().toISOString().split('T')[0];
+        function toggleDateInputs() {
+    var dateRange = document.getElementById("date-range").value;
+    var startDateGroup = document.getElementById("start-date-group");
+    var endDateGroup = document.getElementById("end-date-group");
+    var startDateInput = document.getElementById("start-date");
+    var endDateInput = document.getElementById("end-date");
 
-        switch (dateRange) {
-            case "daily":
-                startDateInput.value = endDateInput.value = today;
-                break;
-            case "weekly":
-                var lastWeek = new Date();
-                lastWeek.setDate(lastWeek.getDate() - 6);
-                startDateInput.value = lastWeek.toISOString().split('T')[0];
-                endDateInput.value = today;
-                break;
-            case "monthly":
-                var lastMonth = new Date();
-                lastMonth.setDate(lastMonth.getDate() - 30);
-                startDateInput.value = lastMonth.toISOString().split('T')[0];
-                endDateInput.value = today;
-                break;
-            case "custom":
-                startDateInput.value = endDateInput.value = "";
-                break;
-            default:
-                startDateInput.value = endDateInput.value = "";
-                break;
-        }
+    var today = new Date().toISOString().split('T')[0];
 
-        startDateGroup.style.display = endDateGroup.style.display = (dateRange === "custom") ? "block" : "none";
+    switch (dateRange) {
+        case "daily":
+            startDateInput.value = endDateInput.value = today;
+            startDateInput.min = startDateInput.max = endDateInput.min = endDateInput.max = today;
+            break;
+        case "weekly":
+            var lastWeek = new Date();
+            lastWeek.setDate(lastWeek.getDate() - 6);
+            startDateInput.value = lastWeek.toISOString().split('T')[0];
+            endDateInput.value = today;
+            startDateInput.min = endDateInput.min = lastWeek.toISOString().split('T')[0];
+            startDateInput.max = endDateInput.max = today;
+            break;
+        case "monthly":
+            var lastMonth = new Date();
+            lastMonth.setDate(lastMonth.getDate() - 30);
+            startDateInput.value = lastMonth.toISOString().split('T')[0];
+            endDateInput.value = today;
+            startDateInput.min = endDateInput.min = lastMonth.toISOString().split('T')[0];
+            startDateInput.max = endDateInput.max = today;
+            break;
+        case "custom":
+            startDateInput.value = endDateInput.value = "";
+            startDateInput.min = endDateInput.min = "";
+            startDateInput.max = endDateInput.max = "";
+            break;
+        default:
+            startDateInput.value = endDateInput.value = "";
+            startDateInput.min = endDateInput.min = "";
+            startDateInput.max = endDateInput.max = "";
+            break;
     }
+
+    startDateGroup.style.display = endDateGroup.style.display = (dateRange === "custom") ? "block" : "none";
+}
+
        </script>
 
 

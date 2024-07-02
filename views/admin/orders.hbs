@@ -152,6 +152,9 @@
                                 {{#ifeq this.status 'Requested'}}
                                 <td class="text-center"><span class="badge bg-info">{{this.status}}</span></td>
                                 {{/ifeq}}
+                                {{#ifeq this.status 'Payment Failed'}}
+                                <td class="text-center"><span class="badge bg-info">{{this.status}}</span></td>
+                                {{/ifeq}}
                                 <td class="text-center">
                                     {{#ifeq this.status 'Delivered'}}
                                     <form action="/admin/change_status?id={{this._id}}" method="post">

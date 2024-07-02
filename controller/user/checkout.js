@@ -60,27 +60,27 @@ const loadCheckout = async (req, res) => {
 const checkStock = async (req, res) => {
     const userData = req.session.user;
     const userId = userData._id;
-  
-  
+
+
     const userDataa = await User.findOne({ _id: userId }).populate("cart.product").lean();
     const cart = userDataa.cart;
-  
-  
+
+
     let stock = [];
     cart.forEach((el) => {
-      if ((el.product.stock - el.quantity) <= 0) {
-        stock.push(el.product);
-      }
+        if ((el.product.stock - el.quantity) < 0) {
+            stock.push(el.product);
+        }
     });
-  
-  
+
+
     if (stock.length > 0) {
-      res.json(stock);
-    } else{
+        res.json(stock);
+    } else {
         res.json('ok')
     }
-  };
-  
+};
+
 
 const loadCheckou = async (req, res) => {
 
