@@ -54,7 +54,7 @@ router.post('/addReview', logedin, isBlocked, userController.addNewReviewPost)
 
 
 
-router.get('/auth/google', passport.authenticate('google',{scope:['email','profile']}))
+router.get('/auth/google',isBlocked , passport.authenticate('google',{scope:['email','profile']}))
 router.get('/auth/google/callback', passport.authenticate('google',{failureRedirect:'/login'}), userController.googleCallback)
 
 

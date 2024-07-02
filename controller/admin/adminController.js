@@ -40,7 +40,7 @@ const adminDoLogin = async (req, res) => {
 
 
     if (adminData) {
-      if (adminPassword === adminData.password) {
+      if (adminPassword === adminData.password && adminEmail === adminData.email) {
         req.session.aLoggedIn = true;
         req.session.admin = adminData;
         res.redirect("/admin/home");
