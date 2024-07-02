@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { array } = require('../middleware/multer')
+
 
 const produtSchema = new mongoose.Schema({
  
@@ -12,11 +12,11 @@ const produtSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    
     DiscountPrice: {
         type: Number,
         required: true
     },
-
 
     description: {
         type: String,
@@ -31,10 +31,9 @@ const produtSchema = new mongoose.Schema({
 
     imageUrl: {
         type: Array,
-         required: true
+        required: true
     },
 
-    
     stock: {
         type: Number,
         required: true
@@ -42,6 +41,10 @@ const produtSchema = new mongoose.Schema({
     bestSelling :{
         type : Number,
         default: 0
+    },
+    popularity :{
+        type : Number ,
+        default : 0
     },
 
     is_blocked: {
@@ -59,7 +62,7 @@ const produtSchema = new mongoose.Schema({
         default: false,
     }
 
-})
+},{timestamps:true})
 
 
 

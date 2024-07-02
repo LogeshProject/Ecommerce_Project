@@ -1,284 +1,366 @@
-    <aside class="navbar-aside" id="offcanvas_aside">
-        <div class="aside-top">
-            <a href="/admin/home" class="brand-wrap">
-            
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+
+
+
+
+
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+
             <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
         </a>
-            <div>
-                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
-            </div>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+            </button>
         </div>
-        <nav>
-            <ul class="menu-aside">
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
-                        <span class="text">Products</span>
-                    </a>
-                   
-                </li>
-                <li class="menu-item active">
-                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
-                        <span class="text">Orders</span>
-                    </a>
-                   
-                </li>
-               
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
-                        <span class="text">Category</span>
-                    </a>
-                    
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
-                        <span class="text">Users</span>
-                    </a>
-                    
-                </li>
-                 <li class="menu-item ">
-                    <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item  ">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link " href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+
+            </li>
+            <li class="menu-item  active">
+                <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+
+            </li>
+
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                    <span class="text">Categories</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Users</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
                     <span class="text">Coupons</span> </a>
-                </li>
+            </li>
 
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-photo_size_select_actual"></i>
-                        <span class="text">Banners</span> </a>
-                </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/banners"> <i
+                        class="icon material-icons md-photo_size_select_actual"></i>
+                    <span class="text">Banners</span> </a>
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link " href="/admin/reviews"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
 
-              
-               
-            </ul>
-            <hr>
-            <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
+
+
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
                     <button class="nav-link
                      rounded-pill darkmode m-3 " href="#">
                         <i class="material-icons md-nights_stay"></i>Dark mode
                     </button>
                 </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
-                        <span class="text"> Logout </span>
-                    </a>
-                </li>
-            </ul>
-            <br>
-            <br>
-        </nav>
-    </aside>
-       {{!-- <header class="main-header navbar">
-            <div class="col-search">
-                <form class="searchform">
-                    <div class="input-group">
-                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
-                        <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
-                    </div>
-                    <datalist id="search_terms">
-                        <option value="Products">
-                        <option value="New orders">
-                        <option value="Apple iphone">
-                        <option value="Ahmed Hassan">
-                    </datalist>
-                </form>
-            </div>
-            <div class="col-nav">
-                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon" href="#">
-                            <i class="material-icons md-notifications animation-shake"></i>
-                            <span class="badge rounded-pill">3</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                            <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png" alt="English">English</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png" alt="Français">Français</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png" alt="Français">日本語</a>
-                            <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png" alt="Français">中国人</a>
-                        </div>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="assets/imgs/people/avatar2.jpg" alt="User"></a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                            <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit Profile</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account Settings</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-account_balance_wallet"></i>Wallet</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
-                            <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#"><i class="material-icons md-exit_to_app"></i>Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </header> --}}
-
-    <main class="main-nowrap">
-
-        <section class="content-main">
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 ">
-            {{!-- <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                    <span class="text"> Logout </span>
                 </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+            </li>
+        </ul>
+        <br>
+        <br>
+    </nav>
+</aside>
 
-                    <li class="nav-item">
-                        <a href="/admin/home" class="nav-link align-middle px-0 ">Home </a>
-                    </li>
+<main class="main-nowrap">
 
-                    <li>
-                        <a href="/admin/manage_users" class="nav-link px-0 align-middle"> Users </a>
-                    </li>
+    <section class="content-main">
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 ">
 
-                    <li>
-                        <a href="/admin/category" class="nav-link px-0 align-middle btn btn-outline-primary">Category
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/admin/orders" class="nav-link px-0 align-middle"
-                            style="background-color: #fff; padding: 2px;">Orders</a>
-                    </li>
-                    <li>
-                        <a href="/admin/product" class="nav-link px-0 align-middle"> Products </a>
-                    </li>
-                    <li>
-                        <a href="/admin/coupons"  class="nav-link px-0 align-middle" > Coupons </a>
-                    </li>
-                </ul>
-                <hr>
-            </div> --}}
-        </div>
-        <div class="col py-3 d-flex justify-content-center mt-2">
+                </div>
+                <div class="col py-3 d-flex justify-content-center mt-2">
 
-            <div class="col-xl-8">
-                <!-- Account details card-->
-                <div class="card mb-4 ">
-                    <div class="card-header text-center">Order details</div>
-                    <div class="card-body">
+                    <div class="col-xl-8">
+                        <!-- Account details card-->
+                        <div class="card mb-4 ">
+                            <div class="card-header text-center">Order details</div>
+                            <div class="card-body">
 
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="text-center">Name</th>
-                                    <th scope="col" class="text-center">Price</th>
-                                    <th scope="col" class="text-center">Quantity</th>
-                                    <th scope="col" class="text-center">Image</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="text-center">Name</th>
+                                            <th scope="col" class="text-center">Regular Price</th>
+                                            <th scope="col" class="text-center">Quantity</th>
 
-                                {{#each orderedProDet}}
-                                <tr>
-                                    <td scope="row" class="text-center">{{this.name}}</td>
-                                    <td class="text-center"> ₹ {{this.price}}</td>
-                                    <td class="text-center">{{this.quantity}}</td>
-                                    <td class="text-center"><img style="width: 50px; height: auto;" src="/images/products/{{this.image}}"
-                                            alt="product image">
-                                    </td>
-                                    {{!-- <td>
-                                        {{!-- <a href="my_orders/details?id={{this._id}}" type="button"
-                                            class="btn btn-warning">View
-                                            details</a> --}}
-                                        {{!-- <a href="/order_details/{{this.id}}" type="button"
-                                            class="btn btn-danger">cancel</a>
-                                    </td> --}}
-                                </tr>
-                                {{/each}}
+                                            <th scope="col" class="text-center">Total Price</th>
+                                            <th scope="col" class="text-center">Image</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                            </tbody>
-                        </table>
+                                        {{#each orderedProDet}}
+                                        <tr>
+                                            <td scope="row" class="text-center">{{this.name}}</td>
+                                            <td class="text-center"> ₹ {{this.price}}</td>
+                                            <td class="text-center">{{this.quantity}}</td>
+
+                                            <td class="text-center"> ₹ {{subtract this.price this.DiscountPrice}}</td>
+
+                                            <td class="text-center"><img style="width: 50px; height: auto;"
+                                                    src="/images/products/{{this.image}}" alt="product image">
+                                            </td>
+                                            
+                                        </tr>
+                                        {{/each}}
+
+                                    </tbody>
+                                </table>
 
 
-                        <div class="d-flex justify-content-between border mt-5 p-5" style="color: #000;">
-                            <div class="mt-3 ">
-                                <p class="mb-2">Total amount :  ₹ <strong>{{myOrderDetails.total}}</strong></p>
-                                
-                                <p class="mb-2">Payment method: {{myOrderDetails.paymentMethod}}</p>
-                                <p class="mb-2">Order status : {{myOrderDetails.status}}</p>
-                                {{#if myOrderDetails.discountAmt}}
-                                <p class="mb-2">Amount after discount :
-                                     ₹ <strong>{{myOrderDetails.amountAfterDscnt}}</strong></p>
-                                <p class="mb-2">Discount amount :  ₹ <strong>{{myOrderDetails.discountAmt}}</strong></p>
-                                <p class="mb-2" style="color: green;">Coupon used: {{myOrderDetails.coupon}}</p>
-                                {{else}}
-                                <p class="mb-2" style="color: green;">No coupon applied</p>
-                                {{/if}}
+                                <div class="d-flex justify-content-between border mt-5 p-5" style="color: #000;">
+                                    <div class="mt-3 ">
+
+                                        <p class="mb-2">Delivery Charge : ₹ <strong>50</strong></p>
+                                        <p class="mb-2">Total amount : ₹ <strong>{{myOrderDetails.total}}</strong></p>
+
+                                        <p class="mb-2">Payment method: {{myOrderDetails.paymentMethod}}</p>
+
+
+
+                                        
+
+
+
+
+                                        {{#if myOrderDetails.discountAmt}}
+                                        <p class="mb-2">Amount after discount :
+                                            ₹ <strong>{{myOrderDetails.amountAfterDscnt}}</strong></p>
+                                        <p class="mb-2">Discount amount : ₹
+                                            <strong>{{myOrderDetails.discountAmt}}</strong>
+                                        </p>
+                                        <p class="mb-2" style="color: green;">Coupon used: {{myOrderDetails.coupon}}</p>
+                                        {{else}}
+                                        <p class="mb-2" style="color: green;">No coupon applied</p>
+                                        {{/if}}
+
+                                        <br><br>
+
+                                        <p class="mb-2"><b style="font-weight: bolder;">Order status : </b>
+                                            {{#ifeq myOrderDetails.status 'pending'}}
+                                            <span class="badge bg-secondary">{{myOrderDetails.status}}</span>
+                                            {{/ifeq}}
+                                            {{#ifeq myOrderDetails.status 'Shipped'}}
+                                            <span class="badge bg-primary">{{myOrderDetails.status}}</span>
+                                            {{/ifeq}}
+                                            {{#ifeq myOrderDetails.status 'Delivered'}}
+                                            <span class="badge bg-success">{{myOrderDetails.status}}</span>
+                                            {{/ifeq}}
+                                            {{#ifeq myOrderDetails.status 'Returned'}}
+                                            <span class="badge bg-warning">{{myOrderDetails.status}}</span>
+                                            {{/ifeq}}
+                                            {{#ifeq myOrderDetails.status 'Cancelled'}}
+                                            <span class="badge bg-danger">{{myOrderDetails.status}}</span>
+                                            {{/ifeq}}
+                                            {{#ifeq myOrderDetails.status 'Rejected'}}
+                                            <span class="badge bg-danger">{{myOrderDetails.status}}</span>
+                                            {{/ifeq}}
+                                            {{#ifeq myOrderDetails.status 'Requested'}}
+                                            <span class="badge bg-info">{{myOrderDetails.status}}</span>
+                                            {{/ifeq}}
+                                        </p>
+
+                                    </div>
+
+
+
+                                    <div class="">
+                                        <h5 class="border-bottom mb-3">Delivery address</h5>
+                                        <p>{{address.name}}</p>
+                                        <p>Mobile: {{address.mobile}}</p>
+                                        <p>{{address.addressLine1}}</p>
+                                        <p>{{address.addressLine2}}</p>
+                                        <p>{{address.city}}, {{address.state}},</p>
+                                        <p>Pin: {{address.pin}}</p>
+
+
+
+                                    </div>
+
+                                </div>
+                                <br>
+                                <div class="container mt-5">
+                                    <div class="card p-4 border-0 shadow-sm">
+                                        {{#ifeq myOrderDetails.status 'Requested'}}
+
+
+                                        {{#if myOrderDetails.returnMsg}}
+                                        <h5 class="border-bottom pb-2 mb-4">Return Request</h5>
+                                        <p class="mb-4" style="color: #000;">{{myOrderDetails.returnMsg}}</p>
+                                        <div class="d-flex justify-content-end">
+                                            <a id="blockprod" data-product-id="{{myOrderDetails._id}}"
+                                                class="btn btn-success btn-sm me-2"
+                                                onclick="status('{{myOrderDetails._id}}')">
+                                                Approve
+                                            </a>
+                                            <a href="javascript:void(0);"
+                                                onclick="confirmEditProduct('{{myOrderDetails._id}}')"
+                                                class="btn btn-danger btn-sm">
+                                                <i class="material-icons md-edit"></i> Decline
+                                            </a>
+                                        </div>
+
+                                        {{/if}}
+
+                                        {{/ifeq }}
+                                        {{#ifeq myOrderDetails.status 'Returned'}}
+                                        <h5 class="border-bottom pb-2 mb-4">Return Reason</h5>
+                                        <p class="mb-4" style="color: #000;">{{myOrderDetails.returnMsg}}</p>
+                                        <div class="d-flex justify-content-end">
+                                            <p class="text-danger">Product Returned Approved .</p>
+                                        </div>
+                                        {{/ifeq }}
+                                        {{#ifeq myOrderDetails.status 'Rejected'}}
+                                        <h5 class="border-bottom pb-2 mb-4">Return Reason</h5>
+                                        <p class="mb-4" style="color: #000;">{{myOrderDetails.returnMsg}}</p>
+                                        <div class="d-flex justify-content-end">
+                                            <p class="text-danger">Product Returned Rejected .</p>
+                                        </div>
+                                        {{/ifeq }}
+                                    </div>
+                                </div>
+
+
 
                             </div>
 
-
-
-                            <div class="">
-                                <h5 class="border-bottom mb-3">Delivery address</h5>
-                                <p>{{address.name}}</p>
-                                <p>Mobile: {{address.mobile}}</p>
-                                <p>{{address.adressLine1}}</p>
-                                <p>{{address.adressLine2}}</p>
-                                <p>{{address.city}}, {{address.state}},</p>
-                                <p>Pin: {{address.pin}}</p>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex">
-                        {{!-- <form action="/change_status" method="post">
                             <div class="d-flex">
-                                <div style="width: 100%;" class="p-l-15 ">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Change order status</option>
-                                        <option value="1">Shipped</option>
-                                        <option value="2">Delivered</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <button type="submit" class="m-l-5 btn btn-primary">submit</button>
+                               
+                                <div class="m-auto mb-20 p-r-15 p-b-15">
+                                    <a href="/admin/orders" class=" btn btn-primary">Back to orders</a>
                                 </div>
                             </div>
-                        </form> --}}
-                        <div class="m-auto mb-20 p-r-15 p-b-15">
-                            <a href="/admin/orders" class=" btn btn-primary">Back to orders</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-        </section> <!-- content-main end// -->
-        <footer class="main-footer font-xs">
-            <div class="row pb-30 pt-15">
-                <div class="col-sm-6">
-                    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    </section> <!-- content-main end// -->
+    <footer class="main-footer font-xs">
+        <div class="row pb-30 pt-15">
+            <div class="col-sm-6">
+                <script data-cfasync="false"
+                    src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                <script>
                     document.write(new Date().getFullYear())
-                    </script> ©,  Coco Loco - Ecommerce website .
-                </div>
-                <div class="col-sm-6">
-                    <div class="text-sm-end">
-                        All rights reserved
-                    </div>
+                </script> ©, Coco Loco - Ecommerce website .
+            </div>
+            <div class="col-sm-6">
+                <div class="text-sm-end">
+                    All rights reserved
                 </div>
             </div>
-        </footer>
-    </main>
+        </div>
+    </footer>
+</main>
+
+<!-- SweetAlert2 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+<!-- Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+    const status = (id) => {
+        Swal.fire({
+            title: 'Are you sure you want to approve this return?',
+            text: "This action cannot be undone.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, approve it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/admin/return_approve?id=${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire('Approved!', 'The return request has been approved.', 'success');
+                        } else {
+                            Swal.fire('Error!', 'There was an error approving the return request.', 'error');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        Swal.fire('Error!', 'There was a problem with the approval process.', 'error');
+                    });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire('Cancelled', 'The return request remains pending.', 'info');
+            }
+        });
+    }
+
+    const confirmEditProduct = (id) => {
+        Swal.fire({
+            title: 'Are you sure you want to decline this return?',
+            text: "This action cannot be undone.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, decline it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/admin/return_decline?id=${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire('Declined!', 'The return request has been declined.', 'success');
+                        } else {
+                            Swal.fire('Error!', 'There was an error declining the return request.', 'error');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        Swal.fire('Error!', 'There was a problem with the decline process.', 'error');
+                    });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire('Cancelled', 'The return request remains pending.', 'info');
+            }
+        });
+    }
+</script>

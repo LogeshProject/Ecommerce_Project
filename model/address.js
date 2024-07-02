@@ -17,13 +17,13 @@ const addressSchema = new mongoose.Schema({
         required: true
     },
 
-    adressLine1: {
+    addressLine1: {
         type: String,
          required: true
     },
 
     
-    adressLine2: {
+    addressLine2: {
         type: String,
     },
 
@@ -46,7 +46,7 @@ const addressSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     }
-})
+},{timestamps:true})
 
 
-module.exports = mongoose.model('adress', addressSchema)
+module.exports = mongoose.model('addresses', addressSchema)

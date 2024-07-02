@@ -1,213 +1,242 @@
-       <aside class="navbar-aside" id="offcanvas_aside">
-        <div class="aside-top">
-            <a href="/admin/home" class="brand-wrap">
-            
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
             <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
         </a>
-            <div>
-                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
-            </div>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize">
+                <i class="text-muted material-icons md-menu_open"></i>
+            </button>
         </div>
-        <nav>
-            <ul class="menu-aside">
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
-                        <span class="text">Products</span>
-                    </a>
-                   
-                </li>
-                <li class="menu-item  active">
-                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
-                        <span class="text">Orders</span>
-                    </a>
-                   
-                </li>
-               
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
-                        <span class="text">Category</span>
-                    </a>
-                    
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
-                        <span class="text">Users</span>
-                    </a>
-                    
-                </li>
-                 <li class="menu-item ">
-                    <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
-                    <span class="text">Coupons</span> </a>
-                </li>
-
-                {{!-- <li class="menu-item ">
-                    <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-photo_size_select_actual"></i>
-                        <span class="text">Banners</span> </a>
-                </li> --}}
-
-             
-            </ul>
-            <hr>
-            <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
-                    <button class="nav-link
-                     rounded-pill darkmode m-3 " href="#">
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+            </li>
+            <li class="menu-item active">
+                <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                    <span class="text">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Users</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/banners"> <i class="icon material-icons md-photo_size_select_actual"></i>
+                    <span class="text">Banners</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/reviews"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
+                    <button class="nav-link rounded-pill darkmode m-3" href="#">
                         <i class="material-icons md-nights_stay"></i>Dark mode
                     </button>
                 </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
-                        <span class="text"> Logout </span>
-                    </a>
-                </li>
-            </ul>
-            <br>
-            <br>
-        </nav>
-    </aside>
-      
-    <main class="main-wrap">
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+        <br><br>
+    </nav>
+</aside>
 
-        <section class="content-main">
-            <div class="content-header">
-                <div>
-                    <h2 class="content-title card-title">Order List </h2>
-                    <p>Lorem ipsum dolor sit amet.</p>
-                </div>
-                <div>
-                    <input type="text" placeholder="Search order ID" class="form-control bg-white">
-                </div>
+<main class="main-wrap">
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Order List</h2>
+                <p> All the product order list shown here.</p>
             </div>
-            <div class="card mb-4">
-                <header class="card-header">
-                    <div class="row gx-3">
-                        <div class="col-lg-4 col-md-6 me-auto">
-                            <input type="text" placeholder="Search..." class="form-control">
-                        </div>
-                        <div class="col-lg-2 col-6 col-md-3">
-                            <select class="form-select">
-                                <option>Status</option>
-                                <option>Active</option>
-                                <option>Disabled</option>
-                                <option>Show all</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-2 col-6 col-md-3">
-                            <select class="form-select">
-                                <option>Show 20</option>
-                                <option>Show 30</option>
-                                <option>Show 40</option>
-                            </select>
-                        </div>
+            <div>
+                <input type="text" placeholder="Search order ID" class="form-control bg-white">
+            </div>
+        </div>
+        <div class="card mb-4">
+            <header class="card-header">
+                <div class="row gx-3">
+                    <div class="col-lg-4 col-md-6 me-auto">
+                        <input type="text" placeholder="Search..." class="form-control">
                     </div>
-                </header> <!-- card-header end// -->
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="text-center">Date</th>
-                                    <th scope="col" class="text-center">#ID</th>
-                                    <th scope="col" class="text-center">Payment Method</th>
-                                    <th scope="col" class="text-center">Status</th>
-                                    <th scope="col" class="text-center">Change Order Status</th>
-                                    <th scope="col" class="text-center"> Action </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{#each ordersData}}
-                                <tr>
-                                    
-                                    <td class="text-center">{{this.date}}</td>
-                                    <td class="text-center"><b>{{this.orderId}}</b></td>
-                                    <td class="text-center">{{this.paymentMethod}}</td>
-                                    {{#ifeq this.status 'Shipped'}}
-                                    <td class="text-center"><span class="badge bg-primary">{{this.status}}</span></td>
-                                    {{/ifeq}}
+                    <div class="col-lg-2 col-6 col-md-3">
+                        <select class="form-select" id="statusFilter">
+                            <option value="all">Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Returned">Returned</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Requested">Requested</option>
+                            
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-6 col-md-3">
+                        <select class="form-select">
+                            <option value="10">Show 10</option>
+                            
+                        </select>
+                    </div>
+                </div>
+            </header>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Date</th>
+                                <th scope="col" class="text-center">#ID</th>
+                                <th scope="col" class="text-center">Payment Method</th>
+                                <th scope="col" class="text-center">Status</th>
+                                <th scope="col" class="text-center">Change Order Status</th>
+                                <th scope="col" class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTable">
+                            {{#each ordersData}}
+                            <tr>
+                                <td class="text-center">{{this.date}}</td>
+                                <td class="text-center"><b>{{this.orderId}}</b></td>
+                                <td class="text-center">{{this.paymentMethod}}</td>
+                                {{#ifeq this.status 'pending'}}
+                                <td class="text-center"><span class="badge bg-secondary">{{this.status}}</span></td>
+                                {{/ifeq}}
+                                {{#ifeq this.status 'Shipped'}}
+                                <td class="text-center"><span class="badge bg-primary">{{this.status}}</span></td>
+                                {{/ifeq}}
+                                {{#ifeq this.status 'Delivered'}}
+                                <td class="text-center"><span class="badge bg-success">{{this.status}}</span></td>
+                                {{/ifeq}}
+                                {{#ifeq this.status 'Returned'}}
+                                <td class="text-center"><span class="badge bg-warning">{{this.status}}</span></td>
+                                {{/ifeq}}
+                                {{#ifeq this.status 'Cancelled'}}
+                                <td class="text-center"><span class="badge bg-danger">{{this.status}}</span></td>
+                                {{/ifeq}}
+                                {{#ifeq this.status 'Rejected'}}
+                                <td class="text-center"><span class="badge bg-danger">{{this.status}}</span></td>
+                                {{/ifeq}}
+                                {{#ifeq this.status 'Requested'}}
+                                <td class="text-center"><span class="badge bg-info">{{this.status}}</span></td>
+                                {{/ifeq}}
+                                <td class="text-center">
                                     {{#ifeq this.status 'Delivered'}}
-                                    <td class="text-center"><span class="badge bg-success">{{this.status}}</span></td>
+                                    <form action="/admin/change_status?id={{this._id}}" method="post">
+                                        <div class="d-flex w-50 ml-30">
+                                            <div class="col-lg-2 col-6 col-md-3 w-100 mr-15">
+                                                <select name="status" class="form-select" aria-label="Default select example">
+                                                    <option selected disabled hidden>Delivered</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary w-100" disabled>Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                    {{else}}
+                                    <form action="/admin/change_status?id={{this._id}}" method="post">
+                                        <div class="d-flex w-50 ml-30">
+                                            <div class="col-lg-2 col-6 col-md-3 w-100 mr-15">
+                                                <select name="status" class="form-select" aria-label="Default select example">
+                                                    <option selected disabled hidden>Change order status</option>
+                                                    <option value="pending">pending</option>
+                                                    <option value="Shipped">Shipped</option>
+                                                    <option value="Delivered">Delivered</option>
+                                                    <option value="Delivered">Returned</option>
+                                                    <option value="Delivered">Cancelled</option>
+                                                    <option value="Delivered">Rejected</option>
+                                                    
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary w-100">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                     {{/ifeq}}
-                                    {{#ifeq this.status 'pending'}}
-                                    <td class="text-center"><span class="badge bg-secondary">{{this.status}}</span></td>
-                                    {{/ifeq}}
-                                    {{#ifeq this.status 'Returned'}}
-                                    <td class="text-center"><span class="badge bg-warning">{{this.status}}</span></td>
-                                    {{/ifeq}}
-                                    {{#ifeq this.status 'Cancelled'}}
-                                    <td class="text-center"><span class="badge bg-danger">{{this.status}}</span></td>
-                                    {{/ifeq}}
-                                    <td class="text-center">
-                                 <form action="/admin/change_status?id={{this._id}}" method="post">
-                            <div class="d-flex w-50 ml-30" >
-                                <div  class="col-lg-2 col-6 col-md-3 w-100 mr-15">
-                                    <select name="status" class="form-select" aria-label="Default select example">
-                                        <option selected disabled hidden>Change order status</option>
-                                        <option value="pending" >pending</option>
-                                        <option value="Shipped">Shipped</option>
-                                        <option value="Delivered">Delivered</option>
-                                        <option value="Returned">Returned</option>
-                                        <option value="Cancelled">Cancelled</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <button type="submit" class="btn btn-primary w-100">Submit</button>
-                                </div>
-                            </div>
-                        </form></td>
-                                    <td class="text-center">
-                                        <a href="/admin/order_details?id={{this._id}}" type="button" class="btn btn-primary w-100"> View Detail</a>
-                                    </td>
-                                </tr>
-                                {{/each}}
-
-
-
-
-
-
-
-
-
-
-
-
-                            </tbody>
-                        </table>
-                    </div> <!-- table-responsive //end -->
-                </div> <!-- card-body end// -->
-            </div> <!-- card end// -->
-            <div class="pagination-area mt-15 mb-50">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-start">
-                        {{#each pages}}
-                        <li class="page-item active"><a class="page-link" href="?page={{this}}">{{this}}</a></li>
-                       {{/each}}
-                    </ul>
-                </nav>
-            </div>
-        </section> <!-- content-main end// -->
-        <footer class="main-footer font-xs">
-            <div class="row pb-30 pt-15">
-                <div class="col-sm-6">
-                    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-                    document.write(new Date().getFullYear())
-                    </script> ©,  Coco Loco - Ecommerce website.
-                </div>
-                <div class="col-sm-6">
-                    <div class="text-sm-end">
-                        All rights reserved
-                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <a href="/admin/order_details?id={{this._id}}" type="button" class="btn btn-primary w-100">View Detail</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </footer>
-    </main>
+        </div>
+        <div class="pagination-area mt-15 mb-50">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-start">
+                    {{#each pages}}
+                    <li class="page-item {{#ifeq this ../currentPage}}active{{/ifeq}}"><a class="page-link" href="?page={{this}}">{{this}}</a></li>
+                    {{/each}}
+                </ul>
+            </nav>
+        </div>
+    </section>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const statusFilter = document.getElementById('statusFilter');
+        
+        
+        statusFilter.addEventListener('change', filterOrders);
+        
+        function filterOrders() {
+            const status = statusFilter.value;
+            
+            const rows = document.querySelectorAll('#ordersTable tr');
+          
+
+            rows.forEach(row => {
+                const statusText = row.querySelector('td:nth-child(4) span').textContent;
+                const matchesStatus = status === 'all' || statusText === status;
+
+                if (matchesStatus ) {
+                    row.style.display = '';
+                  
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        filterOrders(); // Initial call to apply default filters on page load
+    });
+</script>

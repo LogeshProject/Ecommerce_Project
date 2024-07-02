@@ -1,3 +1,31 @@
+<style>
+    .header-action-icon-2 {
+    position: relative; /* Ensure proper positioning */
+    z-index: 1000; /* Set a higher z-index value */
+}
+
+.dropdown-menu {
+    position: absolute; /* Position the dropdown menu */
+    top: 100%; /* Position it below the parent element */
+    right: 0; /* Adjust as needed */
+    z-index: 1001; /* Set a higher z-index value */
+}
+
+.dropdown.nav-item {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Position the dropdown below the parent element */
+    right: 0; /* Align the dropdown to the right */
+    z-index: 1000; /* Ensure the dropdown appears above other elements */
+}
+
+
+</style>
+
+
 <header class="header-area header-style-1 header-height-2">
     <div class="header-top header-top-ptb-1 d-none d-lg-block">
         <div class="container">
@@ -12,11 +40,12 @@
                 </div>
                 <div class="header-right">
 
-                    <div class="search-style-2 pl-80">
-                        <form action="/search">
-                            <input type="text" id="filterItem" name="search" class="form-control"
+                    <div class="search-style-2">
+                        
+                            <input type="text" onkeyup="searchProducts()" id="searchInput" name="search" class="form-control"
                                 placeholder="Search for items...">
-                        </form>
+                                {{!-- <button id="searchButton">Search</button> --}}
+                        
                     </div>
                     <div class="header-action-right">
                         <div class="header-action-2">
@@ -68,27 +97,29 @@
                                             <i class="fa-solid fa-lg fa-circle-info " style="margin-right: 10px;"></i> Help center
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-danger" href="/logout">
+                                        <a class="dropdown-item text-danger"  id="logoutbtn" href="/logout">
                                             <i class="fa-solid fa-right-from-bracket" style="margin-right: 10px;"></i> Logout
                                         </a>
                                     </div>
                                 </li>
                             </div>
 
+                            {{else}}
 
-
-
-                            {{/if}}
-
-                            {{#unless userData}}
-                            <div style="margin-left: 10px;">
+                             <div style="margin-left: 10px;">
                                 <div class="btn p-2.2 "> <i class="fi-rs-user"></i><a href="/login"
                                         style="color: white;"> Sign in </a>
 
                                 </div>
                             </div>
 
-                            {{/unless}}
+
+
+                            {{/if}}
+
+                            {{!-- {{#unless userData}}
+                           
+                            {{/unless}} --}}
                         </div>
                     </div>
                 </div>
@@ -112,23 +143,12 @@
                                 <li></li>
                                 <li></li>
                                 <li> <a href="/"> Home </a></li>
-                                <li> <a href="#"> About </a></li>
+                                <li> <a href="/about"> About </a></li>
 
                                 <li><a href="/product">Shop </i></a>
 
                                 </li>
-                                <li><a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>
-
-                                </li>
-                                <li><a href="#">Blog <i class="fi-rs-angle-down"></i></a>
-
-                                </li>
-                                <li><a href="#">Pages <i class="fi-rs-angle-down"></i></a>
-
-                                </li>
-                                <li>
-                                    <a href="#">Contact</a>
-                                </li>
+                               
                             </ul>
                         </nav>
                     </div>
@@ -141,3 +161,31 @@
         </div>
     </div>
 </header>
+
+<script>
+
+    /////logout
+    $(document).ready(function () {
+        $('#logoutbtn').click(function (e) {
+            e.preventDefault();
+
+
+            Swal.fire({
+                title: "LOGOUT?",
+                text: "Do you want to logout?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#088178",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/logout";
+
+                }
+            });
+
+
+        });
+    });
+</script>

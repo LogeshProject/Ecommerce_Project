@@ -2,7 +2,7 @@ const User = require('../../model/userModel')
 const razorpay = require("razorpay")
 
 let instance = new razorpay({
-    key_id: process.env.CLIENT_ID ,
+    key_id: process.env.CLIENT_ID,
     key_secret: process.env.CLIENT_SECRET
 })
 
@@ -35,7 +35,8 @@ let addMoneyToWallet = async (req, res) => {
                             history: {
                                 amount: amount,
                                 status: "Credited",
-                                date: Date.now()
+                                date: Date.now(),
+                                Remarks: `Razorpay`
                             }
                         }
                     }

@@ -1,177 +1,175 @@
-        <aside class="navbar-aside" id="offcanvas_aside">
-        <div class="aside-top">
-            <a href="/admin/home" class="brand-wrap">
-            
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+
             <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
         </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+            </button>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+
+            </li>
+
+            <li class="menu-item  active">
+                <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                    <span class="text">Categories</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Users</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span> </a>
+            </li>
+
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/banners"> <i
+                        class="icon material-icons md-photo_size_select_actual"></i>
+                    <span class="text">Banners</span> </a>
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link " href="/admin/reviews"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
+
+
+
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
+                    <button class="nav-link
+                     rounded-pill darkmode m-3 " href="#">
+                        <i class="material-icons md-nights_stay"></i>Dark mode
+                    </button>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                    <span class="text"> Logout </span>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </nav>
+</aside>
+<main class="main-wrap">
+    <section class="content-main">
+        <div class="content-header">
             <div>
-                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+                <h2 class="content-title card-title">Edit Categories </h2>
+                <p>Edit category</p>
+            </div>
+            <div>
+                <input type="text" placeholder="Search Categories" class="form-control bg-white">
             </div>
         </div>
-        <nav>
-            <ul class="menu-aside">
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
-                        <span class="text">Products</span>
-                    </a>
-                   
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
-                        <span class="text">Orders</span>
-                    </a>
-                   
-                </li>
-                {{!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
-                        <span class="text">Sellers</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-sellers-cards.html">Sellers cards</a>
-                        <a href="page-sellers-list.html">Sellers list</a>
-                        <a href="page-seller-detail.html">Seller profile</a>
-                    </div>
-                </li> --}}
-                {{!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-form-product-1.html"> <i class="icon material-icons md-add_box"></i>
-                        <span class="text">Add product</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-form-product-1.html">Add product 1</a>
-                        <a href="page-form-product-2.html">Add product 2</a>
-                        <a href="page-form-product-3.html">Add product 3</a>
-                        <a href="page-form-product-4.html">Add product 4</a>
-                    </div>
-                </li> --}}
-                <li class="menu-item active">
-                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
-                        <span class="text">Category</span>
-                    </a>
-                    
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
-                        <span class="text">Users</span>
-                    </a>
-                    
-                </li>
-                {{!-- <li class="menu-item">
-                    <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
-                        <span class="text">Brands</span> </a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
-                        <span class="text">Statistics</span>
-                    </a>
-                </li> --}}
-            </ul>
-            <hr>
-            <ul class="menu-aside">
-                <li class="menu-item ">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link btn btn-primary" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
-                        Logout
-                    </a>
-                </li>
-            </ul>
-            <br>
-            <br>
-        </nav>
-    </aside>
-    <main class="main-wrap">
-        <section class="content-main">
-            <div class="content-header">
-                <div>
-                    <h2 class="content-title card-title">Edit Categories </h2>
-                    <p>Edit category</p>
+        <div class="card">
+            <div class="card-body">
+                {{#if catSaveMsg}}
+                <div class="alert alert-success mt-3 alert-dismissible fade  {{#if catSaveMsg}}show{{/if}}"
+                    role="alert">
+                    {{catSaveMsg}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <div>
-                    <input type="text" placeholder="Search Categories" class="form-control bg-white">
+                {{/if}}
+                {{#if catExistMsg}}
+                <div class="alert alert-danger mt-3 alert-dismissible fade {{#if catExistMsg}}show{{/if}}" role="alert">
+                    {{catExistMsg}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    {{#if catSaveMsg}}
-            <div class="alert alert-success mt-3 alert-dismissible fade  {{#if catSaveMsg}}show{{/if}}" role="alert">
-              {{catSaveMsg}}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {{/if}}
-            {{#if catExistMsg}}
-            <div class="alert alert-danger mt-3 alert-dismissible fade {{#if catExistMsg}}show{{/if}}" role="alert">
-              {{catExistMsg}}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {{/if}}
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form action="/admin/update_category/{{catData._id}}" method="post" enctype="multipart/form-data">
-                                <div class="mb-4">
-                                    <label for="productName" class="form-label">Category Name:</label>
-                                    <input type="text"  class="form-control" id="productName"  onchange="validate_Category()" name="name" value={{catData.category}} required>
-                                </div>
-                                
-                                
-                                <div class="form-group">
-                                    <label for="productImage" >Category Image:</label>
-                                    <br>
-                                    <img class="border m-2" style="width: 80px; height: auto;" src="/images/products/{{catData.imageUrl}}"   alt="">
-                                    <br>
-                                    <input type="file"  class="form-control-file" name="image" id="productImage">
-                                    
-                                    
-                                </div>
-                                <div class="d-flex g-2">
-                                    <div class="m-2">
-                                         <button type="submit" class="btn btn-primary">Edit category</button>
+                {{/if}}
+                {{#if catData}}
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="/admin/update_category/{{catData._id}}" method="post"
+                            enctype="multipart/form-data">
+                            <div class="mb-4">
+                                <label for="productName" class="form-label">Category Name:</label>
+                                <input type="text" class="form-control" id="productName" onchange="validate_Category()"
+                                    name="name" value="{{catData.category}}" required>
+                            </div>
 
-                                    </div>
-                                    <div class="m-2">
-                                        <a href="/admin/Category" id="backbutton" type="button" class="btn btn-primary">Back</a>
 
-                                    </div>
-                                   
-                                    
+                            <div class="form-group">
+                                <label for="productImage">Category Image:</label>
+                                <br>
+                                <img class="border m-2" style="width: 80px; height: auto;"
+                                    src="/images/products/{{catData.imageUrl}}" alt="">
+                                <br>
+                                <input type="file" class="form-control-file" name="image" id="productImage">
+
+
+                            </div>
+                            <div class="d-flex g-2">
+                                <div class="m-2">
+                                    <button type="submit" class="btn btn-primary" id="edit-Category-btn">Edit
+                                        Category</button>
                                 </div>
-                            </form>
-                        </div>
-                     
-                    </div> <!-- .row // -->
-                </div> <!-- card body .// -->
-            </div> <!-- card .// -->
-        </section> <!-- content-main end// -->
-        <footer class="main-footer font-xs">
-            <div class="row pb-30 pt-15">
-                <div class="col-sm-6">
-                    <script>
+                                <div class="m-2">
+                                    <a href="/admin/Category" id="backbutton" type="button"
+                                        class="btn btn-primary">Back</a>
+
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div> <!-- .row // -->
+                {{/if}}
+            </div> <!-- card body .// -->
+        </div> <!-- card .// -->
+    </section> <!-- content-main end// -->
+    <footer class="main-footer font-xs">
+        <div class="row pb-30 pt-15">
+            <div class="col-sm-6">
+                <script>
                     document.write(new Date().getFullYear())
-                    </script> ©, Coco Loco - Ecommerce website .
-                </div>
-                <div class="col-sm-6">
-                    <div class="text-sm-end">
-                        All rights reserved
-                    </div>
+                </script> ©, Coco Loco - Ecommerce website .
+            </div>
+            <div class="col-sm-6">
+                <div class="text-sm-end">
+                    All rights reserved
                 </div>
             </div>
-        </footer>
-    </main>
+        </div>
+    </footer>
+</main>
 
-    <script>
-        function validate_Category() {
+<script>
+    function validate_Category() {
         var categoryNameInput = document.getElementById("productName");
         var category = categoryNameInput.value.trim();
         var pattern = /^[a-zA-Z0-9\s']{3,}$/;
@@ -187,16 +185,43 @@
 
 
     }
-    </script>
+</script>
 
 
 
 
-    
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
+
+    // sure edit category 
+
+    document.getElementById('edit-Category-btn').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the form from submitting immediately
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to edit the Category?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, edit it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, submit the form
+                // Assuming the button is within a form, submit the form
+                // If not, you might need to target the form explicitly
+                event.target.closest('form').submit();
+            }
+        });
+    });
+
+
+
     //back
     $(document).ready(function () {
         $('#backbutton').click(function (e) {
@@ -222,4 +247,4 @@
         });
     }
     )
-    </script>
+</script>

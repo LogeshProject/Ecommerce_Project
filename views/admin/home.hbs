@@ -3,37 +3,46 @@
 
     <style>
         /* CSS for positioning the badge */
-        .img-wrap {
-            position: relative;
-        }
+.img-wrap {
+    position: relative;
+}
 
-        .badge-premium {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 1;
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            background-color: #ffc107;
-            /* Yellow color for premium badge */
-            color: #212529;
-            /* Text color for premium badge */
-        }
+.badge-premium {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: #ffc107; /* Yellow color for premium badge */
+    color: #212529; /* Text color for premium badge */
+}
 
-        .badge-top {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 1;
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            background-color: #ffc107;
-            /* Yellow color for premium badge */
-            color: #212529;
-            /* Text color for premium badge */
-        }
+.badge-popular {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: #28a745; /* Green color for popular badge */
+    color: white; /* Text color for popular badge */
+}
+
+.badge-top {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: #17a2b8; /* Blue color for top selling badge */
+    color: white; /* Text color for top selling badge */
+}
+
     </style>
 
 </head>
@@ -73,7 +82,7 @@
 
             <li class="menu-item ">
                 <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
-                    <span class="text">Category</span>
+                    <span class="text">Categories</span>
                 </a>
 
             </li>
@@ -88,11 +97,16 @@
                     <span class="text">Coupons</span> </a>
             </li>
 
-            {{!-- <li class="menu-item ">
-                <a class="menu-link" href="/admin/banner"> <i
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/banners"> <i
                         class="icon material-icons md-photo_size_select_actual"></i>
                     <span class="text">Banners</span> </a>
-            </li> --}}
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link " href="/admin/reviews"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
 
 
 
@@ -192,21 +206,21 @@
         <div class="row">
             <div class="col-xl-8 col-lg-12">
                 <div class="card mb-4">
-                    <article class="card-body">
-                        <h5 class="card-title">Sale statistics</h5>
-                        <canvas id="myChart1" height="120px"></canvas>
+                     <article class="card-body">
+                            <h5 class="card-title">Sale statistics</h5>
+                            <canvas id="myChart1" height="130px"></canvas>
                     </article>
                 </div>
 
             </div>
             <div class="col-xl-4 col-lg-12">
-                <div class="card mb-4">
-                    <article class="card-body">
-                        <h5 class="card-title">Revenue Base on Area</h5>
-                        <canvas id="myChar" height="265px"></canvas>
-                    </article>
+                    <div class="card mb-4">
+                        <article class="card-body">
+                            <h5 class="card-title">Revenue</h5>
+                            <canvas id="myChar" height="300px"></canvas>
+                        </article>
+                    </div>
                 </div>
-            </div>
         </div>
 
 
@@ -214,7 +228,7 @@
 
         
 
-        <div class="form-inline d-flex m-3">
+       <div class="form-inline d-flex m-3">
             <div class="form-group" style="margin-right: 5%;">
                 <label for="date-range">Select Range : </label>
                 <select class="form-control" id="date-range" onchange="toggleDateInputs()">
@@ -225,7 +239,7 @@
                     <option value="custom">Custom</option>
                 </select>
             </div>
-            
+
             <div class="form-group" id="start-date-group" style="margin-right: 2%; display: none;">
                 <label for="start-date">Start Date:</label>
                 <input type="date" class="form-control" value="2024-07-12" id="start-date" min="" max="">
@@ -241,43 +255,43 @@
             <input id="revenue" type="hidden" value="{{revenueByMonth}}">
         </div>
 
-        <script>
+       <script>
             function toggleDateInputs() {
-                var dateRange = document.getElementById("date-range").value;
-                var startDateGroup = document.getElementById("start-date-group");
-                var endDateGroup = document.getElementById("end-date-group");
-                var startDateInput = document.getElementById("start-date");
-                var endDateInput = document.getElementById("end-date");
+        var dateRange = document.getElementById("date-range").value;
+        var startDateGroup = document.getElementById("start-date-group");
+        var endDateGroup = document.getElementById("end-date-group");
+        var startDateInput = document.getElementById("start-date");
+        var endDateInput = document.getElementById("end-date");
 
-                var today = new Date().toISOString().split('T')[0];
+        var today = new Date().toISOString().split('T')[0];
 
-                switch (dateRange) {
-                    case "daily":
-                        startDateInput.value = endDateInput.value = today;
-                        break;
-                    case "weekly":
-                        var lastWeek = new Date();
-                        lastWeek.setDate(lastWeek.getDate() - 6);
-                        startDateInput.value = lastWeek.toISOString().split('T')[0];
-                        endDateInput.value = today;
-                        break;
-                    case "monthly":
-                        var lastMonth = new Date();
-                        lastMonth.setDate(lastMonth.getDate() - 30);
-                        startDateInput.value = lastMonth.toISOString().split('T')[0];
-                        endDateInput.value = today;
-                        break;
-                    case "custom":
-                        startDateInput.value = endDateInput.value = "";
-                        break;
-                    default:
-                        startDateInput.value = endDateInput.value = "";
-                        break;
-                }
+        switch (dateRange) {
+            case "daily":
+                startDateInput.value = endDateInput.value = today;
+                break;
+            case "weekly":
+                var lastWeek = new Date();
+                lastWeek.setDate(lastWeek.getDate() - 6);
+                startDateInput.value = lastWeek.toISOString().split('T')[0];
+                endDateInput.value = today;
+                break;
+            case "monthly":
+                var lastMonth = new Date();
+                lastMonth.setDate(lastMonth.getDate() - 30);
+                startDateInput.value = lastMonth.toISOString().split('T')[0];
+                endDateInput.value = today;
+                break;
+            case "custom":
+                startDateInput.value = endDateInput.value = "";
+                break;
+            default:
+                startDateInput.value = endDateInput.value = "";
+                break;
+        }
 
-                startDateGroup.style.display = endDateGroup.style.display = (dateRange === "custom") ? "block" : "none";
-            }
-        </script>
+        startDateGroup.style.display = endDateGroup.style.display = (dateRange === "custom") ? "block" : "none";
+    }
+       </script>
 
 
         {{!-- Date Details --}}
@@ -292,57 +306,73 @@
     </section>
 
 
-    <section>
-        <div class="card-body">
-            <h5 class="card-title">Top 3 Selling Products</h5>
-            <div class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
-                {{#each topSelling}}
-                <div class="col">
-                    <div class="card card-product-grid">
-                        <a href="#" class="img-wrap position-relative">
-                            <img src="/images/products/{{this.productImage.[0]}}" alt="{{this.productName}}">
-
-                            <span class="badge badge-primary badge-premium"><i class="fa-solid fa-crown"></i></span>
-
-                        </a>
-                        <div class="info-wrap">
-                            <a href="#" class="title text-truncate">{{this.productName}}</a>
-                            <div class="price mb-2"> ₹ {{this.salePrice}}</div>
-                            <h6 class="quantity mb-2">Total Quantity Sold: {{this.totalQuantitySold}}</h6>
-                        </div>
+   <section>
+    <div class="card-body">
+        <h5 class="card-title">Popular Products</h5>
+        <div class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
+            {{#each popularity}}
+            <div class="col">
+                <div class="card card-product-grid">
+                    <a href="#" class="img-wrap position-relative">
+                        <img src="/images/products/{{this.imageUrl.[0]}}" alt="{{this.name}}">
+                        <span class="badge badge-popular"> Popular </span>
+                    </a>
+                    <div class="info-wrap">
+                        <a href="#" class="title text-truncate">{{this.name}}</a>
+                        <div class="price mb-2"> ₹ {{this.price}}</div>
+                        <h6 class="quantity mb-2">Popularity: {{this.popularity}}</h6>
                     </div>
                 </div>
-                {{/each}}
-
-
             </div>
+            {{/each}}
         </div>
+    </div>
+</section>
 
-    </section>
-
-    <section>
-        <div class="card-body">
-            <h5 class="card-title">Top 3 Selling Categories</h5>
-            <div class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
-                {{#each topSellingCat}}
-                <div class="col">
-                    <div class="card card-category-grid">
-                        <a href="#" class="img-wrap">
-
-                            <img src="/images/products/{{this.categoryImageUrl}}" alt="{{this.categoryName}}">
-                            <span class="badge badge-primary badge-top"><i
-                                    class="fa-solid fa-star-half-stroke"></i></span>
-                        </a>
-                        <div class="info-wrap">
-                            <a href="#" class="title text-truncate">{{this.categoryName}}</a>
-                            <h6 class="quantity mb-2">Total Quantity Sold: {{this.totalQuantitySold}}</h6>
-                        </div>
+<section>
+    <div class="card-body">
+        <h5 class="card-title">Top 5 Selling Products</h5>
+        <div class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
+            {{#each topSelling}}
+            <div class="col">
+                <div class="card card-product-grid">
+                    <a href="#" class="img-wrap position-relative">
+                        <img src="/images/products/{{this.imageUrl.[0]}}" alt="{{this.name}}">
+                        <span class="badge badge-premium"><i class="fa-solid fa-crown"></i></span>
+                    </a>
+                    <div class="info-wrap">
+                        <a href="#" class="title text-truncate">{{this.name}}</a>
+                        <div class="price mb-2"> ₹ {{this.price}}</div>
+                        <h6 class="quantity mb-2">Total Quantity Sold: {{this.bestSelling}}</h6>
                     </div>
                 </div>
-                {{/each}}
             </div>
+            {{/each}}
         </div>
-    </section>
+    </div>
+</section>
+
+<section>
+    <div class="card-body">
+        <h5 class="card-title">Top 5 Selling Categories</h5>
+        <div class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5">
+            {{#each topSellingCat}}
+            <div class="col">
+                <div class="card card-category-grid">
+                    <a href="#" class="img-wrap">
+                        <img src="/images/products/{{this.imageUrl}}" alt="{{this.category}}">
+                        <span class="badge badge-top"> Best Selling </span>
+                    </a>
+                    <div class="info-wrap">
+                        <h6 class="quantity mb-2 mt-2">{{this.category}}</h6>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
+
 
     <!-- content-main end// -->
     <footer class="main-footer font-xs">
@@ -384,58 +414,101 @@
         revenueByMonth = data.revnueByMonth
 
         //graph functions
-        salesGraph(months, ordersByMonth)
-        revenue(months, revenueByMonth)
+        salesGraph(months, ordersByMonth);
+        revenue(months, revenueByMonth);
 
     }
 
     getChartData()
 
 
-    function salesGraph(months, ordersByMonth) {
-        const ctx = document.getElementById('myChart1');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: months,
-                datasets: [{
-                    label: '# of Sales',
-                    data: ordersByMonth,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+
+function salesGraph(months, ordersByMonth) {
+    const ctx = document.getElementById('myChart1').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [{
+                label: '# of Sales',
+                
+                data: ordersByMonth,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': ' + tooltipItem.raw + ' sales';
+                        }
                     }
                 }
             }
-        })
-    }
+        }
+    });
+}
 
 
-    function revenue(months, revenueByMonth) {
-        const ctx1 = document.getElementById('myChar');
-        new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: months,
-                datasets: [{
-                    label: '# Revenue',
-                    data: revenueByMonth,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+function revenue(months,revenueByMonth){
+    const ctx1 = document.getElementById('myChar');
+    new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: '# Revenue',
+                data: revenueByMonth,
+                borderColor:['rgba(255, 99, 132, 1)',
+                             'rgba(54, 162, 235, 1)'
+                            ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
-    }
+        }
+    });
+}
 
 
 

@@ -5,6 +5,10 @@ const bannerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
     required: true,
@@ -13,11 +17,15 @@ const bannerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  active: {
-    type: Boolean,
-    default: true,
+  startDate: {
+    type: Date,
+    required: true,
   },
-});
+  endDate: {
+    type: Date,
+    required: true,
+  },
+},{timestamps:true});
 
 const Banner = mongoose.model('Banner', bannerSchema);
 

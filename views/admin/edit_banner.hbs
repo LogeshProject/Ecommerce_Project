@@ -1,0 +1,271 @@
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+            <h2 style="font-family: 'Times New Roman', Times, serif; color: rgb(8,129,120);">Coco Loco</h2>
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize">
+                <i class="text-muted material-icons md-menu_open"></i>
+            </button>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/home">
+                    <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/product">
+                    <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/orders">
+                    <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/category">
+                    <i class="icon material-icons md-category"></i>
+                    <span class="text">Categories</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/manage_users">
+                    <i class="icon material-icons md-person"></i>
+                    <span class="text">Users</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/coupons">
+                    <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span>
+                </a>
+            </li>
+            <li class="menu-item active">
+                <a class="menu-link" href="/admin/banners">
+                    <i class="icon material-icons md-photo_size_select_actual"></i>
+                    <span class="text">Banners</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/reviews">
+                    <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#">
+                    <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
+                    <button class="nav-link rounded-pill darkmode m-3" href="#">
+                        <i class="material-icons md-nights_stay"></i>Dark mode
+                    </button>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/logout">
+                    <i class="icon material-icons md-exit_to_app"></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+        <br><br>
+    </nav>
+</aside>
+
+<main class="main-wrap">
+  <section class="content-main">
+    <div class="row">
+      <div class="col-9">
+        <div class="content-header">
+          <h2 class="content-title">Edit Banner</h2>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="card mb-4">
+          <div class="card-body">
+            <form method="post" action="/admin/editBanner/{{banner._id}}" enctype="multipart/form-data">
+              <input type="hidden" name="_method" value="PUT"> <!-- Use _method field for PUT request -->
+              <div class="mb-4">
+                <label for="banner_title" class="form-label">Banner Title</label>
+                <input type="text" placeholder="Type here" name="title" class="form-control border" id="banner_title" value="{{banner.title}}" required>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label">Description</label>
+                <textarea placeholder="Type here" name="description" class="form-control border" rows="4" required>{{banner.description}}</textarea>
+              </div>
+
+              <div class="mb-4">
+                <label for="start_date" class="form-label">Start Date</label>
+                <input type="date" name="startDate" class="form-control" required id="start_date" value="{{banner.startDate}}">
+              </div>
+
+              <div class="mb-4">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" name="endDate" class="form-control" id="end_date" required value="{{banner.endDate}}">
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label">Link</label>
+                <input placeholder="Type here" name="link" type="text" class="form-control border" value="{{banner.link}}">
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label">Current Banner Image</label>
+                <img src="/images/products/{{banner.image}}" class="img-sm img-thumbnail" alt="Current Banner Image" style="width:190px; height: 120px;">
+              </div>
+
+             <div class="mb-4">
+        <label class="form-label">Choose New Banner Image</label>
+        <div class="border row">
+            <div id="addedImagesContainer" class="thumbnails-container"></div>
+        </div>
+        <div class="card-body">
+            <img src="assets/imgs/theme/upload.svg" alt="" id="imgView1">
+            <input class="form-control" type="file" name="image" id="input1" accept="image/png, image/jpeg, image/jpg" onchange="viewImage(event, 1)">
+        </div>
+        <div class="image-cropper" style="display:none; width: 300px; height: 200px;">
+            <img src="" id="croppedImg1" alt="">
+            <button type="button" id="saveButton1" class="btn-sm btn-primary">Save</button>
+        </div>
+    </div>
+
+              <div>
+                <button class="btn btn-md rounded font-sm hover-up" type="submit" id="edit_banner">Save Changes</button>
+                 <a href="/admin/product" type="button" id="backbutton" class="btn btn-primary">Back</a>
+
+              </div>
+              
+                                   
+                               
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+
+    // sure edit banner
+
+    document.getElementById('edit_banner').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the form from submitting immediately
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to edit the product?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, edit it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    event.target.closest('form').submit();
+                }
+            });
+        });
+
+
+    //back
+    $(document).ready(function () {
+        $('#backbutton').click(function (e) {
+            e.preventDefault();
+
+
+            Swal.fire({
+                title: "Leave the page?",
+                text: "The Data will not be saved",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#088178",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/admin/banners";
+
+                }
+            });
+
+
+        });
+    }
+    )
+
+    function validateForm() {
+    let isValid = true;
+
+    // Clear previous error messages
+    document.querySelectorAll('.error-message').forEach(element => element.textContent = '');
+
+    // Title validation
+    const title = document.getElementById('banner_title').value;
+    if (!title) {
+        document.getElementById('title-error').textContent = 'Title is required';
+        isValid = false;
+    }
+
+  
+    const description = document.querySelector('textarea[name="description"]').value;
+    if (!description) {
+        document.getElementById('description-error').textContent = 'Description is required';
+        isValid = false;
+    }
+
+    const startDate = document.getElementById('start_date').value;
+    if (!startDate) {
+        document.getElementById('start-date-error').textContent = 'Start Date is required';
+        isValid = false;
+    }
+
+    
+    const endDate = document.getElementById('end_date').value;
+    if (!endDate) {
+        document.getElementById('end-date-error').textContent = 'End Date is required';
+        isValid = false;
+    }
+
+    
+    const image = document.getElementById('input1').files[0];
+    if (!image) {
+        document.getElementById('input1').nextElementSibling.textContent = 'Image is required';
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function viewImage(event, imageNumber) {
+    const input = event.target;
+    const reader = new FileReader();
+
+    reader.onload = function() {
+        const img = document.getElementById('imgView1');
+        img.src = reader.result;
+    }
+    reader.readAsDataURL(input.files[0]);
+}
+
+</script>
+

@@ -6,27 +6,7 @@ const argon = require('argon2');
 let otp;
 let email;
 
-/////////render forgot otp mail page
 
-// const submitMailProfile= async(req,res)=>{
-//     try {
-
-//         const mailError='Invalid User'
-//         if (req.session.mailError) {
-//             res.render('user/userResetPassword/mailSubmit',{mailError})
-//             req.session.mailError=false
-
-            
-//         } else {
-//             res.render('user/userResetPassword/mailSubmit')
-            
-//         }
-        
-        
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
 
 ///// submit forgot password request
 
@@ -96,7 +76,7 @@ const resetPasswordProfile=async(req,res)=>{
         const userMail=user.email
         const newPassword  = req.body.password
         const hashedPassword = await userHelper.hashPassword(newPassword)
-        //hashedPassword = await userHelper.hashpassword(req.body.password);
+        
 
         await User.updateOne({ email: userMail }, { $set: { password: hashedPassword } });
         req.session.newPas = true;

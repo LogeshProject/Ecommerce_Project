@@ -1,7 +1,16 @@
+<head>
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+
+
 <aside class="navbar-aside" id="offcanvas_aside">
     <div class="aside-top">
         <a href="/admin/home" class="brand-wrap">
-            
+
             <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
         </a>
         <div>
@@ -11,12 +20,12 @@
     </div>
     <nav>
         <ul class="menu-aside">
-            <li class="menu-item">
+            <li class="menu-item ">
                 <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item active ">
                 <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
                     <span class="text">Products</span>
                 </a>
@@ -31,10 +40,9 @@
 
             <li class="menu-item ">
                 <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
-                    <span class="text">Category</span>
+                    <span class="text">Categories</span>
                 </a>
 
-            </li>
             </li>
             <li class="menu-item">
                 <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
@@ -42,17 +50,21 @@
                 </a>
 
             </li>
-
             <li class="menu-item">
                 <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
                     <span class="text">Coupons</span> </a>
             </li>
 
-            {{!-- <li class="menu-item ">
-                <a class="menu-link" href="/admin/banner"> <i
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/banners"> <i
                         class="icon material-icons md-photo_size_select_actual"></i>
                     <span class="text">Banners</span> </a>
-            </li> --}}
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link " href="/admin/reviews"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
 
 
 
@@ -95,15 +107,11 @@
             <header class="card-header">
                 <div class="row gx-3">
                     <div class="col-lg-4 col-md-6 me-auto">
-                        <input type="text" placeholder="Search..." class="form-control">
+                        {{!-- <input type="text" placeholder="" class="form-control"> --}}
                     </div>
 
                     <div class="col-lg-2 col-md-3 col-6">
-                        {{!-- <select class="form-select">
-                            <option>Show 20</option>
-                            <option>Show 30</option>
-                            <option>Show 40</option>
-                        </select> --}}
+                       
                     </div>
                 </div>
             </header> <!-- card-header end// -->
@@ -125,6 +133,7 @@
                                 <th class="text-center">Action </th>
                             </tr>
                         </thead>
+                        {{#if productData}}
                         {{#each productData}}
                         <tbody>
                             <tr>
@@ -155,26 +164,7 @@
                                 <td class="text-center" width="10%">{{this.stock}}</td>
 
 
-                                {{!-- <td>
-                                    {{#if (productOffer)}}
-                                    <button class="btn btn-info" onclick="addOffer('{{data.[i]._id}}')"
-                                        style="width: 100px;">
-                                        <a href="#" class="text-white">Add Offer</a>
-                                    </button>
-                                    {{else}}
-                                    <a href="/admin/edit_product/{{this._id}}"
-                                        class="btn btn-sm font-sm rounded btn-brand">
-                                        Remove
-                                    </a>
-                                    {{/if}} --}}
-                                {{!-- <td>
-                                    {{#if productOffer}}
-                                    {{productOffer}}%
-                                    {{else}}
-                                    0%
-                                    {{/if}}
-                                </td> --}}
-                                </td>
+                            
 
                                 <td class="text-center" width="20%">
                                     {{#if this.is_blocked}}
@@ -188,7 +178,7 @@
                                         Block
                                     </a>
                                     {{/if}}
-                                    <a href="/admin/edit_product/{{this._id}}"
+                                    <a href="javascript:void(0);" onclick="confirmEditProduct('{{this._id}}')"
                                         class="btn btn-sm font-sm rounded btn-brand">
                                         <i class="material-icons md-edit"></i> Edit
                                     </a>
@@ -203,6 +193,11 @@
 
                         </tbody>
                         {{/each}}
+                        {{else}}
+                            <tr>
+                                <td colspan="6" class="text-center">No product Avaliable</td>
+                            </tr>
+                        {{/if}}
                     </table> <!-- table-responsive.// -->
                 </div>
             </div> <!-- card-body end// -->
@@ -211,7 +206,8 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-start">
                     {{#each pages}}
-                    <li class="page-item active"><a class="page-link" href="?page={{this}}">{{this}}</a></li>
+                    <li class="page-item {{#ifeq this ../currentPage}}active{{/ifeq}}"><a class="page-link"
+                            href="?page={{this}}">{{this}}</a></li>
                     {{/each}}
                 </ul>
             </nav>
@@ -224,7 +220,7 @@
                     src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
                 <script>
                     document.write(new Date().getFullYear())
-                </script> ©, Evara - HTML Ecommerce Template .
+                </script> ©, Coco Loco - Ecommerce website .
             </div>
             <div class="col-sm-6">
                 <div class="text-sm-end">
@@ -245,9 +241,7 @@
         $(document).on('click', '#deleteprod', function (e) {
             e.preventDefault();
             var id = $(this).data('product-id');
-            //var wishId = $(this).data('whishlist-id'); // Corrected variable name to wishId
-
-            // Store reference to $(this) in a variable for use inside AJAX success and error callbacks
+            
             var $this = $(this);
 
             Swal.fire({
@@ -358,4 +352,24 @@
     });
 
 
+</script>
+
+
+<script>
+    function confirmEditProduct(id) {
+        Swal.fire({
+            title: 'Edit Product',
+            text: "Do you want to make changes to this product?",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#4caf50', // Green color for confirmation
+            cancelButtonColor: '#f44336',  // Red color for cancel
+            confirmButtonText: 'Yes, edit it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/admin/edit_product/' + id;
+            }
+        })
+    }
 </script>

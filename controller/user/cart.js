@@ -1,12 +1,7 @@
 const User    = require('../../model/userModel')
 const Product = require('../../model/productModel')
 const Swal    = require('sweetalert2')
-const swal    =require('sweetalert')
 
-
-
-
-//////////////  Add to cart /////////////
 
 
 
@@ -54,8 +49,9 @@ const loadCart = async (req, res) => {
     console.log(userId);
 
     const user = await User.findOne({ _id: userId }).populate('cart.product').lean()
+    console.log(user)
     const cart = user.cart; // Get the 'cart' array from the user document
-
+    console.log(cart)
 
      let subTotal = 0
      cart.forEach((val)=>{
@@ -127,7 +123,6 @@ module.exports = {
   addToCart,
   loadCart, 
   removeCart,
-  // cartUpdation,
   updateCart,
   
 };

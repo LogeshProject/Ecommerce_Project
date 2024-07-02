@@ -1,100 +1,115 @@
+<head>
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+
+
+
 <aside class="navbar-aside" id="offcanvas_aside">
-        <div class="aside-top">
-            <a href="/admin/home" class="brand-wrap">
-                <img src="/assetsAdmin/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
-            </a>
-            <div>
-                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
-            </div>
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+
+            <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+            </button>
         </div>
-        <nav>
-            <ul class="menu-aside">
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
-                        <span class="text">Products</span>
-                    </a>
-                   
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
-                        <span class="text">Orders</span>
-                    </a>
-                   
-                </li>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item  ">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
 
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
-                        <span class="text">Category</span>
-                    </a>
-                    
-                </li>
-                            
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
-                        <span class="text">Users</span>
-                    </a>
-                    
-                </li>
-                    </li>
-                                <li class="menu-item active">
-                    <a class="menu-link" href="/admin/coupons"><i class="icon fa-solid fa-ticket"></i></i>
-                        <span class="text">Coupon</span>
-                    </a>
-                    
-                </li>
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
 
-            </ul>
-            <hr>
-              <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
+            </li>
+
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                    <span class="text">Categories</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Users</span>
+                </a>
+
+            </li>
+            <li class="menu-item  active ">
+                <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span> </a>
+            </li>
+
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/banners"> <i
+                        class="icon material-icons md-photo_size_select_actual"></i>
+                    <span class="text">Banners</span> </a>
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link " href="/admin/reviews"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
+
+
+
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
                     <button class="nav-link
                      rounded-pill darkmode m-3 " href="#">
                         <i class="material-icons md-nights_stay"></i>Dark mode
                     </button>
                 </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
-                        <span class="text"> Logout </span>
-                    </a>
-                </li>
-            </ul>
-            <br>
-            <br>
-        </nav>
-    </aside>
-
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                    <span class="text"> Logout </span>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </nav>
+</aside>
 <main class="main-wrap">
 
     <section class="content-main">
         <div class="content-header">
             <h2 class="content-title">Coupons list</h2>
             <div>
-                <a href="/admin/add_coupon" class="btn btn-primary"><i class="material-icons md-plus"></i> Create coupon</a>
+                <a href="/admin/add_coupon" class="btn btn-primary"><i class="material-icons md-plus"></i> Create
+                    coupon</a>
             </div>
         </div>
         <div class="card mb-4">
             <header class="card-header">
                 <div class="row gx-3">
-                    <div class="col-lg-4 col-md-6 me-auto">
-                        <input type="text" placeholder="Search..." class="form-control">
-                    </div>
+                   
 
                     <div class="col-lg-2 col-md-3 col-6">
-                        {{!-- <select class="form-select">
-                            <option>Show 20</option>
-                            <option>Show 30</option>
-                            <option>Show 40</option>
-                        </select> --}}
+                        
                     </div>
                 </div>
             </header> <!-- card-header end// -->
@@ -105,38 +120,50 @@
                             <tr>
                                 <th class="text-center">Coupon Code</th>
                                 <th class="text-center">Discount Percentage</th>
+                                <th class="text-center">minimum Purchase</th>
+                                <th class="text-center">maximum Discount</th>
                                 <th class="text-center">Expiry Date</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
-                         {{#each couponData}}
+                        {{#if couponData}}
+                        {{#each couponData}}
                         <tbody>
-                            <tr >
+                            <tr>
                                 <td width="20%" class="text-center">
-                                        <div class="info pl-3">
-                                            <h6 class="mb-0 title">{{this._doc.code}}</h6>
-                                        </div>
+                                    <div class="info pl-3">
+                                        <h6 class="mb-0 title">{{this._doc.code}}</h6>
+                                    </div>
                                 </td>
                                 <td class="text-center" width="20%">{{this._doc.discount}}%</td>
-                                 <td class="text-center" width="20%">{{this.expiryDate}}</td>
+                                
+                                <td class="text-center" width="10%"> ₹ {{this._doc.minPurchase}}</td>
+                                <td class="text-center" width="10%"> ₹ {{this._doc.maxDiscount}}</td>
+                                <td class="text-center" width="20%">{{this.expiryDate}}</td>
 
 
                                 <td class="text-center" width="20%">
-                                     <a href="/admin/edit_coupon/{{this._doc._id}}" onclick="return confirm ('Are you edit this coupon ?')"  data-product-id="{{this._id}}"
-                                        class="btn btn-sm  rounded btn-brand" id="deleteprod">
+                                    <a href="javascript:void(0);" onclick="confirmEdit('{{this._doc._id}}')"
+                                        data-product-id="{{this._id}}" class="btn btn-sm rounded btn-brand"
+                                        id="editCoupon">
                                         <i class="material-icons md-edit"></i> Edit
                                     </a>
-                                    <a href="/admin/delete_cpn?id={{this._doc._id}}" onclick="return confirm ('Are you delete this Coupon ?')" type="button" class="btn btn-sm btn-light rounded">
+                                    <a href="javascript:void(0);" onclick="confirmDelete('{{this._doc._id}}')"
+                                        type="button" class="btn btn-sm btn-light rounded">
                                         <i class="material-icons md-delete_forever"></i> Delete
                                     </a>
-                                   
-                                    
                                 </td>
+
 
                             </tr>
 
                         </tbody>
                         {{/each}}
+                        {{else}}
+                        <tr>
+                            <td colspan="6" class="text-center">No Coupon Available</td>
+                        </tr>
+                        {{/if}}
                     </table> <!-- table-responsive.// -->
                 </div>
             </div> <!-- card-body end// -->
@@ -145,7 +172,8 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-start">
                     {{#each pages}}
-                             <li class="page-item active"><a class="page-link" href="?page={{this}}">{{this}}</a></li>
+                    <li class="page-item {{#ifeq this ../currentPage}}active{{/ifeq}}"><a class="page-link"
+                            href="?page={{this}}">{{this}}</a></li>
                     {{/each}}
                 </ul>
             </nav>
@@ -158,7 +186,7 @@
                     src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
                 <script>
                     document.write(new Date().getFullYear())
-                </script> ©, Evara - HTML Ecommerce Template .
+                </script> ©, Coco Loco - Ecommerce website .
             </div>
             <div class="col-sm-6">
                 <div class="text-sm-end">
@@ -168,3 +196,38 @@
         </div>
     </footer>
 </main>
+
+
+<script>
+    function confirmEdit(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to edit this coupon?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, edit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/admin/edit_coupon/' + id;
+            }
+        })
+    }
+
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to delete this coupon?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/admin/delete_cpn?id=' + id;
+            }
+        })
+    }
+</script>

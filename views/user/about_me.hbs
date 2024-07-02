@@ -1,44 +1,48 @@
-       
-    <script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
-    
-    <main class="main">
-        
-        <div class="page-header breadcrumb-wrap">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="/" rel="nofollow">Home</a>
-                    <span></span> <a href="/profile" rel="nofollow">profile</a>
-                    <span></span> <a href="/profile" rel="nofollow">General</a>
-                </div>
+<!-- Favicon -->
+<link rel="shortcut icon" type="image/x-icon" href="/assetsAdmin/imgs/theme/favicon.svg">
+<!-- Template CSS -->
+<link href="/assetsAdmin/css/main.css" rel="stylesheet" type="text/css" />
+
+<main class="main">
+
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/" rel="nofollow">Home</a>
+                <span></span> <a href="/profile" rel="nofollow">profile</a>
+                <span></span> <a href="/profile" rel="nofollow">General</a>
             </div>
         </div>
-               <div class="container p-5 m-5" >
-                     <section class="content-main col-md-11">
+    </div>
+    <div>
+        <section class="content-main col-md-11">
             <div class="content-header">
-                <h2 class="content-title p-3" style="font-family: 'Times New Roman', Times, serif;margin-left: 10%;">Profile setting </h2>
+                <h2 class="content-title p-3">
+                    Profile setting </h2>
             </div>
-            <div class="card" style="margin-left: 10%;">
+            <div class="card">
                 <div class="card-body">
                     <div class="row gx-5">
                         <aside class="col-lg-3 border-end">
                             <nav class="nav nav-pills flex-lg-column mb-4">
-                                <a class="nav-link" style="background-color: rgb(8,129,120); color: white;" aria-current="page" href=>General</a>
+                                <a class="nav-link" style="background-color: rgb(8,129,120); color: white;"
+                                    aria-current="page" href=>General</a>
                                 <a class="nav-link" href="/my_orders">Orders</a>
                                 <a class="nav-link" href="/wallet">Wallet</a>
-                                <a class="nav-link" href="/adresses">My Address</a>
-                                <a class="nav-link" href="#">Account details</a>
-                                <a class="nav-link" href="#">Newsletter</a>
+                                <a class="nav-link" href="/addresses">My Address</a>
+                                <a class="nav-link" href="/logout">Log out</a>
                             </nav>
                         </aside>
                         <div class="col-lg-9">
                             <section class="content-body p-xl-4">
-                                <form method="get" action="/edit_details" >
+                                <form method="get" action="/edit_details">
                                     <div class="row">
                                         <div class="col-lg-8">
                                             <div class="row gx-3">
                                                 <div class="col-12  mb-3">
                                                     <label class="form-label">Name</label>
-                                                    <input class="form-control" type="text" placeholder="{{userData.name}}" readonly> 
+                                                    <input class="form-control" type="text"
+                                                        placeholder="{{userData.name}}" readonly>
                                                 </div> <!-- col .// -->
                                                 {{!-- <div class="col-6  mb-3">
                                                     <label class="form-label">Last name</label>
@@ -46,46 +50,40 @@
                                                 </div> <!-- col .// --> --}}
                                                 <div class="col-lg-12  mb-3">
                                                     <label class="form-label">Email</label>
-                                                    <input class="form-control" type="email" placeholder="{{userData.email}}" readonly>
+                                                    <input class="form-control" type="email"
+                                                        placeholder="{{userData.email}}" readonly>
                                                 </div> <!-- col .// -->
                                                 <div class="col-lg-12  mb-3">
                                                     <label class="form-label">Phone</label>
-                                                    <input class="form-control" type="tel" placeholder="{{userData.mobile}}" readonly>
+                                                    <input class="form-control" type="tel"
+                                                        placeholder="{{userData.mobile}}" readonly>
                                                 </div> <!-- col .// -->
-                                                <div class="col-lg-12  mb-3">
-                                                    <label class="form-label">Address</label>
-                                                    <input class="form-control" type="text" placeholder="Type here">
-                                                </div> <!-- col .// -->
-                                                <div class="col-lg-6  mb-3">
-                                                    <label class="form-label">Birthday</label>
-                                                    <input class="form-control" type="date">
-                                                </div> <!-- col .// -->
+                                                
                                             </div> <!-- row.// -->
                                         </div> <!-- col.// -->
                                         <aside class="col-lg-4">
                                             <figure class="text-lg-center">
-                                                <img class="img-lg mb-3 img-avatar" src="/images/users/profile.jpg" alt="User Photo">
+                                                <img class="img-lg mb-3 img-avatar" src="/images/users/profile.jpg"
+                                                    alt="User Photo">
                                             </figure>
                                         </aside> <!-- col.// -->
                                     </div> <!-- row.// -->
                                     <br>
-                                    <button class="btn btn-primary" type="submit" >Edit Profile</button>
+                                    <button class="btn btn-primary" type="submit">Edit Profile</button>
                                 </form>
                                 <hr class="my-5">
                                 <div class="row" style="max-width:920px">
                                     <div class="col-md">
                                         <article class="box mb-3 bg-light">
-                                            <a class="btn float-end btn-light btn-sm rounded font-md" href="/changePassword">Change</a>
+                                            <a class="btn float-end btn-light btn-sm rounded font-md"
+                                                href="/changePassword">Change</a>
                                             <h6>Password</h6>
-                                            <small class="text-muted d-block" style="width:70%">You can reset or change your password by clicking here</small>
+                                            <small class="text-muted d-block" style="width:70%">You can reset or change
+                                                your password by clicking here</small>
                                         </article>
                                     </div> <!-- col.// -->
                                     <div class="col-md">
-                                        <article class="box mb-3 bg-light">
-                                            <a class="btn float-end btn-light rounded btn-sm font-md" href="#">Deactivate</a>
-                                            <h6>Remove account</h6>
-                                            <small class="text-muted d-block" style="width:70%">Once you delete your account, there is no going back.</small>
-                                        </article>
+
                                     </div> <!-- col.// -->
                                 </div> <!-- row.// -->
                             </section> <!-- content-body .// -->
@@ -94,14 +92,13 @@
                 </div> <!-- card body end// -->
             </div> <!-- card end// -->
         </section> <!-- content-main end// -->
-               </div>
-    </main>
+    </div>
+</main>
 
-        <script src="/assetsAdmin/js/vendors/jquery-3.6.0.min.js"></script>
-    <script src="/assetsAdmin/js/vendors/bootstrap.bundle.min.js"></script>
-    <script src="/assetsAdmin/js/vendors/select2.min.js"></script>
-    <script src="/assetsAdmin/js/vendors/perfect-scrollbar.js"></script>
-    <script src="/assetsAdmin/js/vendors/jquery.fullscreen.min.js"></script>
-    <!-- Main Script -->
-    <script src="/assetsAdmin/js/main.js" type="text/javascript"></script>
-
+<script src="/assetsAdmin/js/vendors/jquery-3.6.0.min.js"></script>
+<script src="/assetsAdmin/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="/assetsAdmin/js/vendors/select2.min.js"></script>
+<script src="/assetsAdmin/js/vendors/perfect-scrollbar.js"></script>
+<script src="/assetsAdmin/js/vendors/jquery.fullscreen.min.js"></script>
+<!-- Main Script -->
+<script src="/assetsAdmin/js/main.js" type="text/javascript"></script>

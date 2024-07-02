@@ -5,34 +5,25 @@ const Product = require('../../model/productModel')
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
-const loadWishlist = async (req, res) => {
+const loadWishlist = async(req, res) => {
 
-  const user = req.session.user
-  const id = user._id
+  const user=req.session.user
+  const id = user._id    
   const userData = await User.findById(id).lean();
-  try {
+    try {
+       
+        // const userId   = userData._id
+        const userId   = req.query.id
 
-    // const userId   = userData._id
-    const userId = req.query.id
+       const user     = await User.findById(userId).populate('wishlist').lean()
+       const wishItem = user.wishlist
 
-    const user = await User.findById(userId).populate('wishlist').lean()
-    const wishItem = user.wishlist
- 
-
-    for (let i of wishItem) {
-      i.ID = userData._id
-      productExist = await User.find({ _id: userId, "cart.product": new ObjectId(i._id) }).lean();
-      if (productExist.length === 0) i.productExistInCart = false
-      else i.productExistInCart = true
+        res.render('user/wishlist', {userData, userId,wishItem})
+    } catch (error) {
+        console.log(error);
     }
-    console.log(wishItem)
 
-    res.render('user/wishlist', { userData, userId, wishItem })
-  } catch (error) {
-    console.log(error);
-  }
-
-}
+ }
 
 
  const addToWishList = async(req, res) => {

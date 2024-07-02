@@ -1,80 +1,87 @@
 <aside class="navbar-aside" id="offcanvas_aside">
     <div class="aside-top">
-       <a href="/admin/home" class="brand-wrap">
+        <a href="/admin/home" class="brand-wrap">
             
             <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
         </a>
         <div>
-            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+            </button>
         </div>
     </div>
     <nav>
-            <ul class="menu-aside">
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
-                        <span class="text">Products</span>
-                    </a>
-                   
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
-                        <span class="text">Orders</span>
-                    </a>
-                   
-                </li>
-               
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
-                        <span class="text">Category</span>
-                    </a>
-                    
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
-                        <span class="text">Users</span>
-                    </a>
-                    
-                </li>
-                 <li class="menu-item ">
-                    <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+        <ul class="menu-aside">
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+
+            </li>
+
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                    <span class="text">Categories</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Users</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
                     <span class="text">Coupons</span> </a>
-                </li>
+            </li>
 
-                {{!-- <li class="menu-item active ">
-                    <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-photo_size_select_actual"></i>
-                        <span class="text">Banners</span> </a>
-                </li> --}}
+            <li class="menu-item  active">
+                <a class="menu-link" href="/admin/banners"> <i
+                        class="icon material-icons md-photo_size_select_actual"></i>
+                    <span class="text">Banners</span> </a>
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link " href="/admin/reviews"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
 
-              
-               
-            </ul>
-            <hr>
-            <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
+
+
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
                     <button class="nav-link
                      rounded-pill darkmode m-3 " href="#">
                         <i class="material-icons md-nights_stay"></i>Dark mode
                     </button>
                 </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
-                        <span class="text"> Logout </span>
-                    </a>
-                </li>
-            </ul>
-            <br>
-            <br>
-        </nav>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                    <span class="text"> Logout </span>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </nav>
 </aside>
 
 <main class="main-wrap">
@@ -88,57 +95,55 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Image</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Active</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
+                        <th width="25%" class="text-center" scope="col">Image</th>
+                        <th width="15%" class="text-center" scope="col">Title</th>
+                        <th width="15%" class="text-center" scope="col">Description</th>
+                        <th width="10%" class="text-center" scope="col">startDate</th>
+                        <th width="10%" class="text-center" scope="col">ExpiryDate</th>
+                        <th width="15%" class="text-center" scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {{#if data}}
-                        {{#each data}}
-                            <tr>
-                                <td>
-                                    <img src="/uploads/products/{{image}}" style="height: 2rem; width: 3rem;" class="img-xs" alt="Item">
-                                </td>
-                                <td>{{title}}</td>
-                                <td>{{description}}</td>
-                                <td>
-                                    {{#if (and (gt startDate (now)) (lt endDate (now)))}}
-                                        <p class="badge rounded-pill alert-success">Active</p>
-                                    {{else}}
-                                        <p class="badge rounded-pill alert-danger">No Active</p>
-                                    {{/if}}
-                                </td>
-                                <td>
-                                    <a href="/admin/editBanner?id={{_id}}">
-                                        <button class="btn">
-                                            <i class="icon material-icons md-edit"></i>
-                                        </button>
-                                    </a>
-                                </td>
-                                <td class="action" data-title="Remove">
-                                    <a href="/admin/deleteBanner?id={{_id}}">
-                                        <i class="icon material-icons md-delete"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        {{/each}}
-                    {{else}}
-                        <tr>
-                            <td colspan="6">No Banner Found</td>
-                        </tr>
-                    {{/if}}
-                </tbody>
+          <tbody>
+    {{#if data}}
+        {{#each data}}
+            <tr>
+                <td width="25%" class="text-center">
+                    <img src="/images/products/{{this.image}}" class="img-sm img-thumbnail" alt="Banner Image" style="width:190px; height: 120px;">
+                </td>
+                <td width="15%" class="text-center">{{this.title}}</td>
+                <td width="20%" class="text-center">{{this.description}}</td>
+                <td width="10%" class="text-center">{{formatDate this.startDate "MMMM D, YYYY"}}</td> 
+                <td width="10%" class="text-center">{{formatDate this.endDate "MMMM D, YYYY"}}</td>
+               
+               
+                
+               <td width="10%" class="text-center">
+    <a href="javascript:void(0);" onclick="confirmEditBanner('{{this._id}}')" class="btn btn-sm rounded btn-brand">
+        <i class="icon material-icons md-edit"></i> Edit
+    </a>
+    <a href="javascript:void(0);" onclick="confirmDeleteBanner('{{this._id}}')" class="btn btn-sm btn-light rounded">
+        <i class="material-icons md-delete_forever"></i> Delete
+    </a>
+</td>
+
+
+               
+            </tr>
+        {{/each}}
+    {{else}}
+        <tr>
+            <td colspan="6" class="text-center" >No Banners Found</td>
+        </tr>
+    {{/if}}
+</tbody>
+
             </table>
         </div>
         <div class="container mt-3">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center">
-                    <a href="/admin/add_banner">
-                        <button class="btn btn-primary mt-3 mr-200" type="submit">Add Banner</button>
+                    <a href="/admin/add_banner" >
+                        <button class="btn btn-primary mt-3 mr-200 " type="submit">Add Banner</button>
                     </a>
                 </div>
             </div>
@@ -149,4 +154,57 @@
             </nav>
         </div>
     </section>
+     <footer class="main-footer font-xs">
+        <div class="row pb-30 pt-15">
+            <div class="col-sm-6">
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> ©,  Coco Loco - Ecommerce website .
+            </div>
+            <div class="col-sm-6">
+                <div class="text-sm-end">
+                    All rights reserved
+                </div>
+            </div>
+        </div>
+    </footer>
 </main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> <!-- Include Swal CDN -->
+
+<script>
+    function confirmEditBanner(id) {
+        Swal.fire({
+            title: 'Edit Banner',
+            text: "Are you sure you want to edit this banner?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, edit it!',
+            cancelButtonText: 'No, cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/admin/editBanner/' + id;
+            }
+        });
+    }
+
+    function confirmDeleteBanner(id) {
+        Swal.fire({
+            title: 'Delete Banner',
+            text: "Are you sure you want to delete this banner?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/admin/deleteBanner/' + id;
+            }
+        });
+    }
+</script>

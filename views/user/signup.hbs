@@ -19,31 +19,31 @@
                                     <div class="heading_s1">
                                         <h3 class="mb-30">Create an Account</h3>
                                     </div>
-                                    <form method="post" action="/signup">
-
+                                    <form method="post" action="/signup" id="signupForm">
                                         <div class="form-floating mb-3 input-control">
-                                            <input type="text" class="form-control" onchange="validateusername()"
+                                            <input type="text" class="form-control" onchange="validateUsername()"
                                                 id="name" name="name" placeholder="name" required autofocus>
-                                            <label for="floatingInputUsername">Username <span class="text-danger">*</span></label>
+                                            <label for="floatingInputUsername">Username <span
+                                                    class="text-danger">*</span></label>
+                                            <p style="color: red;" id="usernameError"></p>
                                         </div>
                                         <div class="form-floating mb-3 input-control">
-                                            <input type="email" class="form-control" onchange="validate_email()"
+                                            <input type="email" class="form-control" onchange="validateEmail()"
                                                 id="email" placeholder="name@example.com" name="email" required>
                                             <label for="email">Email <span class="text-danger">*</span></label>
-                                            <div class="error"></div>
+                                            <p style="color: red;" id="emailError"></p>
                                         </div>
-
                                         <div class="form-floating mb-3 input-control">
                                             <input type="tel" class="form-control" onchange="validatePhoneNumber()"
                                                 id="phone" placeholder="Phone" name="phone" required>
                                             <label for="phone">Phone <span class="text-danger">*</span></label>
-                                            <div class="error"></div>
+                                            <p style="color: red;" id="phoneError"></p>
                                         </div>
                                         <div class="form-floating mb-3 input-control">
                                             <input type="password" class="form-control" onchange="validatePassword()"
-                                                id="password" placeholder="Password" id="password" name="password" required>
+                                                id="password" placeholder="Password" name="password" required>
                                             <label for="Password">Password <span class="text-danger">*</span></label>
-                                            <div class="error"></div>
+                                            <p style="color: red;" id="passwordError"></p>
                                         </div>
                                         <div class="login_footer form-group">
                                             <div class="chek-form">
@@ -54,15 +54,14 @@
                                                         for="showPasswordCheckbox"><span>Show Password</span></label>
                                                 </div>
                                             </div>
-
                                         </div>
-
                                         <div class="form-floating mb-3 input-control">
                                             <input type="password" class="form-control"
                                                 onchange="validateConfirmPassword()" id="confirmPassword"
                                                 placeholder="Password" name="confirmPassword" required>
-                                            <label for="confirmPassword">Confirm password <span class="text-danger">*</span></label>
-                                            <div class="error"></div>
+                                            <label for="confirmPassword">Confirm password <span
+                                                    class="text-danger">*</span></label>
+                                            <p style="color: red;" id="confirmPasswordError"></p>
                                         </div>
                                         <div class="login_footer form-group">
                                             <div class="chek-form">
@@ -74,26 +73,36 @@
                                                         for="showPasswordCheckbox2"><span>Show Password</span></label>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="form-group text-center">
                                             <button type="submit" class="btn btn-fill-out btn-block hover-up"
-                                                name="login">Submit &amp; Register</button>
+                                                name="login">Submit & Register</button>
                                         </div>
                                     </form>
                                     <div class="divider-text-center mt-15 mb-15">
                                         <span> or</span>
                                     </div>
                                     <ul class=" text-center">
-                                        
-                                        <li><a href="/auth/google" class="btn btn-fill-out btn-block hover-up" style="width: 60%;">  <svg aria-hidden="true" class="icon-svg" width="20" height="20" viewBox="0 0 20 20">
-                                                        <path d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 002.38-5.88c0-.57-.05-.66-.15-1.18z" fill="#4285F4"></path>
-                                                        <path d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 01-7.18-2.54H1.83v2.07A8 8 0 008.98 17z" fill="#34A853"></path>
-                                                        <path d="M4.5 10.52a4.8 4.8 0 010-3.04V5.41H1.83a8 8 0 000 7.18l2.67-2.07z" fill="#FBBC05"></path>
-                                                        <path d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 001.83 5.4L4.5 7.49a4.77 4.77 0 014.48-3.3z" fill="#EA4335"></path>
-                                                    </svg> Signin With Google</a></li>
+
+                                        <li><a href="/auth/google" class="btn btn-fill-out btn-block hover-up"
+                                                style="width: 60%;"> <svg aria-hidden="true" class="icon-svg" width="20"
+                                                    height="20" viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 002.38-5.88c0-.57-.05-.66-.15-1.18z"
+                                                        fill="#4285F4"></path>
+                                                    <path
+                                                        d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 01-7.18-2.54H1.83v2.07A8 8 0 008.98 17z"
+                                                        fill="#34A853"></path>
+                                                    <path
+                                                        d="M4.5 10.52a4.8 4.8 0 010-3.04V5.41H1.83a8 8 0 000 7.18l2.67-2.07z"
+                                                        fill="#FBBC05"></path>
+                                                    <path
+                                                        d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 001.83 5.4L4.5 7.49a4.77 4.77 0 014.48-3.3z"
+                                                        fill="#EA4335"></path>
+                                                </svg> Signin With Google</a></li>
                                     </ul>
-                                    <div class="text-muted text-center" style="padding: 8px;">Already have an account? <a href="/login">Sign
+                                    <div class="text-muted text-center" style="padding: 8px;">Already have an account?
+                                        <a href="/login">Sign
                                             in now</a></div>
                                 </div>
                             </div>
@@ -110,122 +119,63 @@
 
 
 <script>
-    /**
-       * Register form validation 
-       */
+    const usernameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
 
-    /**
-    * uname id validation 
-    */
+    const usernameError = document.getElementById("usernameError");
+    const emailError = document.getElementById("emailError");
+    const phoneError = document.getElementById("phoneError");
+    const passwordError = document.getElementById("passwordError");
+    const confirmPasswordError = document.getElementById("confirmPasswordError");
 
-    function validateusername() {
-        var username = document.getElementById('name').value;
-
-        var userPattern = /^[a-zA-Z0-9]{3,}$/;
-
-        if (!userPattern.test(username)) {
-            alert("Invalid username please try again.");
-
-            document.getElementById('name').value = '';
-
-            document.getElementById('name').focus();
-            return false;
+    function validateUsername() {
+        const usernamePattern = /^[A-Za-z]{4,}$/
+        if (!usernamePattern.test(usernameInput.value.trim())) {
+            usernameError.textContent = "Username is required";
+        } else {
+            usernameError.textContent = "";
         }
-
-        return true;
     }
 
-    /**
-        * email id  validation 
-        */
-
-    function validate_email() {
-        var email = document.getElementById('email').value;
-
-        var emailPattern = /^\S+@\S+\.\S+$/;
-
-        if (!emailPattern.test(email)) {
-            alert("Invalid email please try again.");
-
-            document.getElementById('email').value = '';
-
-            document.getElementById('email').focus();
-            return false;
+    function validateEmail() {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!emailPattern.test(emailInput.value.trim())) {
+            emailError.textContent = "Invalid email address";
+        } else {
+            emailError.textContent = "";
         }
-
-        return true;
     }
-    /**
-        * password  validation 
-        */
-
-
-    function validatePassword() {
-        var password = document.getElementById('password').value;
-
-        // Define a regular expression for a strong password (at least 8 characters)
-        var passwordPattern = /^.{8,}$/;
-
-        if (!passwordPattern.test(password)) {
-            alert('Invalid password! Password should be at least 8 characters long.');
-            document.getElementById('password').value = '';
-            document.getElementById('password').focus();
-            return false;
-        }
-
-
-        return true;
-    }
-    /**
-    * confirm password  validation 
-    */
-
-
-    function validateConfirmPassword() {
-        var password = document.getElementById('password').value;
-        var confirmPassword = document.getElementById('confirmPassword').value;
-
-        if (password !== confirmPassword) {
-            alert('Passwords do not match! Please enter the same password in both fields.');
-
-            document.getElementById('confirmPassword').value = '';
-            document.getElementById("password").focus();
-            return false;
-        }
-
-
-        return true;
-    }
-    /**
-    * phnumber id validation 
-    */
 
     function validatePhoneNumber() {
-        var phoneNumber = document.getElementById('phone').value;
-
-        var phonePattern = /^\d{10}$/;
-
-        if (!phonePattern.test(phoneNumber)) {
-            alert('Invalid phone number! Please enter a 10-digit number.');
-
-            // Clear the input field
-            document.getElementById('phone').value = '';
-
-            // Focus on the input field for correction
-            document.getElementById('phone').focus();
-            return false;
+        const phonePattern = /^\d{10}$/; // Assuming a 10-digit phone number
+        if (!phonePattern.test(phoneInput.value.trim())) {
+            phoneError.textContent = "Invalid phone number";
+        } else {
+            phoneError.textContent = "";
         }
-
-        return true; // Allow form submission
     }
 
+    function validatePassword() {
+        if (passwordInput.value.trim().length < 6) {
+            passwordError.textContent = "Password must be at least 6 characters";
+        } else {
+            passwordError.textContent = "";
+        }
+    }
 
+    function validateConfirmPassword() {
+        if (confirmPasswordInput.value.trim() !== passwordInput.value.trim()) {
+            confirmPasswordError.textContent = "Passwords do not match";
+        } else {
+            confirmPasswordError.textContent = "";
+        }
+    }
 
     function togglePasswordVisibility() {
-        var passwordInput = document.getElementById('password');
-        var checkbox = document.getElementById('showPasswordCheckbox');
-
-        if (checkbox.checked) {
+        if (passwordInput.type === "password") {
             passwordInput.type = "text";
         } else {
             passwordInput.type = "password";
@@ -233,16 +183,25 @@
     }
 
     function togglePasswordVisibility2() {
-        var confirmPasswordInput = document.getElementById('confirmPassword');
-        var checkbox = document.getElementById('showPasswordCheckbox2');
-
-        if (checkbox.checked) {
+        if (confirmPasswordInput.type === "password") {
             confirmPasswordInput.type = "text";
         } else {
             confirmPasswordInput.type = "password";
         }
     }
 
+    // Event listener for form submission
+    const signupForm = document.getElementById("signupForm");
+    signupForm.addEventListener("submit", function (event) {
+        validateUsername();
+        validateEmail();
+        validatePhoneNumber();
+        validatePassword();
+        validateConfirmPassword();
+
+        // Prevent form submission if any field is invalid
+        if (usernameError.textContent || emailError.textContent || phoneError.textContent || passwordError.textContent || confirmPasswordError.textContent) {
+            event.preventDefault();
+        }
+    });
 </script>
-
-

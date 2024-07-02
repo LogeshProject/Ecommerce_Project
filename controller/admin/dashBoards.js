@@ -4,8 +4,8 @@ const Order = require('../../model/order');
 const PDFDocument = require('pdfkit')
 const hbs = require('hbs')
 const Handlebars = require('handlebars')
-
-const {calculateTopSellingProducts , calculateTopSellingCategories } = require('./adminController')
+const Product    = require('../../model/productModel')
+const Category   = require('../../model/categoryModel')
 
 let months        = []
 let odersByMonth  = []
@@ -17,15 +17,18 @@ let totalSales  = 0
 
 
 const loadDashboard = async(req, res) => {
+
+  let topSelling = await Product.find().sort({bestSelling:-1}).limit(5).lean()
+  let popularity = await Product.find().sort({popularity:-1}).limit(5).lean()
+  let topSellingCat= await Category.find().sort({bestselling:-1}).limit(5).lean()
        
-  try {
-    Sale.find({}, async(err, sales) => {
+    Sale.find({}, (err, sales) => {
       if (err) {
         console.error(err);
         return;
       }
     
-      // console.log(sales,'salessssssssssssssssss');
+
       
       const salesByMonth = {};
       
@@ -52,7 +55,7 @@ const loadDashboard = async(req, res) => {
         });
       });
       
-      // console.log(chartData);
+
       
        months        = []
        odersByMonth  = []
@@ -73,59 +76,26 @@ const loadDashboard = async(req, res) => {
       const thisMonthOrder = odersByMonth[odersByMonth.length-1]
       const thisMonthSales = revnueByMonth[revnueByMonth.length-1]
 
-      // console.log(thisMonthOrder, thisMonthSales);
 
 
-    //   const data = {
-    //     months: months,
-    //     ordersByMonth: odersByMonth,
-    //     revenueByMonth: revnueByMonth,
-       
-    //   };
-      
-    //   const jsonData = JSON.stringify(data);
-      
-
-      // console.log(months);
-      // console.log(odersByMonth);
-      // console.log(revnueByMonth);
-      // console.log(totalRevnue);
-      // console.log(totalSales);
-      const topSelling = await calculateTopSellingProducts();
-      const topSellingCat = await calculateTopSellingCategories();
-
-      console.log(topSelling,"................")
-
-
-     
-      res.render('admin/home', {topSelling , topSellingCat , revnueByMonth, months, odersByMonth, totalRevnue, totalSales, thisMonthOrder, thisMonthSales , layout:'adminlayout'})
-
-    })
 
     
+       console.log(popularity,"???????//////")
 
-  } catch (error) {
-    console.log(error)
-  }
+      res.render('admin/home', { revnueByMonth, months, odersByMonth, totalRevnue, totalSales, thisMonthOrder, thisMonthSales , layout:'adminlayout',topSelling , topSellingCat , popularity})
+
+    })
     
 }
 
 
 
-
-
-
-
-
-
-
  const getSales = async (req, res) => {
     const { stDate, edDate } = req.query
-    console.log(stDate, edDate)
+
     
     const startDate = new Date(stDate);
-    const endDate = new Date(edDate);
-    
+    const endDate = new Date(new Date(edDate).setHours(23, 59, 59, 999));    
     const orders = await Order.find({
         date: {
             $gte: startDate,
@@ -140,7 +110,7 @@ const loadDashboard = async(req, res) => {
         ...order
     }))
     
-    console.log(formattedOrders);
+
     
     let salesData = []
     
@@ -161,7 +131,7 @@ const loadDashboard = async(req, res) => {
         grandTotal += element.total
     })
     
-    console.log(grandTotal);
+
     
     res.json({
         grandTotal: grandTotal,
@@ -190,7 +160,6 @@ const loadDashboard = async(req, res) => {
 
 module.exports = {
     loadDashboard,
-    // currentMonthOrder,
     getSales,
     getChartData,
 }

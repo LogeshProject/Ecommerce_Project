@@ -1,81 +1,83 @@
-         <aside class="navbar-aside" id="offcanvas_aside">
-        <div class="aside-top">
-            <a href="/admin/home" class="brand-wrap">
-            
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+
             <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
         </a>
-            <div>
-                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
-            </div>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+            </button>
         </div>
-        <nav>
-            <ul class="menu-aside">
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="menu-item active">
-                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
-                        <span class="text">Products</span>
-                    </a>
-                   
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
-                        <span class="text">Orders</span>
-                    </a>
-                   
-                </li>
-               
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
-                        <span class="text">Category</span>
-                    </a>
-                    
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
-                        <span class="text">Users</span>
-                    </a>
-                    
-                </li>
-                 <li class="menu-item ">
-                    <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item active">
+                <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+
+            </li>
+
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                    <span class="text">Categories</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Users</span>
+                </a>
+
+            </li>
+            <li class="menu-item ">
+                <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
                     <span class="text">Coupons</span> </a>
-                </li>
+            </li>
 
-                {{!-- <li class="menu-item ">
-                    <a class="menu-link" href="/admin/banner"> <i class="icon material-icons md-photo_size_select_actual"></i>
-                        <span class="text">Banners</span> </a>
-                </li> --}}
+            {{!-- <li class="menu-item ">
+                <a class="menu-link" href="/admin/banner"> <i
+                        class="icon material-icons md-photo_size_select_actual"></i>
+                    <span class="text">Banners</span> </a>
+            </li> --}}
 
 
-               
-            </ul>
-            <hr>
-            <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
+
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
                     <button class="nav-link
                      rounded-pill darkmode m-3 " href="#">
                         <i class="material-icons md-nights_stay"></i>Dark mode
                     </button>
                 </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
-                        <span class="text"> Logout </span>
-                    </a>
-                </li>
-            </ul>
-            <br>
-            <br>
-        </nav>
-    </aside>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                    <span class="text"> Logout </span>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </nav>
+</aside>
 <main class="main-wrap">
 
     <section class="content-main">
@@ -83,7 +85,7 @@
             <div class="col-9">
                 <div class="content-header">
                     <h2 class="content-title">Edit Product</h2>
-                   
+
                 </div>
             </div>
             <div class="col-lg-12">
@@ -96,15 +98,15 @@
                             enctype="multipart/form-data" onsubmit="return Validation()">
                             <div class="mb-4">
                                 <label for="product_name" class="form-label">Product Name</label>
-                                <input type="text" value="{{proData.name}}" placeholder="Type here" name="name" 
+                                <input type="text" value="{{proData.name}}" placeholder="Type here" name="name"
                                     class="form-control" id="productName" onchange="validate_productName()">
                             </div>
                             <div class="mb-4">
                                 <label class="form-label">Full description</label>
                                 {{!-- <textarea placeholder="Type here" name="description" id="longdescription"
                                     class="form-control" rows="4 " value="{{product.description}}"></textarea> --}}
-                                <input class="form-control" id="longdescription"  onchange="validate_description()" name="description" rows="3"
-                                    value="{{proData.description}}" required></input>
+                                <input class="form-control" id="longdescription" onchange="validate_description()"
+                                    name="description" rows="3" value="{{proData.description}}" required></input>
                             </div>
                             <div class="row">
                                 <div class="col-lg-2">
@@ -120,8 +122,8 @@
                                     <div class="mb-4">
                                         <label class="form-label">Discount Price</label>
                                         <div class="row gx-2">
-                                            <input placeholder="₹" type="text" value="{{proData.DiscountPrice}}" id="price"
-                                                name="discountprice" class="form-control">
+                                            <input placeholder="₹" type="text" value="{{proData.DiscountPrice}}"
+                                                id="price" name="discountprice" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -142,36 +144,40 @@
                                 </div>
 
 
-                                
+
                             </div>
                             <div class="form-group">
-        <label for="productImage">Product Image:</label>
-        <div class="d-flex border p-10 m-tb-10">
-          <input name="product-id" type="hidden" value="{{proData._id}}">
-          {{#each proData.imageUrl}}
-          <div class="image-container" onclick="deleteProImg()">
-            <div  class="badge rounded-pill alert-danger "><span  class="close-button" data-image-index="{{@index}}"
-              style="text-decoration: none;">×</span></div>
-            <img src="/images/products/{{this}}" alt="images" style="width: 80px; height: auto;" class="m-2 pro-image"
-              data-image-index="{{@index}}">
-          </div>
+                                <label for="productImage">Product Image:</label>
+                                <div class="d-flex border p-10 m-tb-10">
+                                    <input name="product-id" type="hidden" value="{{proData._id}}">
+                                    {{#each proData.imageUrl}}
+                                    <div class="image-container" onclick="deleteProImg()">
+                                        <div class="badge rounded-pill alert-danger "><span class="close-button"
+                                                data-image-index="{{@index}}" style="text-decoration: none;">×</span>
+                                        </div>
+                                        <img src="/images/products/{{this}}" alt="images"
+                                            style="width: 80px; height: auto;" class="m-2 pro-image"
+                                            data-image-index="{{@index}}">
+                                    </div>
 
-          {{/each}}
-        </div>
-        <input type="file" class="form-control-file" id="productImage" multiple name="image">
-      </div>
+                                    {{/each}}
+                                </div>
+                                <input type="file" class="form-control-file" id="productImage" multiple name="image">
+                            </div>
 
                             <div class="d-flex g-2">
                                 {{!-- <div class="m-2">
-                                    <button type="submit" class="btn btn-primary" onclick="return Do you Edit the product ?">Edit Product</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        onclick="return Do you Edit the product ?">Edit Product</button>
 
                                 </div> --}}
                                 <div class="m-2">
-    <button type="submit" class="btn btn-primary" onclick="return confirm('Do you want to edit the product?')">Edit Product</button>
-</div>
+            <button type="submit" class="btn btn-primary" id="edit-product-btn">Edit Product</button>
+        </div>
 
                                 <div class="m-2">
-                                    <a href="/admin/product" type="button" id="backbutton" class="btn btn-primary">Back</a>
+                                    <a href="/admin/product" type="button" id="backbutton"
+                                        class="btn btn-primary">Back</a>
 
                                 </div>
 
@@ -210,55 +216,47 @@
 </main>
 
 <script>
- const deleteImage = async (productId, imageIndex) => {
-    try {
-      const response = await fetch(`/admin/product_img_delete?id=${productId}&?image=${imageIndex}`, {
-        method: 'DELETE'
-      });
+    const deleteImage = async (productId, imageIndex) => {
+        try {
+            const response = await fetch(`/admin/product_img_delete?id=${productId}&?image=${imageIndex}`, {
+                method: 'DELETE'
+            });
 
-      const data = await response.json();
-      console.log(data.message);
+            const data = await response.json();
+            console.log(data.message);
 
-      if (data) {
-        const imageElem = document.querySelector(`.pro-image[data-image-index="${imageIndex}"]`);
-        if (imageElem) {
+            if (data) {
+                const imageElem = document.querySelector(`.pro-image[data-image-index="${imageIndex}"]`);
+                if (imageElem) {
 
-          console.log(imageElem, 'htttttttttttttttttttttt')
-          // or
-          imageElem.remove(); // remove the image element completely
+                    console.log(imageElem, 'htttttttttttttttttttttt')
+                    // or
+                    imageElem.remove(); // remove the image element completely
+                }
+            }
+
+        } catch (error) {
+            console.error(error);
         }
-      }
-
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    };
 
 
-  const deleteProImg = () => {
+    const deleteProImg = () => {
 
-    const deleteButtons = document.querySelectorAll('.close-button')
-    const productId = document.getElementsByName('product-id')[0].value
+        const deleteButtons = document.querySelectorAll('.close-button')
+        const productId = document.getElementsByName('product-id')[0].value
 
-    
 
-    deleteButtons.forEach((button )=> {
-      button.addEventListener('click', async (event) => {
-        const imageIndex = event.target.dataset.imageIndex;
-        deleteImage(productId, imageIndex);
-         const removeIcon = document.createElement("span");
+
+        deleteButtons.forEach((button) => {
+            button.addEventListener('click', async (event) => {
+                const imageIndex = event.target.dataset.imageIndex;
+                deleteImage(productId, imageIndex);
+                const removeIcon = document.createElement("span");
                 removeIcon.classList.add("remove-icon");
-                removeIcon.innerHTML = "&times;"; 
-      });
-    });
-
-
-    
-
-
-
-
-  }
+                removeIcon.innerHTML = "&times;";
+            });
+        });
 
 
 
@@ -266,22 +264,14 @@
 
 
 
-
-
-
-
-
- 
-
-
-
+    }
 
 
 
 
     function Validation() {
 
-       
+
         let productName = document.getElementById("productName").value;
 
         let longdescription = document.getElementById("longdescription").value;
@@ -328,7 +318,7 @@
     }
 
 
-            function validate_productName() {
+    function validate_productName() {
         var productNameInput = document.getElementById("productName");
         var product = productNameInput.value.trim();
         var pattern = /^[a-zA-Z0-9\s]{3,}$/;
@@ -363,9 +353,9 @@
 
     }
 
-    
 
-   
+
+
 </script>
 
 
@@ -374,6 +364,34 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
+    // sure Edit btn
+
+    document.getElementById('edit-product-btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the form from submitting immediately
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to edit the product?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, edit it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form
+                    // Assuming the button is within a form, submit the form
+                    // If not, you might need to target the form explicitly
+                    event.target.closest('form').submit();
+                }
+            });
+        });
+
+
+
+
+
     //back
     $(document).ready(function () {
         $('#backbutton').click(function (e) {
@@ -399,4 +417,4 @@
         });
     }
     )
-    </script>
+</script>

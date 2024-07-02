@@ -9,36 +9,51 @@ require('dotenv').config()
 
 
 const loadCheckout = async (req, res) => {
+    const userData = req.session.user;
+    const userId = userData._id;
+    const user = await User.findOne({ _id: userId }).lean();
+    const addressData = await Address.find({ userId: userId }).lean();
+    const userDataa = await User.findOne({ _id: userId }).populate("cart.product").lean();
+    const cart = userDataa.cart;
 
-    const userData = req.session.user
-    const userId   = userData._id
-    const user = await User.findOne({ _id: userId }).lean()
+    let subTotal = 0;
+    cart.forEach((val) => {
+        val.total = (val.product.price - val.product.DiscountPrice) * val.quantity;
+        subTotal += val.total;
+    });
+
+    const deliveryCharge = 50;
+    const taxRate = 10;
+    req.session.taxRate = taxRate; // Store tax rate in session
+    const taxAmount = (subTotal * taxRate) / 100;
+    let AddDeliverycharge = deliveryCharge + subTotal;
+    const Total = subTotal + taxAmount + deliveryCharge;
 
 
-    const addressData = await Address.find({userId : userId}).lean()
-
-    const userDataa  = await User.findOne({ _id: userId }).populate("cart.product").lean()
-    const cart       = userDataa.cart
-
-
-    let subTotal = 0
-    cart.forEach((val)=>{
-    val.total = (val.product.price - val.product.DiscountPrice ) * val.quantity
-    subTotal += val.total
-    })
-
-    let deliveryCharge = 50 ;
-
-    let Total = deliveryCharge + subTotal ;
 
     const now = new Date();
-    const availableCoupons = await Coupon.find({ 
-      expiryDate: { $gte: now },
-      usedBy: { $nin: [userId] }
+    const availableCoupons = await Coupon.find({
+        expiryDate: { $gte: now },
+        usedBy: { $nin: [userId] }
+    }).lean();
+
+   
+
+    res.render('user/checkout/checkout', { 
+        userData: user, 
+        cart, 
+        addressData, 
+        AddDeliverycharge, 
+        deliveryCharge, 
+        subTotal, 
+        taxAmount, 
+        Total, 
+        taxRate, 
+        availableCoupons, 
+        KEY_ID: process.env.KEY_ID 
     });
-    
-        res.render('user/checkout/checkout', { userData:user, cart, addressData, deliveryCharge , subTotal, Total, availableCoupons,KEY_ID: process.env.KEY_ID })    
-}
+};
+
 
 
 
@@ -79,7 +94,7 @@ const loadCheckou = async (req, res) => {
     const userDataa  = await User.findOne({ _id: userId }).populate("cart.product").lean()
     const cart       = userDataa.cart
 
-    console.log(cart, 'cart aaaannnnnnnnnnnnnnn')
+
 
     let subTotal = 0
     cart.forEach((val)=>{
@@ -94,19 +109,20 @@ const loadCheckou = async (req, res) => {
       }
     })
 
-    console.log(stock, 'stockkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+  
 
     if(stock.length > 0){
-        console.log('njana res jssonnnnnnnnnnnnnnnnnnnnn');
+       
         res.json(stock)
     }else{
-        console.log('heloooooooooo mann am from stock length');
+        
         res.render('user/checkout/checkout', { userData, cart, addressData, subTotal })
     }    
 }
 
-
-///////////  Place order function /////////////
+/* 
+*      Place order methods 
+*/
 
 const placeOrder = async (req, res) => {
     try {
@@ -118,16 +134,18 @@ const placeOrder = async (req, res) => {
         const userDataa = await User.findOne({ _id: userId }).populate("cart.product");
         const cartPro = userDataa.cart;
 
-        let subTotal = 0;
+        
 
         let deliveryCharge = 50;
+
+        let subTotal =  0 + deliveryCharge ;
 
         cartPro.forEach((val) => {
             val.total = (val.product.price - val.product.DiscountPrice) * val.quantity;
             subTotal += val.total;
         });
-
-        subTotal += deliveryCharge;
+      
+        
 
         let productDet = cartPro.map(item => {
             return {
@@ -140,40 +158,42 @@ const placeOrder = async (req, res) => {
             };
         });
 
-        console.log(productDet)
+     
 
         const result = Math.random().toString(36).substring(2, 7);
         const id = Math.floor(100000 + Math.random() * 900000);
         const orderId = result + id;
 
         let saveOrder = async () => {
-            if (req.body.couponData) {
-                const order = new Order({
+           
+            let orderData = {
                     userId: userId,
                     product: productDet,
                     address: addressId,
                     orderId: orderId,
                     total: subTotal,
-                    paymentMethod: payMethod,
-                    discountAmt: req.body.couponData.discountAmt,
-                    amountAfterDscnt: req.body.couponData.newTotal,
-                    coupon: req.body.couponName,
-                });
+                    paymentMethod: payMethod
+            };
 
-                const ordered = await order.save();
-            } else {
-                const order = new Order({
-                    userId: userId,
-                    product: productDet,
-                    address: addressId,
-                    orderId: orderId,
-                    total: subTotal,
-                    paymentMethod: payMethod,
-                });
-
-                const ordered = await order.save();
+            if (req.body.status) {
+                orderData.status = "Payment Failed";
             }
 
+            if (req.body.couponData) {
+               
+                // If couponData exists, add coupon-related properties
+                orderData = {
+                    ...orderData,
+                    discountAmt: req.body.couponData.discountAmt,
+                    amountAfterDscnt: Number(req.body.couponData.newTotal) + 50,
+                    coupon: req.body.couponData.couponVal
+                };
+            }
+
+            const order = new Order(orderData);
+            const ordered = await order.save();
+
+            
             let userDetails = await User.findById(userId);
             let userCart = userDetails.cart;
 
@@ -204,7 +224,7 @@ const placeOrder = async (req, res) => {
 
             userDetails.cart = [];
             await userDetails.save();
-            console.log(userDetails.cart);
+            
         };
 
         if (addressId) {
@@ -236,12 +256,12 @@ const placeOrder = async (req, res) => {
                     amount,
                 });
 
-                console.log(amount,'......................................................................')
+               
             } else if (payMethod === 'wallet') {
                 const newWallet = req.body.updateWallet;
                 const userData = req.session.user;
                 const amount = req.body.amount;
-                console.log(amount,"...........................LLLLLLLL")
+               
 
                 await User.findByIdAndUpdate(userId, { $set: { wallet: newWallet } }, { new: true });
 
@@ -255,7 +275,8 @@ const placeOrder = async (req, res) => {
                             history: {
                                 amount: amount,
                                 status: "Debited",
-                                date: Date.now()
+                                date: Date.now(),
+                                Remarks : `Ordered Product`
                             }
                         }   
                     }
@@ -267,7 +288,7 @@ const placeOrder = async (req, res) => {
                     newWallet, 
                     walletSuccess : true 
                 });
-                console.log(newWallet,'....................................................................')
+               
             } else {
                 res.json({ error: 'Invalid payment method.' });
             }
@@ -280,47 +301,111 @@ const placeOrder = async (req, res) => {
 
 
 
-
-const validateCoupon = async (req, res) => {
+const applyCoupon = async (req, res) => {
     try {
         const { couponVal, subTotal } = req.body;
         const coupon = await Coupon.findOne({ code: couponVal });
+        const userId = req.session.user._id;
 
+
+      
         if (!coupon) {
-            res.json('invalid');
+            return res.json({ status: 'invalid' });
+        } else if (coupon.minPurchase >=  subTotal) {
+            return res.json({ status: 'limit' });
+        } else if (coupon.usedBy.includes(userId)) {
         } else if (coupon.expiryDate < new Date()) {
-            res.json('expired');
+            return res.json({ status: 'expired' });
+        } else if (coupon.usedBy.includes(userId)) {
+            return res.json({ status: 'already_used' });
         } else {
-            const couponId = coupon._id;
-            const discount = coupon.discount;
-            const userId = req.session.user._id;
 
-            const isCpnAlredyUsed = await Coupon.findOne({ _id: couponId, usedBy: { $in: [userId] } });
 
-            if (isCpnAlredyUsed) {
-                res.json('already used');
-            } else {
-                await Coupon.updateOne({ _id: couponId }, { $push: { usedBy: userId } });
 
-                const discnt = Number(discount);
-                const discountAmt = (subTotal * discnt) / 100;
-                const newTotal = subTotal - discountAmt;
 
-                const user = User.findById(userId);
 
-                res.json({
-                    discountAmt,
-                    newTotal,
-                    discount,
-                    succes: 'succes'
-                });
+            let discountAmt = (subTotal * coupon.discount) / 100;
+
+            if (discountAmt > coupon.maxDiscount) {
+                discountAmt = coupon.maxDiscount
+
             }
+            const newTotal = subTotal - discountAmt
+
+
+
+            await Coupon.updateOne({ _id: coupon._id }, { $push: { usedBy: userId } });
+
+            return res.json({
+                discountAmt,
+                newTotal,
+                discount: coupon.discount,
+                status: 'applied',
+                couponVal
+            });
         }
     } catch (error) {
         console.log(error);
+        res.status(500).json({ status: 'error', error });
     }
 };
 
+
+const removeCoupon = async (req, res) => {
+    try {
+        const { couponVal, subTotal } = req.body;
+        const coupon = await Coupon.findOne({ code: couponVal });
+        const userId = req.session.user._id;
+
+        if (!coupon) {
+            return res.json({ status: 'invalid' });
+        } else if (!coupon.usedBy.includes(userId)) {
+            return res.json({ status: 'not_used' });
+        } else {
+            // Remove user ID from usedBy array
+            await Coupon.updateOne({ _id: coupon._id }, { $pull: { usedBy: userId } });
+
+            // Calculate the new total by adding back the discount amount correctly
+            const discountAmt = 0;
+            const newTotal = subTotal;
+
+            return res.json({
+                discountAmt,
+                newTotal,
+                discount: coupon.discount,
+                status: 'removed',
+                couponVal
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ status: 'error', error });
+    }
+};
+
+const checkoutaddNewAddressPost = async (req, res) => {
+    try {
+        const userData = req.session.user
+        const id = userData._id
+
+        const address = new Address({
+            userId: id,
+            name: req.body.name,
+            mobile: req.body.mobile,
+            addressLine1: req.body.address1,
+            addressLine2: req.body.address2,
+            city: req.body.city,
+            state: req.body.state,
+            pin: req.body.pin,
+            is_default: false,
+        })
+
+        const addressData = await address.save()
+        res.redirect('/checkout')
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 
@@ -329,8 +414,10 @@ const validateCoupon = async (req, res) => {
 module.exports = {
     loadCheckout,
     placeOrder,
-    validateCoupon,
+    applyCoupon,
+    removeCoupon,
     checkStock,
+    checkoutaddNewAddressPost
 }
 
 

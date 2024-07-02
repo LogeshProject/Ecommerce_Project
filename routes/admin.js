@@ -19,22 +19,23 @@ router.get('/home', adminAuth.isLogin, dashBoards.loadDashboard)
 router.get('/manage_users', adminAuth.isLogin, adminController.loadUsersData)
 
 router.get('/block_user/:id', adminAuth.isLogin, adminController.blockUser)
+router.get('/block_review/:id', adminAuth.isLogin, adminController.blockReview)
 
 router.get('/category', adminAuth.isLogin, adminController.getCategory)
 router.get('/add_category', adminAuth.isLogin, adminController.addCategory)
 router.post('/add_category', adminAuth.isLogin, store.single('image'), adminController.addNewCategory)
 
-router.post('/delete_category', adminAuth.isLogin, adminController.deleteCategory)
+router.post('/delete_category', adminAuth.isLogin, adminController.blockCategory);
 router.get('/edit_category/:id', adminAuth.isLogin, adminController.editCategory)
-router.post('/update_category/:id', adminAuth.isLogin, store.single('image'), adminController.updateCategory)
+router.post('/update_category/:id', adminAuth.isLogin, store.single('image'), adminController.postEditCategory)
 
 router.get('/product', adminAuth.isLogin, adminController.getProduct)
 
-router.get('/new_product', adminAuth.isLogin, adminController.newProduct)
-router.post('/add_new_product', store.array('image', 5) ,adminController.addNewProduct)
+router.get('/new_product', adminAuth.isLogin, adminController.addProduct)
+router.post('/add_new_product', store.array('image', 5) ,adminController.postAddNewProduct)
 
 router.post('/block_product', adminAuth.isLogin, adminController.blockProduct)
-router.get('/delete_product/:id', adminAuth.isLogin, adminController.deleteProduct)
+// router.get('/delete_product/:id', adminAuth.isLogin, adminController.deleteProduct)
 router.get('/edit_product/:id', store.array('image', 5), adminAuth.isLogin, adminController.editProduct)
 router.post('/update_product/:id', store.array('image', 5), adminAuth.isLogin, adminController.updateProduct)
 
@@ -52,10 +53,16 @@ router.get('/order_details', adminController.orderDetails)
 
 router.post('/change_status', adminController.changeOrderStatus)
 
+router.post('/return_approve' , adminAuth.isLogin , adminController.returnRequest)
+router.post('/return_decline' , adminAuth.isLogin , adminController.returnDecline)
+
 router.get('/banners', adminController.loadBanner)
+router.get('/reviews', adminController.loadReview)
 router.get('/add_banner', adminController.addBanner)
-router.post('/add_banner', store.single('image'),  adminController.addBannerPost)
-router.get('/delete_banner', adminController.deleteBanner)
+router.post('/addBanner', store.single('image'),  adminController.addBannerPost)
+router.get('/editBanner/:id', adminController.getEditBanner);
+router.post('/editBanner/:id', store.single('image'), adminController.editBannerPost);
+router.get('/deleteBanner', adminController.deleteBanner);
 
 // router.get('/sales_report', dashBoards.currentMonthOrder)
 router.get('/get_sales', dashBoards.getSales)

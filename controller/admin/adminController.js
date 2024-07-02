@@ -1,5 +1,3 @@
-const Admin = require("../../model/adminModel");
-const adminHelper = require("../../helpers/admin_helper");
 const User = require("../../model/userModel");
 const Category = require("../../model/categoryModel");
 const Product = require("../../model/productModel");
@@ -7,18 +5,26 @@ const Coupon = require("../../model/coupon");
 const Orders = require("../../model/order");
 const Address = require("../../model/address");
 const Banner = require('../../model/banner')
+const Review = require('../../model/review')
 const moment = require("moment");
 
 let adminData
+
+// for Message shown
+
 let catSaveMsg = "Category added suceessfully..!!";
 
-///Admin home page ///
+/* 
+*    Get Admin Login page
+*/
 
 const adminLogin = (req, res) => {
   res.render("admin/login", { layout: 'loginlayout' });
 };
 
-/////Admin Login//////
+/* 
+*    post Admin Login page
+*/
 
 const adminDoLogin = async (req, res) => {
   try {
@@ -31,7 +37,7 @@ const adminDoLogin = async (req, res) => {
     let adminPassword = req.body.password;
 
 
-    //adminData = await Admin.findOne({ email: adminEmail });
+
 
     if (adminData) {
       if (adminPassword === adminData.password) {
@@ -49,20 +55,10 @@ const adminDoLogin = async (req, res) => {
   }
 };
 
-///Admin logout ////////////////
 
-const adminLogout = async (req, res) => {
-  try {
-    req.session.destroy();
-    adminData = null
-    res.redirect("/admin/login");
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-
-///Get home page////////////
+/* 
+*    Get DashBoard - home page 
+*/
 
 
 const loadHome = (req, res) => {
@@ -74,16 +70,83 @@ const loadHome = (req, res) => {
 };
 
 
-//Get all users data///////////////
 
-const loadUsersData = async (req, res) => {
+/* 
+*     Load Products
+*/
+
+const getProduct = async (req, res) => {
   try {
-    let allUsersData = await adminHelper.getAllUsersData();
-    res.render("admin/manage_users", { allUsersData, layout: 'adminlayout' });
+    var page = 1
+    if (req.query.page) {
+      page = parseInt(req.query.page) || 1
+    }
+    const limit = 3;
+    const productData = await Product.aggregate([
+      {
+        $lookup: {
+          from: "categories",
+          localField: "category",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+      {
+        $unwind: "$category",
+      },
+      {
+        $skip: (page - 1) * limit
+      },
+      {
+        $limit: limit * 1
+      }
+    ]);
+
+    const count = await Product.find({}).count();
+
+    const totalPages = Math.ceil(count / limit)  
+    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+    res.render("admin/product", { productData, pages, currentPage: page, layout: 'adminlayout' });
   } catch (error) {
     console.log(error);
   }
 };
+
+
+
+const loadUsersData = async (req, res) => {
+  try {
+    let page = parseInt(req.query.page) || 1; 
+    const limit = 5; 
+
+    const count = await User.countDocuments({});
+    const totalPages = Math.ceil(count / limit);
+
+    
+    page = Math.max(1, Math.min(page, totalPages));
+
+    const users = await User.find({})
+      .skip((page - 1) * limit)
+      .limit(limit).lean();
+
+    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+    console.log(users);
+
+    res.render("admin/manage_users", {
+      allUsersData : users,
+      layout: 'adminlayout',
+      pages,
+      currentPage: page
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 
 
 
@@ -106,44 +169,62 @@ const blockUser = async (req, res) => {
   }
 };
 
-/// To get category page ///
+const blockReview = async (req, res) => {
+  try {
+    let id = req.params.id;
 
-// const getCategory = async (req, res) => {
-//   try {
-//     let allCtegoryData = await adminHelper.getAllCtegoryData();
-//     let catUpdtMsg = "Category updated successfully..!!";
+    const blockReview = await Review.findById(id);
+    let isListed = blockReview.isListed;
 
-//     if (req.session.categoryUpdate) {
-//       res.render("admin/category", { allCtegoryData, catUpdtMsg, layout: 'adminlayout' });
-//       req.session.categoryUpdate = false;
-//     } else {
-//       res.render("admin/category", { allCtegoryData, layout: 'adminlayout' });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+    const reviewData = await Review.findByIdAndUpdate(
+      id,
+      { $set: { isListed: !isListed } },
+      { new: true }
+    );
+
+    res.redirect("/admin/reviews");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
 
 
 const getCategory = async (req, res) => {
   try {
-    let { CtegoryData, pages } = await adminHelper.getAllCtegoryData(req);
+    let page = 1;
+        if (req.query.page) {
+          page = parseInt(req.query.page)|| 1;
+        }
+        const limit = 1;
+        const skip = (page - 1) * limit;
+        const CtegoryData = await Category.find().skip(skip).limit(limit).lean();
+        
+        const count = await Category.countDocuments();
+        const totalPages = Math.ceil(count / limit);
+        const pages = Array.from({length: totalPages}, (_, i) => i+1);
 
-    console.log(CtegoryData , pages)
+
+
+    
     let catUpdtMsg = "Category updated successfully..!!";
 
     if (req.session.categoryUpdate) {
       res.render("admin/category", { CtegoryData, catUpdtMsg, pages, layout: 'adminlayout' });
       req.session.categoryUpdate = false;
     } else {
-      res.render("admin/category", { CtegoryData, pages, layout: 'adminlayout' });
+      res.render("admin/category", { CtegoryData, pages, layout: 'adminlayout', currentPage : page });
     }
   } catch (error) {
     console.log(error);
   }
 };
 
-/// To get add category page ///
+/* 
+*    To get add category page
+*/
 
 const addCategory = (req, res) => {
   try {
@@ -163,7 +244,9 @@ const addCategory = (req, res) => {
   }
 };
 
-/// To add new category post///
+/* 
+*    To add new category post
+*/
 
 const addNewCategory = async (req, res) => {
   const catName = req.body.name;
@@ -188,7 +271,9 @@ const addNewCategory = async (req, res) => {
   } catch (error) { }
 };
 
-/// To edit category ///
+/* 
+*   To edit category 
+*/
 
 const editCategory = async (req, res) => {
   let catId = req.params.id;
@@ -198,7 +283,7 @@ const editCategory = async (req, res) => {
 
     if (req.session.catExist) {
       res.render("admin/edit_category", { catData, catExistMsg, layout: 'adminlayout' });
-      // req.session.catExist = false
+     
     } else {
       res.render("admin/edit_category", { catData, layout: 'adminlayout' });
     }
@@ -207,47 +292,8 @@ const editCategory = async (req, res) => {
   }
 };
 
-/// To update Category post///
 
-// const updateCategory = async (req, res) => {
-//   try {
-//     const catName = req.body.name;
-//     const image = req.file;
-//     const catId = req.params.id;
-
-//     const cat = await Category.findById(catId);
-//     const catImg = cat.imageUrl;
-//     let updImge;
-
-//     if (image) {
-//       updImge = image.filename;
-//     } else {
-//       updImge = catImg;
-//     }
-
-
-//     const catExist = await Category.findOne({ category: catName });
-
-//     if (!catExist) {
-//       await Category.findByIdAndUpdate(
-//         catId,
-//         {
-//           category: req.body.name,
-//           imageUrl: updImge,
-//         },
-//         { new: true }
-//       );
-
-//       req.session.categoryUpdate = true;
-//       res.redirect("/admin/category");
-//     } else {
-//       // req.session.catExist = true
-//       res.redirect("/admin/category");
-//     }
-//   } catch (error) {}
-// };
-
-const updateCategory = async (req, res) => {
+const postEditCategory = async (req, res) => {
   try {
     const catName = req.body.name;
     const image = req.file
@@ -290,76 +336,37 @@ const updateCategory = async (req, res) => {
 //   }
 // };
 
-const deleteCategory = async (req, res) => {
-
-
+const blockCategory = async (req, res) => {
   try {
-
-    // const catId = req.params.id
     const { id } = req.body;
-    let user = await Category.findById(id)
-    let newListed = user.isListed
 
-    await Category.findByIdAndUpdate(id, {
-      isListed: !newListed
-    },
-      { new: true })
-    res.redirect('/admin/category')
+    let categoryData = await Category.findById(id).lean();
 
+    if (!categoryData) {
+      return res.status(404).send('Category not found');
+    }
 
+    // Toggle the isListed property
+    let isListed = categoryData.isListed;
 
+    await Category.findByIdAndUpdate(id, { $set: { isListed: !isListed } }, { new: true });
+
+   
+    res.redirect('/admin/category');
   } catch (error) {
-    console.log(error)
-
+    console.log(error);
+    res.status(500).send('Internal Server Error');
   }
 }
 
-// load product ///////////
-
-const getProduct = async (req, res) => {
-  try {
-    var page = 1
-    if (req.query.page) {
-      page = req.query.page
-    }
-    const limit = 3;
-    const productData = await Product.aggregate([
-      {
-        $lookup: {
-          from: "categories",
-          localField: "category",
-          foreignField: "_id",
-          as: "category",
-        },
-      },
-      {
-        $unwind: "$category",
-      },
-      {
-        $skip: (page - 1) * limit
-      },
-      {
-        $limit: limit * 1
-      }
-    ]);
-
-    const count = await Product.find({}).count();
-    console.log(count)
-
-    // console.log(products);
-    const totalPages = Math.ceil(count / limit)  // Example value
-    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-
-    res.render("admin/product", { productData, pages, currentPage: page, layout: 'adminlayout' });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-////// new Product page/////////////
 
 
-const newProduct = async (req, res) => {
+/* 
+*     Get product datails
+*/
+
+
+const addProduct = async (req, res) => {
   try {
     let productSaveMsg = "Product added successfuly..!!";
 
@@ -381,7 +388,7 @@ const newProduct = async (req, res) => {
 
 const getOrders = async (req, res) => {
   try {
-    const PAGE_SIZE = 5;
+    const PAGE_SIZE = 10;
     const page = parseInt(req.query.page) || 1;
     const skip = (page - 1) * PAGE_SIZE;
 
@@ -406,7 +413,7 @@ const getOrders = async (req, res) => {
    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
     res.render("admin/orders", {
       ordersData,
-      
+      currentPage : page,
       pages,
       layout: 'adminlayout'
     });
@@ -415,35 +422,14 @@ const getOrders = async (req, res) => {
   }
 };
 
-// Add offers 
-
-
-// const addProductOffer = async (req, res) => {
-//   try {
-//       // console.log(req.body);
-//       const { productId, percentage } = req.body
-//       const findProduct = await Product.findOne({ _id: productId })
-//       // console.log(findProduct);
-
-//       if (findProduct.categoryOffer == 0) {
-//           findProduct.price = findProduct.price - Math.floor(findProduct.regularPrice * (percentage / 100))
-//           findProduct.productOffer = parseInt(percentage)
-//           await findProduct.save()
-//       } else {
-//           res.json({ status: false })
-//       }
-//       res.json({ status: true })
-
-//   } catch (error) {
-//       console.log(error.message);
-//   }
-// }
 
 
 
-////// Add new Product post/////////////
+/* 
+*     Add new product
+*/
 
-const addNewProduct = async (req, res) => {
+const postAddNewProduct = async (req, res) => {
   try {
     const files = req.files;
     const images = [];
@@ -531,22 +517,12 @@ const updateProduct = async (req, res) => {
 
 /// To delete Product ///
 
-const deleteProduct = async (req, res) => {
-  const proId = req.params.id;
-  await Product.findByIdAndDelete(proId)
-  res.redirect('/admin/product')
-  // const prodData = await Product.findById(proId);
-  // const isBlocked = prodData.is_blocked;
+// const deleteProduct = async (req, res) => {
+//   const proId = req.params.id;
+//   await Product.findByIdAndDelete(proId)
+//   res.redirect('/admin/product')
 
-  // const proData = await Product.findByIdAndUpdate(
-  //   proId,
-  //   { $set: { is_blocked: !isBlocked } },
-  //   { new: true }
-  // );
-
-  // res.redirect("/admin/product");
-  // req.session.proDelete = true;
-};
+// };
 
 const blockProduct = async (req, res) => {
   const { id } = req.body
@@ -568,9 +544,9 @@ const loadCoupon = async (req, res) => {
   try {
     var page = 1
   if(req.query.page){
-    page = req.query.page
+    parseInt(req.query.page) || 1 ;
   }
-  const limit = 5;
+  const limit = 7;
   let coupon = await Coupon.find()
   .skip((page - 1) * limit)
   .limit(limit * 1)
@@ -619,7 +595,7 @@ const addCoupon = (req, res) => {
 
 const addCouponPost = async (req, res) => {
   try {
-    const { code, percent, expDate } = req.body;
+    const { code, percent, expDate ,minPurchase , maxDiscount } = req.body;
     console.log(code,percent,expDate)
 
         // Validate input data
@@ -634,6 +610,8 @@ const addCouponPost = async (req, res) => {
         code: code,
         discount: percent,
         expiryDate: expDate,
+        minPurchase : minPurchase ,
+        maxDiscount : maxDiscount
       });
 
       await coupon.save();
@@ -680,7 +658,7 @@ const updateCoupon = async (req, res) => {
     
     // const product = await Product.findById(proId);
 
-    const { code , percent , expDate } = req.body;
+    const { code , percent , expDate , minPurchase , maxDiscount } = req.body;
 
      // Validate input data
      if (!code || !percent || !expDate) {
@@ -693,6 +671,8 @@ const updateCoupon = async (req, res) => {
         code: code,
         discount: percent,
         expiryDate: expDate,
+        minPurchase : minPurchase ,
+        maxDiscount : maxDiscount ,
         status : true 
       },
       // { new: true }
@@ -719,6 +699,9 @@ const orderDetails = async (req, res) => {
     const addressId = myOrderDetails.address;
 
     const address = await Address.findById(addressId).lean();
+
+
+    console.log("......",myOrderDetails,".......")
 
     res.render("admin/order_Details", {
       myOrderDetails,
@@ -751,6 +734,133 @@ const changeOrderStatus = async (req, res) => {
 };
 
 
+const returnRequest = async(req, res) => {
+  try {
+    
+    const orderId = req.query.id
+
+
+    const myOrderDetails = await Orders.findOne({ _id: orderId }).lean()
+
+    console.log(myOrderDetails);
+
+    const userId = myOrderDetails.userId
+
+    const userData = await User.find({_id : userId });
+
+    const deliveryCharge = 50 ;
+
+    const amount =  myOrderDetails.total - deliveryCharge ;
+
+
+    const refundAmount = amount;
+   
+    const updateWalletAmount = userData[0].wallet + amount ;
+
+
+    await User.findByIdAndUpdate(userId, { $set: { wallet: updateWalletAmount } }, { new: true })
+
+
+    await Orders.findByIdAndUpdate(orderId, { $set: { status: 'Returned' } }, { new: true });
+
+    await User.updateOne(
+      { _id: userId },
+      {
+        $push: {
+          history: {
+            amount: refundAmount,
+            status: 'Refunded',
+            date: Date.now(),
+            Remarks : `Returned Order`
+          }
+        }
+      }
+    );
+
+    let returnOrder = await Orders.findOne({ _id: orderId });
+
+
+    for (const product of returnOrder.product) {
+          await Product.updateOne(
+              { _id: product.id },
+              { $inc: { stock: product.quantity }}
+          );
+  }
+
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
+
+const returnOrder = async (req, res) => {
+  try {
+
+
+    const id = req.query.id
+    const userData = req.session.user
+    const userId = userData._id
+
+    const { updateWallet, payMethod } = req.body
+
+    const myOrderDetails = await Orders.findOne({ _id: id },
+      {
+        total: 1,
+        amountAfterDscnt: 1,
+        _id: 0
+      }
+    ).lean()
+
+    let refundAmount
+    if (myOrderDetails.amountAfterDscnt) {
+      refundAmount = myOrderDetails.amountAfterDscnt - 50
+    } else {
+      refundAmount = myOrderDetails.total - 50
+
+    }
+
+    const deliveryCharge = 50;
+    const updateWalletAmount = updateWallet - deliveryCharge;
+    await User.findByIdAndUpdate(userId, { $set: { wallet: updateWalletAmount } }, { new: true })
+
+    await User.updateOne(
+      { _id: req.session.user._id },
+      {
+        $push: {
+          history: {
+            amount: refundAmount,
+            status: 'Refunded',
+            date: Date.now(),
+            Remarks : `Returned Order`
+          }
+        }
+      }
+    );
+
+    await Orders.findByIdAndUpdate(id, { $set: { status: 'Returned' } }, { new: true });
+
+    res.json('sucess')
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+const returnDecline = async(req, res) => {
+  try {
+    
+    const orderId = req.query.id
+    await Orders.findByIdAndUpdate(orderId, { $set: { status: 'Rejected' } }, { new: true });
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 
 const deleteProdImage = async (req, res) => {
   try {
@@ -771,13 +881,13 @@ const deleteProdImage = async (req, res) => {
 
 const loadBanner = async (req, res) => {
   try {
-
-    const bannerData = await Banner.find()
-    res.render('admin/banners', { layout: 'adminlayout' })
+    const bannerData = await Banner.find().lean(); // .lean() to convert Mongoose documents to plain JavaScript objects
+    res.render('admin/banners', { layout: 'adminlayout', data: bannerData });
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    res.status(500).send('Internal Server Error');
   }
-}
+};
 
 const addBanner = (req, res) => {
   try {
@@ -788,31 +898,83 @@ const addBanner = (req, res) => {
   }
 }
 
-
 const addBannerPost = async (req, res) => {
   try {
-    const { title, link } = req.body
-    const image = req.file.filename
+    const { title, description, link, startDate, endDate } = req.body;
+    const image = req.file.filename;
 
     const banner = new Banner({
-      title: title,
-      image: image,
-      link: link,
-    })
+      title,
+      description,
+      image,
+      link,
+      startDate,
+      endDate,
+    });
 
-    await banner.save()
+    await banner.save();
+    res.redirect('/admin/banners');
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    res.status(500).send('Internal Server Error');
   }
-}
+};
 
+const getEditBanner = async (req, res) => {
+  try {
+      const id = req.params.id;
+      const banner = await Banner.findById(id).lean();
+
+      
+      res.render('admin/edit_banner', { layout: 'adminlayout', banner });
+  } catch (error) {
+      console.error('Error fetching banner for editing:', error);
+      res.status(500).send('Internal Server Error');
+  }
+};
+
+const editBannerPost = async (req, res) => {
+  try {
+    const id = req.params.id; 
+    const { title, description, startDate, endDate, link } = req.body;
+    const image = req.file ? req.file.filename : undefined;
+
+    
+    const updateFields = {
+      title,
+      description,
+      startDate,
+      endDate,
+      link,
+    };
+
+    if (image) {
+      updateFields.image = image; // Add image to update if provided
+    }
+
+    
+    const updatedBanner = await Banner.findByIdAndUpdate(id, updateFields, {
+      new: true, // Return the updated document
+      runValidators: true, // Run validators to ensure new values meet schema requirements
+    });
+
+    if (!updatedBanner) {
+      return res.status(404).send('Banner not found');
+    }
+
+    res.redirect('/admin/banners'); 
+  } catch (error) {
+    console.error('Error editing banner:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
 
 const deleteBanner = async (req, res) => {
   try {
     const id = req.query.id;
 
-    await Coupon.findByIdAndDelete(id);
+    await Banner.findByIdAndDelete(id);
 
     res.redirect("/admin/banners");
   } catch (error) {
@@ -823,53 +985,62 @@ const deleteBanner = async (req, res) => {
 
 const calculateTopSellingProducts = async () => {
   try {
-      const orders = await Orders.aggregate([
+      const topSellingProducts = await Orders.aggregate([
+          
           {
               $match: { status: "Delivered" }
           },
+          // Deconstruct the product array
           {
               $unwind: "$product"
           },
+          // Group by productId and productName, and sum the quantities
           {
               $group: {
                   _id: { productId: "$product.id", productName: "$product.name" },
                   totalQuantitySold: { $sum: "$product.quantity" }
               }
           },
+          
           {
               $sort: { totalQuantitySold: -1 }
           },
+          
           {
               $limit: 3
           },
+          
           {
               $lookup: {
                   from: "products",
                   localField: "_id.productId",
                   foreignField: "_id",
-                  as: "product"
+                  as: "productDetails"
               }
           },
+          // Deconstruct the productDetails array
           {
-              $unwind: "$product"
+              $unwind: "$productDetails"
           },
+          // Project the desired fields
           {
               $project: {
-                  _id: "$product._id",
-                  productName: "$product.name",
-                  productImage: "$product.imageUrl", // Use the imageUrl field from the schema
-                  salePrice: "$product.price", // Assuming salesPrice is the same as price in the schema
+                  _id: "$productDetails._id",
+                  productName: "$_id.productName",
+                  productImage: "$productDetails.imageUrl",
+                  salePrice: "$productDetails.price",
                   totalQuantitySold: 1
               }
           }
       ]);
 
-      return orders;
+      return topSellingProducts;
   } catch (error) {
       console.error("Error calculating top selling products:", error);
-      throw error; // Rethrow the error for handling further up the call stack
+      throw new Error('Failed to calculate top selling products'); // More specific error message
   }
 };
+
 
 
 const calculateTopSellingCategories = async () => {
@@ -922,7 +1093,66 @@ const calculateTopSellingCategories = async () => {
       return orders;
   } catch (error) {
       console.error("Error calculating top selling categories:", error);
-      throw error; // Rethrow the error for handling further up the call stack
+      throw error; 
+  }
+};
+
+
+
+const loadReview = async (req, res) => {
+  try {
+    
+    const page = parseInt(req.query.page) || 1; 
+    const limit = 1; 
+
+    // Aggregate pipeline for fetching reviews with product details
+    const pipeline = [
+      {
+        $lookup: {
+          from: "products",
+          localField: "productId",
+          foreignField: "_id",
+          as: "productDetails"
+        }
+      },
+      {
+        $unwind: "$productDetails"
+      },
+      {
+        $skip: (page - 1) * limit
+      },
+      {
+        $limit: limit
+      }
+    ];
+
+  
+    const reviews = await Review.aggregate(pipeline);
+    const totalReviews = await Review.countDocuments();
+    const totalPages = Math.ceil(totalReviews / limit);
+    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+
+    res.render('admin/reviews', { reviews, pages, totalPages, currentPage: page,  layout: 'adminlayout' });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+/* 
+*    Admin Logout 
+*/
+
+const adminLogout = async (req, res) => {
+  try {
+    req.session.destroy();
+    adminData = null
+    res.redirect("/admin/login");
+  } catch (error) {
+    console.log(error.message);
   }
 };
 
@@ -931,30 +1161,36 @@ const calculateTopSellingCategories = async () => {
 module.exports = {
   adminLogin,
   adminDoLogin,
+
   loadHome,
-  adminLogout,
-  blockUser,
-  loadUsersData,
+  calculateTopSellingProducts,
+  calculateTopSellingCategories,
+ 
+
+  getProduct,
+  editProduct,
+  deleteProdImage,
+  updateProduct,
+  blockProduct,
+  addProduct,
+  postAddNewProduct,
+
+  getOrders,
+  changeOrderStatus,
+  orderDetails,
+  returnRequest,
+  returnDecline,
 
   getCategory,
   addCategory,
   editCategory,
-  deleteCategory,
+  blockCategory, 
   addNewCategory,
-  updateCategory,
-
-  getProduct,
-  addNewProduct,
-  newProduct,
-  editProduct,
-  deleteProduct,
-  blockProduct,
-  updateProduct,
-  deleteProdImage,
-
-  getOrders,
-  orderDetails,
-
+  postEditCategory,
+  
+  loadUsersData,
+  blockUser,
+ 
   loadCoupon,
   addCoupon,
   addCouponPost,
@@ -962,12 +1198,18 @@ module.exports = {
   editCoupon,
   updateCoupon,
 
-  changeOrderStatus,
-
   loadBanner,
   addBanner,
   addBannerPost,
   deleteBanner,
-  calculateTopSellingProducts,
-  calculateTopSellingCategories
+  getEditBanner,
+  editBannerPost,
+  
+  loadReview,
+  blockReview,
+  
+  adminLogout,
+
+    // deleteProduct,
+  
 };

@@ -1,239 +1,263 @@
 <aside class="navbar-aside" id="offcanvas_aside">
-	<div class="aside-top">
-		<a href="/admin/home" class="brand-wrap">
-			<img src="/assetsAdmin/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
-		</a>
-		<div>
-			<button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
-			</button>
-		</div>
-	</div>
-	<nav>
-		<ul class="menu-aside">
-			<li class="menu-item">
-				<a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
-					<span class="text">Dashboard</span>
-				</a>
-			</li>
-			<li class="menu-item ">
-				<a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
-					<span class="text">Products</span>
-				</a>
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
 
-			</li>
-			<li class="menu-item ">
-				<a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
-					<span class="text">Orders</span>
-				</a>
+            <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+            </button>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
 
-			</li>
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
 
-			<li class="menu-item ">
-				<a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
-					<span class="text">Category</span>
-				</a>
+            </li>
 
-			</li>
-			<li class="menu-item">
-				<a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
-					<span class="text">Users</span>
-				</a>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                    <span class="text">Categories</span>
+                </a>
 
-			</li>
-			</li>
-			<li class="menu-item active">
-				<a class="menu-link" href="/admin/coupons"><i class="icon fa-solid fa-ticket"></i></i>
-					<span class="text">Coupon</span>
-				</a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Users</span>
+                </a>
 
-			</li>
+            </li>
+            <li class="menu-item  active">
+                <a class=" menu-link" href="coupons"> <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span> </a>
+            </li>
+
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/banners"> <i
+                        class="icon material-icons md-photo_size_select_actual"></i>
+                    <span class="text">Banners</span> </a>
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link " href="/admin/reviews"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
 
 
-		</ul>
-		<hr>
-		<ul class="menu-aside">
-			<li class="menu-item has-submenu">
-				<a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-					<span class="text">Settings</span>
-				</a>
-				<div class="submenu">
-					<button class="nav-link
+
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
+                    <button class="nav-link
                      rounded-pill darkmode m-3 " href="#">
-						<i class="material-icons md-nights_stay"></i>Dark mode
-					</button>
-				</div>
-			</li>
-			<li class="menu-item">
-				<a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
-					<span class="text"> Logout </span>
-				</a>
-			</li>
-		</ul>
-		<br>
-		<br>
-	</nav>
+                        <i class="material-icons md-nights_stay"></i>Dark mode
+                    </button>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                    <span class="text"> Logout </span>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </nav>
 </aside>
-
 
 <!DOCTYPE html>
 <html>
 
 <head>
-	<title>Coupon Adding Form</title>
-	<link rel="stylesheet" type="text/css"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-	<style type="text/css">
-		body {
-			background-color: #f5f5f5;
-		}
+    <title>Coupon Adding Form</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style type="text/css">
+        body {
+            background-color: #f5f5f5;
+        }
 
-		.card {
-			border: none;
-			border-radius: 10px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		}
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-		.card-title {
-			font-size: 1.5rem;
-			font-weight: 600;
-			color: #333;
-		}
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
 
-		.form-control {
-			border-radius: 5px;
-			border-color: #ccc;
-			box-shadow: none;
-			font-size: 1rem;
-			padding: 1.5rem;
-			margin-bottom: 1.5rem;
-		}
+        .form-control {
+            border-radius: 5px;
+            border-color: #ccc;
+            box-shadow: none;
+            font-size: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
 
-		.form-control:focus {
-			border-color: #007bff;
-			box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
-		}
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+        }
 
-		.form-group label {
-			font-weight: 500;
-			color: #555;
-			margin-bottom: 0.5rem;
-		}
+        .form-group label {
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
 
-		.btn-primary {
-			background-color: #007bff;
-			border-color: #007bff;
-			font-size: 1.1rem;
-			font-weight: 600;
-			padding: .75rem 1.5rem;
-			transition: background-color 0.2s ease, border-color 0.2s ease;
-		}
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: .75rem 1.5rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
 
-		.btn-primary:hover,
-		.btn-primary:focus {
-			background-color: #0069d9;
-			border-color: #0062cc;
-			box-shadow: none;
-		}
-	</style>
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #0069d9;
+            border-color: #0062cc;
+            box-shadow: none;
+        }
+    </style>
 </head>
 
 
 <body>
-	<div class="container ">
-		<div class="row ">
-			<div class="col-md-6 mx-auto mt-5">
-				<div class="card">
-					<div class="card-body">
+    <div class="container ">
+        <div class="row ">
+            <div class="col-md-6 mx-auto mt-5">
+                <div class="card">
+                    <div class="card-body">
 
-						<p style="text-align: center; color: green;" class="mt-4">{{couponMsg}}</p>
-						<p style="text-align: center; color: red;" class="mt-4">{{couponExMsg}}</p>
+                        <p style="text-align: center; color: green;" class="mt-4">{{couponMsg}}</p>
+                        <p style="text-align: center; color: red;" class="mt-4">{{couponExMsg}}</p>
 
-						<h2 class="card-title text-center mb-4">Add Coupon</h2>
-	<form action="/admin/add_coupon" method="post" id="couponForm">
-    <div class="form-group">
-        <label for="coupon-code">Coupon Code</label>
-        <input type="text" class="form-control" id="coupon-code" placeholder="Enter coupon code" name="code" required onkeyup="validateCouponCode()">
-        <p style="color: red;" id="codeError"></p>
-    </div>
-    <div class="form-group">
-        <label for="discount">Discount (%)</label>
-        <div class="input-group">
-            <input type="number" class="form-control" id="discount" placeholder="Enter discount amount" name="percent" required onkeyup="validateDiscount()">
-            <div class="input-group-append">
-                <span class="input-group-text">%</span>
+                        <h2 class="card-title text-center mb-4">Add Coupon</h2>
+                        <form action="/admin/add_coupon" method="post" id="couponForm">
+                            <div class="form-group">
+                                <label for="coupon-code">Coupon Code</label>
+                                <input type="text" class="form-control" id="coupon-code" placeholder="Enter coupon code"
+                                    name="code" required onkeyup="validateCouponCode()">
+                                <p style="color: red;" id="codeError"></p>
+                            </div>
+                            <div class="form-group">
+                                <label for="discount">Discount (%)</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="discount"
+                                        placeholder="Enter discount amount" name="percent" required
+                                        onkeyup="validateDiscount()">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                                <p style="color: red;" id="discountError"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="min-purchase">Minimum Purchase Amount</label>
+                                <input type="number" class="form-control" id="min-purchase"
+                                    placeholder="Enter minimum purchase amount" name="minPurchase">
+                            </div>
+                            <div class="form-group">
+                                <label for="max-discount">Maximum Discount Amount</label>
+                                <input type="number" class="form-control" id="max-discount"
+                                    placeholder="Enter maximum discount amount" name="maxDiscount">
+                            </div>
+                            <div class="form-group">
+                                <label for="expiry-date">Expiry Date</label>
+                                <input type="date" class="form-control" id="expiry-date" name="expDate" required
+                                    onkeyup="validateExpiryDate()">
+                                <p style="color: red;" id="expiryDateError"></p>
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary">Add Coupon</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        <p style="color: red;" id="discountError"></p>
     </div>
-    <div class="form-group">
-        <label for="expiry-date">Expiry Date</label>
-        <input type="date" class="form-control" id="expiry-date" name="expDate" required onkeyup="validateExpiryDate()">
-        <p style="color: red;" id="expiryDateError"></p>
-    </div>
-    <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">Add Coupon</button>
-    </div>
-</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 
-<script>
-    const codeInput = document.getElementById("coupon-code");
-    const discountInput = document.getElementById("discount");
-    const expiryDateInput = document.getElementById("expiry-date");
-    const codeError = document.getElementById("codeError");
-    const discountError = document.getElementById("discountError");
-    const expiryDateError = document.getElementById("expiryDateError");
+    <script>
+        const codeInput = document.getElementById("coupon-code");
+        const discountInput = document.getElementById("discount");
+        const expiryDateInput = document.getElementById("expiry-date");
+        const codeError = document.getElementById("codeError");
+        const discountError = document.getElementById("discountError");
+        const expiryDateError = document.getElementById("expiryDateError");
 
-    function validateCouponCode() {
-        const couponCodePattern = /^[a-zA-Z0-9]{6,}$/; // Alphanumeric, at least 6 characters
-        if (!couponCodePattern.test(codeInput.value.trim())) {
-            codeError.textContent = "Coupon code must be alphanumeric and at least 6 characters";
-        } else {
-            codeError.textContent = "";
+        function validateCouponCode() {
+            const couponCodePattern = /^[a-zA-Z0-9]{6,}$/; // Alphanumeric, at least 6 characters
+            if (!couponCodePattern.test(codeInput.value.trim())) {
+                codeError.textContent = "Coupon code must be alphanumeric and at least 6 characters";
+            } else {
+                codeError.textContent = "";
+            }
         }
-    }
 
-    function validateDiscount() {
-        if (discountInput.value.trim() === "" || parseFloat(discountInput.value) <= 0) {
-            discountError.textContent = "Discount amount must be greater than 0";
-        } else {
-            discountError.textContent = "";
+        function validateDiscount() {
+            if (discountInput.value.trim() === "" || parseFloat(discountInput.value) <= 0) {
+                discountError.textContent = "Discount amount must be greater than 0";
+            } else {
+                discountError.textContent = "";
+            }
         }
-    }
 
-    function validateExpiryDate() {
-        if (expiryDateInput.value.trim() === "") {
-            expiryDateError.textContent = "Expiry date is required";
-        } else {
-            expiryDateError.textContent = "";
+        function validateExpiryDate() {
+            if (expiryDateInput.value.trim() === "") {
+                expiryDateError.textContent = "Expiry date is required";
+            } else {
+                expiryDateError.textContent = "";
+            }
         }
-    }
 
-    // Event listener for form submission
-    const couponForm = document.getElementById("couponForm");
-    couponForm.addEventListener("submit", function(event) {
-        // Prevent form submission if any field is invalid
-        if (!validateForm()) {
-            event.preventDefault();
+        // Event listener for form submission
+        const couponForm = document.getElementById("couponForm");
+        couponForm.addEventListener("submit", function (event) {
+            // Prevent form submission if any field is invalid
+            if (!validateForm()) {
+                event.preventDefault();
+            }
+        });
+
+        // Function to validate entire form
+        function validateForm() {
+            validateCouponCode();
+            validateDiscount();
+            validateExpiryDate();
+
+            // Check if any error message exists
+            if (codeError.textContent || discountError.textContent || expiryDateError.textContent) {
+                return false; // Return false if any error exists
+            }
+            return true; // Return true if all fields are valid
         }
-    });
-
-    // Function to validate entire form
-    function validateForm() {
-        validateCouponCode();
-        validateDiscount();
-        validateExpiryDate();
-
-        // Check if any error message exists
-        if (codeError.textContent || discountError.textContent || expiryDateError.textContent) {
-            return false; // Return false if any error exists
-        }
-        return true; // Return true if all fields are valid
-    }
-</script>
+    </script>

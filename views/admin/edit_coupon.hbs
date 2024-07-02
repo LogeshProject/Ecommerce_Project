@@ -1,78 +1,90 @@
+
+
 <aside class="navbar-aside" id="offcanvas_aside">
-        <div class="aside-top">
-            <a href="/admin/home" class="brand-wrap">
-                <img src="/assetsAdmin/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard">
-            </a>
-            <div>
-                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
-            </div>
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+            
+            <h2 style="font-family: 'Times New Roman', Times, serif;color: rgb(8,129,120);">Coco Loco </h2>
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+            </button>
         </div>
-        <nav>
-            <ul class="menu-aside">
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
-                        <span class="text">Products</span>
-                    </a>
-                   
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
-                        <span class="text">Orders</span>
-                    </a>
-                   
-                </li>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item  ">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/product"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
 
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
-                        <span class="text">Category</span>
-                    </a>
-                    
-                </li>
-				 <li class="menu-item">
-                    <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
-                        <span class="text">Users</span>
-                    </a>
-                    
-                </li>
-                                </li>
-                                <li class="menu-item active">
-                    <a class="menu-link" href="/admin/coupons"><i class="icon fa-solid fa-ticket"></i></i>
-                        <span class="text">Coupon</span>
-                    </a>
-                    
-                </li>
-               
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/orders"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
 
-            </ul>
-            <hr>
-              <ul class="menu-aside">
-                <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
-                        <span class="text">Settings</span>
-                    </a>
-                    <div class="submenu">
+            </li>
+
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/category"> <i class="icon material-icons md-category"></i>
+                    <span class="text">Categories</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/manage_users"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Users</span>
+                </a>
+
+            </li>
+            <li class="menu-item">
+                <a class=" menu-link  active" href="coupons"> <i class="icon material-icons md-class"></i>
+                    <span class="text">Coupons</span> </a>
+            </li>
+
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/banners"> <i
+                        class="icon material-icons md-photo_size_select_actual"></i>
+                    <span class="text">Banners</span> </a>
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link " href="/admin/reviews"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
+
+
+
+        </ul>
+        <hr>
+        <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
                     <button class="nav-link
                      rounded-pill darkmode m-3 " href="#">
                         <i class="material-icons md-nights_stay"></i>Dark mode
                     </button>
                 </div>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
-                        <span class="text"> Logout </span>
-                    </a>
-                </li>
-            </ul>
-            <br>
-            <br>
-        </nav>
-    </aside>
-
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-exit_to_app"></i>
+                    <span class="text"> Logout </span>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <br>
+    </nav>
+</aside>
 
 <!DOCTYPE html>
 <html>
@@ -154,13 +166,25 @@
         </div>
         <p style="color: red;" id="discountError"></p>
     </div>
+          <div class="form-group">
+	              <label for="min-purchase">Minimum Purchase Amount</label>
+	              <input type="number" class="form-control" id="min-purchase"  value="{{couponData.minPurchase}}" placeholder="Enter minimum purchase amount" name="minPurchase" >
+	            </div>
+	            <div class="form-group">
+	              <label for="max-discount">Maximum Discount Amount</label>
+	              <input type="number" class="form-control" id="max-discount" value="{{couponData.maxDiscount}}" placeholder="Enter maximum discount amount" name="maxDiscount" >
+	            </div>
     <div class="form-group">
         <label for="expiry-date">Expiry Date</label>
         <input type="date" class="form-control" id="expiry-date" value="{{couponData.expiryDate}}" name="expDate" required onkeyup="validateExpiryDate()">
         <p style="color: red;" id="expiryDateError"></p>
     </div>
     <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">Edit Coupon</button>
+        <button type="submit" class="btn btn-primary" id="edit_coupon">Edit Coupon</button>
+        <a  type="button" id="backbutton" class="btn btn-primary">Back</a>
+                                    
+
+                              
     </div>
 </form>
 	        </div>
@@ -169,9 +193,65 @@
 	  </div>
 	</div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+
+    // sure edit coupon 
+
+    document.getElementById('edit_coupon').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the form from submitting immediately
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to edit the product?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, edit it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, submit the form
+                    // Assuming the button is within a form, submit the form
+                    // If not, you might need to target the form explicitly
+                    event.target.closest('form').submit();
+                }
+            });
+        });
+
+    //back
+    $(document).ready(function () {
+        $('#backbutton').click(function (e) {
+            e.preventDefault();
+
+
+            Swal.fire({
+                title: "Leave the page?",
+                text: "The Data will not be saved",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#088178",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/admin/coupons";
+
+                }
+            });
+
+
+        });
+    }
+    )
+
+
+
+
+
     const codeInput = document.getElementById("coupon-code");
     const discountInput = document.getElementById("discount");
     const expiryDateInput = document.getElementById("expiry-date");

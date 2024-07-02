@@ -1,41 +1,26 @@
-const createError = require('http-errors');
 const express = require('express');
 const handlebars = require('express-handlebars');
-const path = require('path');
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const mongoose = require('mongoose')
-const hbs = require('hbs')
-const session = require('express-session')
-const Handlebars = require('handlebars')
-const exphbs = require('express-handlebars')
-const nocache = require('nocache')
-const multer = require('multer')
-const swal=require('sweetalert')
-const passport = require("passport")
- require('dotenv').config()
+const nocache = require('nocache');
+const passport = require("passport");
+const path = require('path');
 
- mongoose.set('strictQuery', false);
- mongoose.connect(process.env.CONNECT, { useNewUrlParser: true, useUnifiedTopology: true })
- .then(() => {
-   console.log('MongoDB connected');
- })
- .catch(err => {
-   console.error('MongoDB connection error:', err);
- });
 
-const userRouter = require('./routes/user');
-const adminRouter = require('./routes/admin');
+const logger = require('morgan');  // => For Terminal log messages
+
 
 
 const app = express();
 
+// BodyParsers
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// let hbss = exphbs.create({})
+// set view engine 
 
-
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
 
 app.engine('hbs', handlebars.engine({
   layoutsDir: __dirname + '/views/layouts',
@@ -44,6 +29,12 @@ app.engine('hbs', handlebars.engine({
   partialsDir: __dirname + '/views/partials/'
 }));
 
+/* 
+*   Middleware setup 
+*/
+
+
+
 
 
 app.use(session({
@@ -51,10 +42,56 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
+app.use(cookieParser());
+
+app.use(nocache());
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-hbs.registerPartials(path.join(__dirname,'/views/partials'))
+//static file serving 
+
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(logger('dev'));
+
+
+
+/* 
+*  Utilities  - Db Connection ,Hbs Helpers , moment format .
+*/
+
+
+const mongoose = require('mongoose');
+const Handlebars = require('handlebars');
+const moment = require('moment');
+
+
+/* 
+*     MongoDB Connection 
+*/
+
+require('dotenv').config();
+
+mongoose.set('strictPopulate', false);
+mongoose.set('strictQuery', false);
+mongoose.connect(process.env.CONNECT, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => {
+  console.log('MongoDB connected');
+})
+.catch(err => {
+  console.error('MongoDB connection error:', err);
+});
+
+
+/* 
+*    Handlebar Helpers
+*/
+
+
 
 
 Handlebars.registerHelper('ifeq', function (a, b, options) {
@@ -62,66 +99,47 @@ Handlebars.registerHelper('ifeq', function (a, b, options) {
   return options.inverse(this);
 });
 
-
-
-
 Handlebars.registerHelper('ifnoteq', function (a, b, options) {
   if (a != b) { return options.fn(this); }
   return options.inverse(this);
 });
 
+Handlebars.registerHelper('increment', function(index) {
+  return index + 1;
+});
 
-Handlebars.registerHelper("for", function (from, to, incr, block) {
-  let accum = "";
-  for (let i = from; i <= to; i += incr) {
-    accum += block.fn(i);
-  }
-  return accum;
-
-})
-
-
-Handlebars.registerHelper('ifCond', function(v1, v2, options) {
-  if (v1 === v2) {
-    return options.fn ? options.fn(this) : options.fn;
-  } else {
-    return options.inverse ? options.inverse(this) : options.inverse
-  }
-})
-
-Handlebars.registerHelper('multiply', function(a, b) {
-  return a * b;
+Handlebars.registerHelper('add', function(a, b) {
+  return Number(a) + Number(b);
 });
 
 Handlebars.registerHelper('subtract', function(a, b) {
-  return a - b;
+  return Number(a) - Number(b);
 });
 
-Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
-  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+Handlebars.registerHelper('multiply', function(a, b) {
+  return Number(a) * Number(b);
+});
+
+// moment.js
+
+Handlebars.registerHelper('formatDate', function (date, format) {
+  // Ensure the date is valid
+  if (!date || !moment(date).isValid()) {
+    return "Invalid Date";
+  }
+  
+  // Format the date using moment.js library
+  return moment(date).format(format);
 });
 
 
+// User & Admin 
+
+const userRouter = require('./routes/user');
+const adminRouter = require('./routes/admin');
 
 
-app.use(session({
-  secret: 'secret',
-  saveUninitialized: true,
-   cookie: { maxAge: 600000000 },
-  resave: false 
-}));
-
-
-app.use(nocache());
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
-// app.use(multer({dest: 'uploads', storage: fileStorage, fileFilter: fileFilter}).single('image'))
+// Router middleware 
 
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
@@ -132,10 +150,7 @@ app.use(function(req, res, next) {
   res.status(404).render('404',{layout:'emptyLayout'});
 });
 
-
-
-
-
+// error page 
 
 app.use(function(err, req, res, next) {
   res.status(500);
@@ -143,4 +158,4 @@ app.use(function(err, req, res, next) {
 });
  
 
-module.exports = app;
+app.listen(process.env.PORT);

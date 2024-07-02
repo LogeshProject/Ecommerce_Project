@@ -69,14 +69,18 @@ const orderSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    enum: ["pending", "Shipped", "Delivered", 'Cancelled', 'Returned'],
+    enum: ["pending", "Shipped", "Delivered", 'Cancelled', 'Returned' , 'Rejected', 'Payment Failed',"Requested"],
     default: "pending",
+  },
+
+  returnMsg: {
+    type: String,
   },
 
   date: {
     type: Date,
     default: Date.now,
   },
-});
+},{timestamps:true});
 
 module.exports = mongoose.model("Order", orderSchema);

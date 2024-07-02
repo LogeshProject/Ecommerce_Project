@@ -1,6 +1,6 @@
 const Address = require('../../model/address')
 const User = require('../../model/userModel')
-// const { verifyPayment } = require('./walletController')
+
 
 const razorpay = require("razorpay")
 
@@ -20,7 +20,7 @@ module.exports = {
             const user = req.session.user
             const id = user._id
             const userData = await User.findById(id).lean();
-            // const userDataObject = userData.toObject();
+           
             res.render('user/about_me', { userData })
         } catch (error) {
             console.log(error);
@@ -31,7 +31,7 @@ module.exports = {
     /// To get manage address page ///
 
 
-    manageAdress: async (req, res) => {
+    manageaddress: async (req, res) => {
         try {
             const userData = req.session.user
             const id = userData._id
@@ -49,7 +49,10 @@ module.exports = {
 
     addNewAddress: (req, res) => {
         try {
-            res.render('user/add_new_address')
+
+            const userData = req.session.user
+            const id = userData._id
+            res.render('user/add_new_address', { userData })
         } catch (error) {
             console.log(error);
         }
@@ -64,20 +67,20 @@ module.exports = {
             const userData = req.session.user
             const id = userData._id
 
-            const adress = new Address({
+            const address = new Address({
                 userId: id,
                 name: req.body.name,
                 mobile: req.body.mobile,
-                adressLine1: req.body.address1,
-                adressLine2: req.body.address2,
+                addressLine1: req.body.address1,
+                addressLine2: req.body.address2,
                 city: req.body.city,
                 state: req.body.state,
                 pin: req.body.pin,
                 is_default: false,
             })
 
-            const adressData = await adress.save()
-            res.redirect('/adresses')
+            const addressData = await address.save()
+            res.redirect('/addresses')
         } catch (error) {
             console.log(error);
         }
@@ -109,8 +112,8 @@ module.exports = {
                 $set: {
                     name: req.body.name,
                     mobile: req.body.mobile,
-                    adressLine1: req.body.address1,
-                    adressLine2: req.body.address2,
+                    addressLine1: req.body.address1,
+                    addressLine2: req.body.address2,
                     city: req.body.city,
                     state: req.body.state,
                     pin: req.body.pin,
@@ -118,11 +121,9 @@ module.exports = {
                 }
             }, { new: true })
 
-            res.redirect('/adresses')
+            res.redirect('/addresses')
 
-            // Find user addresses
-            // const userAddresses = await Address.find({ userId: id }).lean();
-            // res.render('user/editAddress')
+           
         } catch (error) {
             console.log(error);
         }
@@ -173,13 +174,13 @@ module.exports = {
             const id = req.params.id
 
             await Address.findByIdAndDelete(id)
-            res.redirect('/adresses')
+            res.redirect('/addresses')
         } catch (error) {
             console.log(error);
         }
     },
 
-  
+
 
     // wallet
 
@@ -188,14 +189,14 @@ module.exports = {
             const user = req.session.user;
             const id = user._id;
             const userData = await User.findById(id).lean();
-    
+
             var page = 1;
             if (req.query.page) {
-                page = req.query.page;
+                page = parseInt(req.query.page) || 1;
             }
-            let limit = 5;
+            let limit = 7;
             const skip = (page - 1) * limit;
-    
+
             const historyData = await User.aggregate([
                 { $match: { _id: userData._id } },
                 { $unwind: "$history" },
@@ -212,24 +213,28 @@ module.exports = {
                 const year = date.getFullYear();
                 return `${day}, ${month} ${year}`;
             }
-    
+
             const count = await User.aggregate([
                 { $match: { _id: userData._id } },
                 { $project: { historyCount: { $size: "$history" } } }
             ]);
-    
+
             const totalItems = count[0] ? count[0].historyCount : 0;
             const totalPages = Math.ceil(totalItems / limit);
             const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-    
+
             const formattedHistory = historyData[0] ? historyData[0].history.map(item => ({
                 amount: item.amount,
                 status: item.status,
-                date: formatDate(item.date) // Format the date
+                date: formatDate(item.date), // Format the date
+                Remarks: item.Remarks
             })) : [];
-    
-            res.render('user/wallet', { userData, history: formattedHistory, KEY_ID: process.env.KEY_ID, pages });
+
+            res.render('user/wallet', { userData, history: formattedHistory, KEY_ID: process.env.KEY_ID, pages, page });
+
+            console.log(formattedHistory)
         } catch (error) {
+
             console.log(error);
         }
     }
@@ -294,7 +299,8 @@ module.exports = {
                                 history: {
                                     amount: amount,
                                     status: "Credited",
-                                    date: Date.now()
+                                    date: Date.now(),
+                                    Remarks: `Razorpay Money`
                                 }
                             }
                         }

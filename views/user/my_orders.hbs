@@ -1,4 +1,9 @@
-<script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
+
+  <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assetsAdmin/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="/assetsAdmin/css/main.css" rel="stylesheet" type="text/css" />
+
 
 <style>
     .alert-warning {
@@ -37,13 +42,13 @@
                 </div>
             </div>
         </div>
-        <div class="container p-5 m-5">
+        <div >
             <section class="content-main col-md-11">
                 <div class="content-header">
                     <h2 class="content-title p-3"
-                        style="font-family: 'Times New Roman', Times, serif;margin-left: 10%;">Profile setting </h2>
+                       >Profile setting </h2>
                 </div>
-                <div class="card" style="margin-left: 10%;">
+                <div class="card" >
                     <div class="card-body">
                         <div class="row gx-5">
                             <aside class="col-lg-3 border-end">
@@ -53,9 +58,8 @@
                                         href="/my_orders">Orders</a>
 
                                     <a class="nav-link" href="/wallet">Wallet</a>
-                                    <a class="nav-link" href="/adresses">My Address</a>
-                                    <a class="nav-link" href="#">Account details</a>
-                                    <a class="nav-link" href="#">Newsletter</a>
+                                    <a class="nav-link" href="/addresses">My Address</a>
+                                    <a class="nav-link" href="/logout">Log out</a>
                                 </nav>
                             </aside>
                             <div class="col-lg-9">
@@ -65,23 +69,17 @@
                                             <h2 class="content-title card-title">Order List </h2>
                                         </div>
                                         <div>
-                                            <input type="text" placeholder="Search order ID"
-                                                class="form-control bg-white">
+                                           
                                         </div>
                                     </div>
                                     <div class="card mb-4">
                                         <header class="card-header">
                                             <div class="row gx-3">
                                                 <div class="col-lg-4 col-md-9 me-auto">
-                                                    <input type="text" placeholder="Search..." class="form-control">
+                                                    <input type="text" placeholder="" class="form-control">
                                                 </div>
                                                 <div class="col-lg-3 col-6 col-md-3">
-                                                    <select class="form-select">
-                                                        <option style="font-size: ;">Status</option>
-                                                        <option>Active</option>
-                                                        <option>Disabled</option>
-                                                        <option>Show all</option>
-                                                    </select>
+                                                    
                                                 </div>
 
                                             </div>
@@ -130,6 +128,18 @@
                                                             <td class="text-center"><span
                                                                     class="badge bg-danger">{{this.status}}</span></td>
                                                             {{/ifeq}}
+                                                            {{#ifeq this.status 'Rejected'}}
+                                                            <td class="text-center"><span
+                                                                    class="badge bg-info">{{this.status}}</span></td>
+                                                            {{/ifeq}}
+                                                            {{#ifeq this.status 'Payment Failed'}}
+                                                            <td class="text-center"><span
+                                                                    class="badge bg-dark">{{this.status}}</span></td>
+                                                            {{/ifeq}}
+                                                            {{#ifeq this.status 'Requested'}}
+                                                            <td class="text-center"><span
+                                                                    class="badge bg-danger">{{this.status}}</span></td>
+                                                            {{/ifeq}}
                                                             <td class="text-center">{{this.date}}</td>
                                                             <td class="text-center">
                                                                 <input type="hidden" name="order_id"
@@ -162,7 +172,7 @@
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination justify-content-start">
                                                 {{#each pages}}
-                                                <li class="page-item active"><a class="page-link"
+                                                <li class="page-item {{#ifeq this ../page}}active{{/ifeq}}"><a class="page-link"
                                                         href="?page={{this}}">{{this}}</a></li>
                                                 {{/each}}
                                             </ul>
