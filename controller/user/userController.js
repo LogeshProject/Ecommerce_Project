@@ -43,6 +43,7 @@ const loadHome = async (req, res) => {
             const userArray = [userData];
             console.log("\nusername : ", userArray[0].name);
             res.render('user/home', { userData, loadProData, loadCatData, banners, Coupons, newProduct, popularity });
+            console.log(loadProData)
         } else {
             res.render('user/home', { loadProData, loadCatData, banners, Coupons, newProduct, popularity });
         }
