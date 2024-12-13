@@ -1,0 +1,29 @@
+  version: '3'
+  services:
+    backend:
+      build: 
+        context : .
+      ports :
+        - '3000:3000'
+      networks:
+        - mern-network
+      
+      
+      
+
+    mongodb:
+      image: mongo:latest
+      ports:
+        - '27017:27017'      # Expose MongoDB if needed for external access
+      networks:
+        - mern-network
+      volumes:
+        - mongo-data:/data/db         # Persistent storage for MongoDB data
+
+  networks:
+    mern-network:
+      driver: bridge
+
+  volumes:
+    mongo-data:
+      driver: local 
