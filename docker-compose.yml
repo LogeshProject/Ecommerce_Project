@@ -2,7 +2,7 @@
   services:
     backend:
       build: 
-        context : .
+        context : logeshc12/cocoloco-ecommerce-backend
       ports :
         - '3000:3000'
       networks:
@@ -19,6 +19,10 @@
         - mern-network
       volumes:
         - mongo-data:/data/db         # Persistent storage for MongoDB data
+
+
+
+# here i will create a mern -network
 
   networks:
     mern-network:
