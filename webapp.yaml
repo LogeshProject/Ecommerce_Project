@@ -24,7 +24,8 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: mongo-config
-              key: MONGODB_KEY  # from mongo-config
+              key: MONGODB_KEY
+
 ---
 apiVersion: v1
 kind: Service
@@ -39,3 +40,4 @@ spec:
       port: 3000
       targetPort: 3000
       nodePort: 30001
+
